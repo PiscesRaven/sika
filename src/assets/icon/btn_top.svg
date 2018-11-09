@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #52504d;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <g id="btn_top" transform="translate(-2337 1519) rotate(-90)">
+    <rect id="Rectangle_499" data-name="Rectangle 499" class="cls-1" width="42" height="42" rx="6" transform="translate(1477 2337)"/>
+    <path id="Path_3" data-name="Path 3" class="cls-2" d="M1275.5,2957.891l18.293,12.363-18.293,12.823" transform="translate(215.545 -612.076)"/>
+  </g>
+</svg>

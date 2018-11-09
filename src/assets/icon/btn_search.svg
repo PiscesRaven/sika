@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.969 19.969">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #8d8d8d;
+        fill-rule: evenodd;
+        opacity: 0.8;
+      }
+    </style>
+  </defs>
+  <path id="btn_search" class="cls-1" d="M58.386,28.384a1.975,1.975,0,0,1-2.786,0l-4.061-4.063a8.272,8.272,0,1,1,2.786-2.786L58.386,25.6A1.967,1.967,0,0,1,58.386,28.384Zm-7.5-14.741a5.121,5.121,0,1,0,0,7.242A5.12,5.12,0,0,0,50.889,13.643Z" transform="translate(-38.994 -8.99)"/>
+</svg>
