@@ -10,9 +10,12 @@ $phones-media:575px;
 $main-T-Color: #000; //主要文字顏色
 $submain-T-Color: #fff; //次要文字顏色
 
+
 $main-Bg-Color: #000; // 主要背景色
 $submain-Bg-Color: #fff; //次要貝景色
+$third-Bg-Color:#d5d5d5;
 
+$Menu-Bg-Color:#292827;
 
 //電腦
 @mixin pc-width() {

@@ -2,7 +2,7 @@
   <div class="footer">
     <b-container>
       <b-row class="footer-info">
-        <b-col md="4" sm="12" cols="12">
+        <b-col lg="6" md="4" sm="12" cols="12">
           <div class="sikainfo">
             <h2>
               希卡 Hair Salon
@@ -13,10 +13,11 @@
             <div id="footer-input">
               <input type="text" name="" id="" placeholder="Search">
               <img src="../assets/icon/btn_search.svg">
+              <button class="ft-booking-btn">線上預約</button>
             </div>
           </div>
         </b-col>
-        <b-col md="4" sm="12" cols="12">
+        <b-col lg="2" md="4" sm="12" cols="12">
           <div class="sika-contact">
             <h2>CONTACT US</h2>
             <p> +44 345 678 903<br>
@@ -24,14 +25,44 @@
               Find a Store </p>
           </div>
         </b-col>
-        <b-col md="4" sm="12" cols="12">
+        <b-col lg="4" md="4" sm="12" cols="12">
           <div class="sika-menulist">
             <h2>INFORMATION</h2>
-            <p>熱門訊息 News</p>
-            <p>髮型專區 hair</p>
-            <p>設計師 Stylist</p>
-            <p>流行趨勢 Blog</p>
-            <p>影片專區 Video</p>
+            <p>
+              <router-link to="/news">
+                優惠訊息 News
+              </router-link>
+            </p>
+            <p>
+              <router-link to="/hairstyle">
+                髮型專區 hair
+              </router-link>
+            </p>
+            <p>
+              <router-link to="/designer">
+                設計師 Stylist
+              </router-link>
+            </p>
+            <p>
+              <router-link to="/bloglist">
+                流行趨勢 Blog
+              </router-link>
+            </p>
+            <p>
+              <router-link to="/video">
+                影片專區 Video
+              </router-link>
+            </p>
+            <p>
+              <router-link to="/products">
+                產品資訊 Products
+              </router-link>
+            </p>
+            <p>
+              <router-link to="/booking">
+                線上預約 Booking
+              </router-link>
+            </p>
           </div>
         </b-col>
       </b-row>
@@ -58,8 +89,8 @@ export default {
 @import '../assets/scss/global.scss';
 
 .footer {
-  background: #000;
-  color: #fff;
+  background: $main-Bg-Color;
+  color: $submain-T-Color;
   width: 100%;
   padding-top: 57px;
   font-size: 16px;
@@ -77,9 +108,10 @@ export default {
         font-weight: bold;
         line-height: 1.5;
         text-align: left;
-        color: #ffffff;
+        color: $submain-T-Color;
       }
       > p {
+        width: 80%;
         margin-top: 21px;
         text-align: left;
         margin-bottom: 21px;
@@ -87,22 +119,23 @@ export default {
       #footer-input {
         text-align: left;
         position: relative;
-        width: 100%;
         input[type='text'] {
+          width: 286px;
           height: 46px;
-          border-radius: 4px;
-          border: solid 1px #7fc4fd;
-          background: #000;
-          color: #fff;
           padding-left: 22px;
           font-size: 16px;
+          color: $submain-T-Color;
+          border-radius: 4px;
+          border: solid 1px #ababaa;
+          background: $main-Bg-Color;
           //電腦版
           text-align: left;
           @include pc-width {
-            width: 286px;
+            width: 200px;
           }
           //平板
           @include pad-width {
+            width: 100%;
           }
           @include small-pad-width {
             width: 100%;
@@ -120,6 +153,9 @@ export default {
           left: 251px;
           width: 20px;
           height: 20px;
+          @include pc-width {
+            left: 165px;
+          }
           @include pad-width {
             left: 80%;
           }
@@ -130,17 +166,43 @@ export default {
             left: 88%;
           }
         }
+        .ft-booking-btn {
+          width: 170px;
+          height: 46px;
+          margin-left: 30px;
+          font-size: 16px;
+          color: $submain-T-Color;
+          border-radius: 4px;
+          border: solid 1px #ababaa;
+          background: $main-Bg-Color;
+
+          @include pad-width {
+            margin-left: 0;
+            margin-top: 12px;
+            width: 50%;
+          }
+          @include small-pad-width {
+            margin-left: 0;
+            margin-top: 12px;
+            width: 50%;
+          }
+          @include phone-width {
+            margin-left: 0;
+            margin-top: 12px;
+            width: 50%;
+          }
+        }
       }
     }
 
     .sika-contact {
       text-align: left;
-      margin-left: 146px;
-      margin-right: 60px;
+      // margin-left: 146px;
+      // margin-right: 60px;
       //電腦版
       @include pc-width {
-        margin-left: 73px;
-        margin-right: 30px;
+        // margin-left: 73px;
+        // margin-right: 30px;
       }
       //平板
       @include pad-width {
@@ -202,7 +264,7 @@ export default {
       }
       > p {
         // width: 109px;
-        color: #ffffff;
+        color: $submain-T-Color;
       }
     }
   }
@@ -214,7 +276,7 @@ export default {
     :nth-child(1) {
       text-align: left;
     }
-    :nth-child(2) {
+    :nth-child(2) p {
       text-align: right;
     }
     > p {
