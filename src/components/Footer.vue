@@ -67,10 +67,12 @@
         </b-col>
       </b-row>
       <b-row class="builder">
-        <b-col md="6" sm="12">
-          <p>© Copyright © 2018 Idea-Infinite Information Marketing Co.Ltd.. All rights reserved</p>
+        <b-col md="8" sm="12">
+          <p>© Copyright © 2018 Idea-Infinite Information Marketing Co.Ltd.. All rights reserved
+
+          </p>
         </b-col>
-        <b-col md="6" sm="12">
+        <b-col md="4" sm="12">
           <p>Design by idea infinite 網頁設計</p>
         </b-col>
       </b-row>
@@ -145,6 +147,7 @@ export default {
             width: 100%;
           }
         }
+
         img {
           width: 20px;
           height: 20px;
@@ -197,13 +200,6 @@ export default {
 
     .sika-contact {
       text-align: left;
-      // margin-left: 146px;
-      // margin-right: 60px;
-      //電腦版
-      @include pc-width {
-        // margin-left: 73px;
-        // margin-right: 30px;
-      }
       //平板
       @include pad-width {
         margin: 0;
@@ -264,7 +260,13 @@ export default {
       }
       > p {
         // width: 109px;
-        color: $submain-T-Color;
+        a {
+          color: $submain-T-Color;
+          text-decoration: none;
+          &:hover {
+            border-bottom: 1px solid #fff;
+          }
+        }
       }
     }
   }

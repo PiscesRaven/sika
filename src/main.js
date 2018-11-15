@@ -5,23 +5,20 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import {
-  library
-} from '@fortawesome/fontawesome-svg-core'
-import {
-  faBomb
-} from '@fortawesome/free-solid-svg-icons'
+
+import fontawesome from '@fortawesome/fontawesome'
 import {
   FontAwesomeIcon
 } from '@fortawesome/vue-fontawesome'
-import {
-  faAddressBook
-} from '@fortawesome/free-solid-svg-icons'
+import solid from '@fortawesome/fontawesome-free-solid'
 import regular from '@fortawesome/fontawesome-free-regular'
-
+import brands from '@fortawesome/fontawesome-free-brands'
 
 Vue.use(BootstrapVue);
-library.add(faBomb)
+fontawesome.library.add(solid)
+fontawesome.library.add(regular)
+fontawesome.library.add(brands)
+
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 

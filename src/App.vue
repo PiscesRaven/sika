@@ -16,6 +16,11 @@ export default {
     NavBar,
     Footer
   }
+  // watch: {
+  //   $route(to, from) {
+  //     console.log(to.path)
+  //   }
+  // }
 }
 </script>
 <style lang="scss">

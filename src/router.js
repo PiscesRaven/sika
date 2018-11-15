@@ -39,6 +39,11 @@ export default new Router({
       component: () => import( /* webpackChunkName: "about" */ './components/Designer/Designers.vue')
     },
     {
+      path: '/designer/designerinfo',
+      name: '設計師 個人資訊',
+      component: () => import( /* webpackChunkName: "about" */ './components/Designer/DesignersInfo.vue')
+    },
+    {
       path: '/bloglist',
       name: '流行趨勢 Blog',
       component: () => import( /* webpackChunkName: "about" */ './components/PostList.vue')

@@ -16,7 +16,7 @@
       </b-row>
       <b-row class="designer-row">
         <b-col v-for="list in DesignerName" xl="3" lg="4" sm="6" cols="12">
-          <router-link to="/DesignerInfo">
+          <router-link to="/designer/designerinfo">
             <b-card :title="list.name" :img-src="list.pic" img-alt="Image" img-top tag="article">
               <p class="card-text">
                 Some quick example text to build on the card title and make up the bulk of the card's content.

@@ -9,8 +9,8 @@
       <b-row class="news-row">
         <b-col v-for="list in NewsList" lg="4" sm="6" cols="12">
           <router-link to="/news/post">
-            <b-card :title="list.title" :img-src="list.url" img-alt="Image" img-top tag="article">
-              <p class="card-day">{{list.day}}</p>
+            <b-card :title="list.title" :img-src="list.cover_image" img-alt="Image" img-top tag="article">
+              <p class="card-day">{{list.created_date}}</p>
               <p class="card-text">
                 {{list.text}}
               </p>
@@ -18,7 +18,8 @@
           </router-link>
         </b-col>
         <div class="pagination-nav">
-          <b-pagination-nav base-url="#" :number-of-pages="15" v-model="currentPage" />
+          <b-pagination-nav base-url="#" :link-gen="linkGen" :number-of-pages="15" v-model="currentPage" />
+          <div class="mt-4">currentPage: {{currentPage}}</div>
         </div>
       </b-row>
     </b-container>
@@ -26,84 +27,42 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Postlist',
   data() {
     return {
-      NewsList: [
-        {
-          id: '1',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '2',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '3',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '4',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '5',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '6',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '7',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '8',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
-        },
-        {
-          id: '9',
-          url: 'https://fakeimg.pl/270x200/000/',
-          title: 'Blog Title',
-          day: '2018-09-08',
-          text:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, totam'
+      currentPage: 1,
+      NewsList: []
+    }
+  },
+  created() {
+    axios
+      .get('https://sika.idea-infinite.com/api/v1/news/list', {
+        params: {
+          limit: 6,
+          offset: 0
         }
-      ]
+      })
+      .then(res => {
+        // console.log(res.data.data)
+        this.NewsList = res.data.data
+      })
+  },
+  methods: {
+    linkGen(pageNum) {
+      console.log(pageNum)
+      // axios
+      //   .get('https://sika.idea-infinite.com/api/v1/news/list', {
+      //     params: {
+      //       limit: 6,
+      //       offset: 5
+      //     }
+      //   })
+      //   .then(res => {
+      //     this.NewsList = res.data.data
+      //   })
+      return '#/' + pageNum
     }
   }
 }
