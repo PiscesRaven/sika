@@ -1,15 +1,36 @@
 <template>
   <div>
-    <h1 class="post-title">Long &amp; Big Title
+    <h1 class="post-title">
     </h1>
+
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Blog',
   data() {
-    return {}
+    return {
+      post: [],
+      selectStatus: false,
+      selectData: '請選擇一個選項'
+    }
+  },
+  methods: {
+    getList() {
+      // axios
+      //   .get('https://sika.idea-infinite.com/api/v1/news/list', {
+      //     params: {
+      //       limit: 6,
+      //       offset: (pageNum - 1) * 6
+      //     }
+      //   })
+      //   .then(res => {
+      //     console.log(res.data.data)
+      //     this.NewsList = res.data.data
+      //   })
+    }
   }
 }
 </script>

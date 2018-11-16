@@ -10,31 +10,36 @@
             </h1>
           </b-col>
           <b-col cols="12">
-            <b-form @submit="onSubmit" @reset="onReset" v-if="show" class="booking-from">
-              <b-form-group id="exampleInputGroup1" label-for="yourName">
-                <b-form-input id="yourName" type="text" v-model="form.email" required placeholder="輸入您的名字">
-                </b-form-input>
-              </b-form-group>
-              <b-form-group id="exampleInputGroup2" label-for=yourPhone>
-                <b-form-input id=yourPhone type="email" v-model="form.name" required placeholder="Enter name">
-                </b-form-input>
-              </b-form-group>
-              <b-form-group id="exampleInputGroup3" label-for="designers">
-                <b-form-select id="designers" :options="designers" required v-model="form.designers">
-                </b-form-select>
-              </b-form-group>
-              <b-form-group id="exampleInputGroup4" label-for="youTime">
-                <b-form-select id="youTime" :options="Time" required v-model="form.time">
-                </b-form-select>
-              </b-form-group>
-              <b-form-group id="exampleInputGroup5" label-for="service">
-                <b-form-select id="service" :options="Service" required v-model="form.service">
-                </b-form-select>
-              </b-form-group>
-
-              <b-button type="submit" class="submit-btn">送出</b-button>
-              <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
-            </b-form>
+            <form method="post" class="booking-form">
+              <div class="input-row">
+                <input type="text" name="" id="" placeholder="請輸入您的名字">
+              </div>
+              <div class="input-row">
+                <input type="email" name="" id="" placeholder="請輸入您的電話號碼">
+              </div>
+              <div class="input-row" @click.prevent="selectStatusD = false">
+                <ul @click.stop.prevent="selectStatusD = !selectStatusD" :class="'select' + (selectStatusD ? ' open' : '')" :selectData="selectData">
+                  <li @click.prevent="selectData = list" v-for="list in designers">
+                    {{list}}
+                  </li>
+                </ul>
+              </div>
+              <div class="input-row" @click.prevent="selectStatusT = false">
+                <ul @click.stop.prevent="selectStatusT = !selectStatusT" :class="'select' + (selectStatusT ? ' open' : '')" :selectData="'請選擇時間'">
+                  <li @click.prevent="selectData = list" v-for="list in time">
+                    {{list}}
+                  </li>
+                </ul>
+              </div>
+              <div class="input-row" @click.prevent="selectStatusS = false">
+                <ul @click.stop.prevent="selectStatusS = !selectStatusS" :class="'select' + (selectStatusS ? ' open' : '')" :selectData="'請選擇服務'">
+                  <li @click.prevent="selectData = list" v-for="list in service">
+                    {{list}}
+                  </li>
+                </ul>
+              </div>
+              <button type="button" class="submit-btn">送出</button>
+            </form>
           </b-col>
         </b-container>
 
@@ -49,6 +54,11 @@ export default {
   name: 'Booking',
   data() {
     return {
+      selectStatusD: false,
+      selectData: '請選擇設計師',
+      selectStatusT: false,
+      selectStatusS: false,
+
       form: {
         email: '',
         name: '',
@@ -56,34 +66,10 @@ export default {
         time: null,
         service: null
       },
-      des: [
-        { text: '請選擇設計師', value: null },
-        { name: 'Lili' },
-        { name: 'Erica' },
-        { name: 'Raven' },
-        { name: 'Keven' }
-      ],
-      designers: [
-        { text: '請選擇設計師', value: null },
-        'Erica',
-        'Raven',
-        'Lili',
-        'Keven'
-      ],
-      Time: [
-        { text: '請選擇時間', value: null },
-        '10:00~10:30',
-        '10:30~11:00',
-        '11:00~11:30',
-        '11:30~12:00'
-      ],
-      Service: [
-        { text: '請選擇服務內容', value: null },
-        '剪髮',
-        '洗髮',
-        '按摩',
-        '燙髮'
-      ],
+
+      designers: ['Erica', 'Raven', 'Lili', 'Keven'],
+      time: ['10:00~10:30', '10:30~11:00', '11:00~11:30', '11:30~12:00'],
+      service: ['剪髮', '洗髮', '按摩', '燙髮'],
       show: true
     }
   },
@@ -115,13 +101,70 @@ export default {
     line-height: 1.5;
     color: $main-T-Color;
   }
+  .booking-form {
+    display: inline-block;
+    max-width: 770px;
+    //平板
+    @include pad-width {
+      width: 100%;
+    }
+    //小平板
+    @include small-pad-width {
+      width: 100%;
+    }
+    //手機
+    @include phone-width {
+      width: 100%;
+    }
+    .input-row {
+      margin: 11px auto;
+      //平板
+      @include pad-width {
+        width: 100%;
+      }
+      //小平板
+      @include small-pad-width {
+        width: 100%;
+      }
+      //手機
+      @include phone-width {
+        width: 100%;
+      }
 
+      input {
+        padding: 10px;
+        &::-webkit-input-placeholder {
+          color: $main-T-Color !important;
+        }
+      }
+      input,
+      .select {
+        width: 770px;
+        height: 56px;
+        //平板
+        @include pad-width {
+          width: 100%;
+        }
+        //小平板
+        @include small-pad-width {
+          width: 100%;
+        }
+        //手機
+        @include phone-width {
+          width: 100%;
+        }
+      }
+    }
+  }
   .submit-btn {
     font-size: 27px;
+    color: $submain-T-Color;
+    border: none;
     width: 481px;
-    height: 56.9px;
+    height: 57px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     background-color: #52504d;
+    margin-top: 100px;
     //平板
     @include pad-width {
       width: 100%;
@@ -135,31 +178,26 @@ export default {
       width: 100%;
     }
   }
-
-  .sel {
-    margin-top: 50px;
-    width: 150px;
-    background: red;
-    border: 5px blue solid;
-    .opt {
-      display: none;
-    }
-    &:hover {
-      .opt {
-        display: block;
-      }
-    }
-  }
 }
+
+// .app {
+//   padding: 10px;
+//   height: 100vh;
+//   width: 100;
+//   overflow: hidden;
+//   box-sizing: border-box;
+//   background: #fdfdfd;
+// }
 .select {
+  text-align: left;
   position: relative;
   display: block;
   list-style: none;
   padding: 0;
   height: 34px;
   overflow: hidden;
-  background: #313131;
-  color: white;
+  background: $submain-Bg-Color;
+  color: $main-T-Color;
   cursor: pointer;
 }
 .select.open {
@@ -168,31 +206,41 @@ export default {
 .select:before {
   content: attr(selectData);
   display: block;
-  padding: 6px 10px;
+  padding: 20px 10px;
 }
 .select:after {
-  content: 'keyboard_arrow_down';
-  position: absolute;
-  right: 1vw;
-  top: 8px;
+  content: '';
+  height: 10px;
+  width: 10px;
   display: block;
+  position: absolute;
+  top: 23px;
+  right: 1vw;
+  border: 12px dashed #666;
+  border-radius: 2px;
+  border-top-color: #000;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  transform-origin: 50% 25%;
   font-family: 'Material Icons';
   font-size: 20px;
-  height: 20px;
   transition: 0.2s;
 }
 .select.open:after {
-  transform: rotate(180deg);
+  transform: rotate(-180deg);
 }
 .select li {
-  display: block;
+  // display: block;
   padding: 6px 10px;
   position: relative;
   z-index: 1;
-  background: #313131;
+  transition: 0.5s;
+  background: $submain-Bg-Color;
 }
 .select li:hover {
-  background: yellow;
-  color: #272727;
+  background: #52504d;
+  color: $submain-T-Color;
+  transition: 0.3s;
 }
 </style>

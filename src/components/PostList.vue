@@ -19,7 +19,6 @@
         </b-col>
         <div class="pagination-nav">
           <b-pagination-nav base-url="#" :link-gen="linkGen" :number-of-pages="15" v-model="currentPage" />
-          <div class="mt-4">currentPage: {{currentPage}}</div>
         </div>
       </b-row>
     </b-container>
@@ -36,32 +35,29 @@ export default {
       NewsList: []
     }
   },
+  watch: {
+    currentPage: function(pageNum) {
+      this.getList(pageNum)
+    }
+  },
   created() {
-    axios
-      .get('https://sika.idea-infinite.com/api/v1/news/list', {
-        params: {
-          limit: 6,
-          offset: 0
-        }
-      })
-      .then(res => {
-        // console.log(res.data.data)
-        this.NewsList = res.data.data
-      })
+    this.getList()
   },
   methods: {
+    getList(pageNum = 1) {
+      axios
+        .get('https://sika.idea-infinite.com/api/v1/news/list', {
+          params: {
+            limit: 6,
+            offset: (pageNum - 1) * 6
+          }
+        })
+        .then(res => {
+          console.log(res.data.data)
+          this.NewsList = res.data.data
+        })
+    },
     linkGen(pageNum) {
-      console.log(pageNum)
-      // axios
-      //   .get('https://sika.idea-infinite.com/api/v1/news/list', {
-      //     params: {
-      //       limit: 6,
-      //       offset: 5
-      //     }
-      //   })
-      //   .then(res => {
-      //     this.NewsList = res.data.data
-      //   })
       return '#/' + pageNum
     }
   }
