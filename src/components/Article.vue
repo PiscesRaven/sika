@@ -1,15 +1,18 @@
 <template>
-  <div @click.prevent="selectStatus = false">
-    <h1>Vue 版本的 select 選單</h1>
-    <ul @click.stop.prevent="selectStatus = !selectStatus" :class="'select' + (selectStatus ? ' open' : '')" :selectData="selectData">
-      <li @click.prevent="selectData = '選項' + row" v-for="(row, keys) in 6">
-        選項{{row}}
-      </li>
-    </ul>
-    <button @click.prevent="selectData = '請選擇一個選項'" class="refresh-button">
-      重置
-      <span class="material-icons">refresh</span>
-    </button>
+  <div>
+    <b-container>
+      <b-row>
+        <b-col cols="12" class="article-title">
+          Title
+        </b-col>
+        <b-col cols="6" class="article-title">
+          day
+        </b-col>
+        <b-col cols="6" class="article-title">
+          day
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 

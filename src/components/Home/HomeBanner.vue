@@ -21,13 +21,13 @@
       </b-carousel-slide>
 
       <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
+      <!-- <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
           eros felis, tincidunt a tincidunt eget, convallis vel est. Ut pellentesque
           ut lacus vel interdum.
         </p>
-      </b-carousel-slide>
+      </b-carousel-slide> -->
     </b-carousel>
   </div>
 </template>
@@ -54,11 +54,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../../assets/scss/global.scss';
-
-.carousel-indicators /deep/ li {
-  width: 10px;
-  height: 10px;
-  margin: 0 9px;
-  border-radius: 50%;
-}
 </style>

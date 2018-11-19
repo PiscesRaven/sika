@@ -14,6 +14,17 @@ import solid from '@fortawesome/fontawesome-free-solid'
 import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
 
+
+
+////
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+// require styles
+import 'swiper/dist/css/swiper.css'
+
+Vue.use(VueAwesomeSwiper, /* { default global options } */ )
+
+////
 Vue.use(BootstrapVue);
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)

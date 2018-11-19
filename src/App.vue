@@ -2,6 +2,7 @@
   <div id="app">
     <NavBar></NavBar>
     <router-view />
+    <div id="toolbar-chat" ref="toolbarChat"></div>
     <Footer></Footer>
   </div>
 </template>
@@ -15,18 +16,38 @@ export default {
   components: {
     NavBar,
     Footer
-  }
+  },
   // watch: {
   //   $route(to, from) {
   //     console.log(to.path)
   //   }
   // }
+  methods: {
+    addMessage(message) {
+      this.messages.unshift(message)
+      this.$nextTick(() => {
+        this.$refs.toolbarChat.scrollTop = 0
+      })
+
+      axios.post(chat_send_route, message).then(response => {
+        console.log(response.data)
+      })
+    }
+  }
 }
 </script>
 <style lang="scss">
 @import '@/assets/scss/restscss.scss'; // reset
 @import '@/assets/scss/global.scss';
 
+.toolbar-chat {
+  background: red;
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+}
 // RWD 響應式尺寸
 .fz-tw {
   font-family: 'NotoSansCJKtc';
