@@ -20,7 +20,7 @@
           </h2>
         </b-col>
       </b-row>
-      <b-row v-for="list in newBlog" class="news-row">
+      <b-row v-for="list in newBlog" class="home-news-row">
         <b-col lg="6" md="6" sm="12" cols="12">
           <div class="blog-sec">
             <p>{{list.title}}</p>
@@ -35,23 +35,24 @@
     </b-container>
     <!-- 設計師清單 -->
     <b-container fluid class="home-full-width">
-      <b-row>
-        <b-container>
-          <b-row>
-            <b-col md="4">
-              <h2 class="home-sec-title">
-                設計師
-                <span class="en-title">
-                  Stylist
-                </span>
-              </h2>
-            </b-col>
-            <!--設計師 stylist-->
+      <b-container>
+        <b-row>
+          <b-col md="4">
+            <h2 class="home-sec-title">
+              設計師
+              <span class="en-title">
+                Stylist
+              </span>
+            </h2>
+          </b-col>
+        </b-row>
+        <b-row>
+          <!--設計師 stylist-->
+          <b-col md="12">
             <HomeStylist />
-
-          </b-row>
-        </b-container>
-      </b-row>
+          </b-col>
+        </b-row>
+      </b-container>
     </b-container fluid>
     <!-- 部落格與影片專區 -->
     <b-container class="blog-video-sec">
@@ -149,10 +150,10 @@
     </b-container>
     <b-container fluid class="home-full-width">
       <b-row>
-        <b-col cols="6">
+        <b-col md="6" sm="12" cols="12">
           <img src="../../public/img/img_booking_home.jpg" alt="" srcset="">
         </b-col>
-        <b-col cols="6">
+        <b-col md="6" sm="12" cols="12">
           <BookingFrom />
         </b-col>
       </b-row>
@@ -222,7 +223,7 @@ export default {
   methods: {
     getBlogList() {
       axios
-        .get('https://sika.idea-infinite.com/api/v1/news/list', {
+        .get('https://sika.idea-infinite.com/api/v1/article/list', {
           params: {
             limit: 1,
             offset: 0
@@ -254,6 +255,8 @@ export default {
   position: relative;
   padding-bottom: 3px;
   margin: 70px auto;
+  padding-left: 24px;
+  text-align: left;
   &:after {
     content: '';
     height: 10px;
@@ -297,10 +300,23 @@ export default {
     text-align: center;
   }
 }
-.news-row {
+.home-news-row {
   margin-bottom: 170px;
   img {
+    margin-top: -70px;
     box-shadow: 50px -50px 0px 0px#e5e5e5;
+    //平板
+    @include pad-width {
+      margin-top: -70px;
+    }
+    //小平板
+    @include small-pad-width {
+      margin-top: 50px;
+    }
+    //手機
+    @include phone-width {
+      margin-top: 50px;
+    }
   }
 }
 
@@ -310,6 +326,7 @@ export default {
     height: 10px;
     margin: 0 9px;
     border-radius: 50%;
+    margin-bottom: 70px;
   }
 }
 .home-full-width {
@@ -421,11 +438,12 @@ address {
   }
   .scrolltop-txt {
     background: linear-gradient(
-      359deg,
+      to bottom,
       rgba(167, 167, 167, 0),
       rgba(119, 118, 116, 0),
       #454444
     );
+
     padding-top: 18%;
     color: $submain-T-Color;
     position: absolute;

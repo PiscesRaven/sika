@@ -45,6 +45,11 @@
             線上預約<span> Booking </span>
           </router-link>
         </li>
+        <li class="nav-items">
+          <router-link to="/post">
+            test
+          </router-link>
+        </li>
       </ul>
     </div>
 

@@ -7,8 +7,8 @@
     </b-container fluid>
     <b-container class="container-body">
       <b-row class="news-row">
-        <b-col v-for="list in NewsList" lg="4" sm="6" cols="12">
-          <router-link to="/news/post">
+        <b-col v-for="list in NewsList" lg="4" sm="6" cols="12" :key="list.id">
+          <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">
             <b-card :title="list.title" :img-src="list.cover_image" img-alt="Image" img-top tag="article">
               <p class="card-day">{{list.created_date}}</p>
               <p class="card-text">
@@ -46,7 +46,7 @@ export default {
   methods: {
     getList(pageNum = 1) {
       axios
-        .get('https://sika.idea-infinite.com/api/v1/news/list', {
+        .get('https://sika.idea-infinite.com/api/v1/article/list', {
           params: {
             limit: 6,
             offset: (pageNum - 1) * 6

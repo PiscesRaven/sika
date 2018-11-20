@@ -2,8 +2,7 @@
   <div>
     <form method="post" class="booking-form">
       <div class="input-row">
-        <input type="text" name="" id="">
-        <p>請輸入您的名字</p>
+        <input type="text" name="name" id="" placeholder="請輸入您的名字">
       </div>
       <div class="input-row">
         <input type="email" name="" id="" placeholder="請輸入您的電話號碼">
@@ -86,22 +85,8 @@ export default {
     width: 100%;
   }
   .input-row {
-    position: relative;
     margin: 11px auto;
-    input {
-      &:focus + p {
-        background: $submain-Bg-Color;
-        transition: 0.5s;
-        position: absolute;
-        top: -10%;
-        left: 10px;
-      }
-    }
-    p {
-      position: absolute;
-      top: 22px;
-      left: 10px;
-    }
+    position: relative;
 
     //平板
     @include pad-width {
@@ -118,8 +103,22 @@ export default {
 
     input {
       padding: 10px;
+      position: relative;
       &::-webkit-input-placeholder {
         color: $main-T-Color !important;
+      }
+      &:focus + label {
+        position: absolute;
+        top: -8px;
+        background: $submain-T-Color;
+        color: $main-T-Color;
+        font-size: 16px;
+        padding: 1px 6px;
+        z-index: 2;
+        text-transform: uppercase;
+      }
+      &:focus {
+        padding: 25px;
       }
     }
     input,
@@ -164,14 +163,6 @@ export default {
   }
 }
 
-// .app {
-//   padding: 10px;
-//   height: 100vh;
-//   width: 100;
-//   overflow: hidden;
-//   box-sizing: border-box;
-//   background: #fdfdfd;
-// }
 .select {
   text-align: left;
   position: relative;

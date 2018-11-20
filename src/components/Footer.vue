@@ -100,6 +100,7 @@ export default {
     margin: 0 auto;
     display: flex;
     line-height: 25px;
+    margin-bottom: 35px;
     .sikainfo {
       margin-bottom: 58px;
       > h2 {
