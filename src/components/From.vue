@@ -107,19 +107,6 @@ export default {
       &::-webkit-input-placeholder {
         color: $main-T-Color !important;
       }
-      &:focus + label {
-        position: absolute;
-        top: -8px;
-        background: $submain-T-Color;
-        color: $main-T-Color;
-        font-size: 16px;
-        padding: 1px 6px;
-        z-index: 2;
-        text-transform: uppercase;
-      }
-      &:focus {
-        padding: 25px;
-      }
     }
     input,
     .select {

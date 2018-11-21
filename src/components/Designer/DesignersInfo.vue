@@ -123,6 +123,8 @@ h3 {
   font-size: 32px;
   text-align: center;
   line-height: 1.47;
+  margin-top: 172px;
+  margin-bottom: 60px;
 }
 
 h2 {

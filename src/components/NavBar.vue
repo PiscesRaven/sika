@@ -45,11 +45,6 @@
             線上預約<span> Booking </span>
           </router-link>
         </li>
-        <li class="nav-items">
-          <router-link to="/post">
-            test
-          </router-link>
-        </li>
       </ul>
     </div>
 
@@ -122,34 +117,19 @@ export default {
       }
     }
   }
-  //小平板
-  @include small-pad-width {
-    position: fixed;
-    left: -100%;
-    background: $Menu-Bg-Color;
-    transition: 1s;
-    opacity: 0.9;
-    width: 50%;
-    height: 500px;
-    padding-top: 53px;
-  }
-  //手機
-  @include phone-width {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    transition: 1s;
-    opacity: 0.9;
-    width: 100%;
-    height: 500px;
-    padding-top: 59px;
-    background: $Menu-Bg-Color;
-  }
   .router-link-active {
     border-bottom: 1px solid #fff;
   }
   .nav-bar {
     display: inline-flex;
+    //小平板
+    @include small-pad-width {
+      width: 50%;
+    }
+    //手機
+    @include phone-width {
+      width: 100%;
+    }
 
     .nav-items {
       &:nth-child(n + 2) {
@@ -157,6 +137,14 @@ export default {
         //平板
         @include pad-width {
           margin: 37px 10px;
+        }
+        //小平板
+        @include small-pad-width {
+          margin: 11px 15px;
+        }
+        //手機
+        @include phone-width {
+          margin: 11px 15px;
         }
         span {
           //電腦版
@@ -186,11 +174,16 @@ export default {
       display: none;
     }
     .nav-bar {
-      width: 100%;
       display: inline-block;
-      background: $Menu-Bg-Color;
-      padding: 53px;
       padding-left: 13px;
+      height: 600px;
+      padding-top: 114px;
+      opacity: 0.9;
+      background: $Menu-Bg-Color;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      transition: 1s;
     }
   }
 }
@@ -210,11 +203,9 @@ export default {
   opacity: 0;
   border: 1px solid #707070;
   border-radius: 7px;
-
   .span {
     border-radius: 10px;
     background: $submain-Bg-Color;
-    transition: all 0.3s ease-out;
     backface-visibility: hidden;
   }
 }
@@ -227,8 +218,8 @@ export default {
     &:active #navbar {
     }
     .span {
-      height: 4px;
-      margin: 5px 0;
+      height: 2px;
+      margin: 7px 0;
       transition: all 0.3s ease-out;
       backface-visibility: visible;
       display: block;
@@ -236,10 +227,16 @@ export default {
     }
   }
 }
-
+// Navbar 選擇時
 .navbar.active {
-  position: fixed;
-  left: 0;
+  > .nav-bar {
+    @include small-pad-width {
+      left: 0;
+    }
+    @include phone-width {
+      left: 0;
+    }
+  }
 }
 </style>
 

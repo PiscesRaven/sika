@@ -1,0 +1,17 @@
+<svg id="btn_youtube" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.57 16.57">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #010002;
+      }
+    </style>
+  </defs>
+  <g id="Group_22" data-name="Group 22" transform="translate(0 0)">
+    <g id="Group_21" data-name="Group 21">
+      <g id="Group_20" data-name="Group 20">
+        <path id="Path_3" data-name="Path 3" class="cls-1" d="M13.463,0H3.107A3.107,3.107,0,0,0,0,3.107V13.463A3.107,3.107,0,0,0,3.107,16.57H13.463a3.107,3.107,0,0,0,3.107-3.107V3.107A3.107,3.107,0,0,0,13.463,0Zm-.088,10.14a1.91,1.91,0,0,1-1.312,1.7,55.726,55.726,0,0,1-7.555,0c-.758-.1-1.256-1.009-1.312-1.7a19.581,19.581,0,0,1,0-3.72c.056-.689.566-1.6,1.312-1.68a52.854,52.854,0,0,1,7.555,0c.843.031,1.256.9,1.312,1.59A20.907,20.907,0,0,1,13.375,10.14Z" transform="translate(0 0)"/>
+        <path id="Path_4" data-name="Path 4" class="cls-1" d="M222.477,194.838l3.107-2.071-3.107-2.071Z" transform="translate(-215.228 -184.481)"/>
+      </g>
+    </g>
+  </g>
+</svg>

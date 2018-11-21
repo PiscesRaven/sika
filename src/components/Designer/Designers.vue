@@ -88,13 +88,24 @@ export default {
 .section-img {
   background: url('../../../public/img/img_Stylist.jpg') center no-repeat;
   height: 410px;
-  margin-bottom: 125px;
 }
 
 .designer-list {
   display: inline-flex;
-  margin-top: 66px;
+  margin-top: 85px;
   margin-bottom: 36px;
+  //平板
+  @include pad-width {
+    margin-top: 36px;
+  }
+  //小平板
+  @include small-pad-width {
+    margin-top: 36px;
+  }
+  //手機
+  @include phone-width {
+    margin-top: 36px;
+  }
   //平板
   @include pad-width {
     display: flex;
@@ -159,7 +170,7 @@ export default {
       .card-text {
         text-align: left;
         overflow: hidden;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 1;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-box-orient: vertical;

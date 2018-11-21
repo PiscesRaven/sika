@@ -127,17 +127,15 @@
             <p>Tel. 04 723 3405</p>
             <p>Add. 彰化縣彰化市民生南路23號</p>
           </address>
-
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5458.063410319871!2d120.5419531651003!3d24.07263338772579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469388f1b64e687%3A0xecb0929a6bd94e5!2z5biM5Y2hIFNpa2EgaGFpciBzYWxvbg!5e0!3m2!1szh-TW!2stw!4v1542599832447" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
         </b-col>
         <b-col class="fb-col">
           <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsikahairsalon%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" width="400" height="480" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
         </b-col>
-
       </b-row>
       <b-row>
         <b-col md="4">
-          <h2 class="home-sec-title">
+          <h2 class="home-sec-title" data-from="booking">
             線上預約
             <span class="en-title">
               Booking
@@ -257,6 +255,7 @@ export default {
   margin: 70px auto;
   padding-left: 24px;
   text-align: left;
+
   &:after {
     content: '';
     height: 10px;
@@ -275,6 +274,9 @@ export default {
   .en-title {
     font-size: 45px;
   }
+}
+[data-from] {
+  margin-top: 180px;
 }
 
 .blog-sec {

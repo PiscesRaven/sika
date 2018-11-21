@@ -6,9 +6,9 @@
       <!-- slides -->
       <swiper-slide v-for="item in imgurl" :style="{backgroundImage: 'url(' + item + ')'}">
         <div class="designer-info-hover">
-          <p class="panel-top">56</p>
+          <p class="panel-top">設計師 Name Erica</p>
           <p class="panel-mid"></p>
-          <p class="panel-down">123</p>
+          <p class="panel-down">2018.11.11</p>
 
         </div>
       </swiper-slide>
@@ -27,6 +27,12 @@
       <div class="swiper-button-next" slot="button-next">
         <font-awesome-icon :icon="['fas','chevron-right']" size="2x" />
 
+        <a href="#">
+          <img src="../../assets/icon/btn_fb.svg" alt="" srcset="">
+        </a>
+        <a href="list.IG">
+          <img src="../../assets/icon/btn_Instagram.svg" alt="" srcset="">
+        </a>
       </div>
     </swiper>
 
@@ -132,7 +138,6 @@ export default {
         }
         .panel-down {
           transform: translateY(125%);
-          width: 80%;
         }
       }
       .panel-top {
@@ -141,7 +146,7 @@ export default {
       }
       .panel-mid {
         transition: transform 0.5s;
-        width: 8 0%;
+        width: 80%;
         height: 5px;
         opacity: 0;
         background: #fff;
