@@ -138,12 +138,8 @@ export default {
         @include pad-width {
           margin: 37px 10px;
         }
-        //小平板
-        @include small-pad-width {
-          margin: 11px 15px;
-        }
-        //手機
-        @include phone-width {
+        //平板
+        @include pad-and-phone-width {
           margin: 11px 15px;
         }
         span {
@@ -168,8 +164,7 @@ export default {
       }
     }
   }
-
-  @media screen and (max-width: $pads-media) {
+  @include pad-and-phone-width {
     .navbar-brand {
       display: none;
     }
@@ -203,21 +198,16 @@ export default {
   opacity: 0;
   border: 1px solid #707070;
   border-radius: 7px;
+  @include pad-and-phone-width {
+    display: block;
+    opacity: 1;
+    margin-top: 6px;
+  }
   .span {
     border-radius: 10px;
     background: $submain-Bg-Color;
     backface-visibility: hidden;
-  }
-}
-
-@media screen and (max-width: $pads-media) {
-  #toggle {
-    display: block;
-    opacity: 1;
-    margin-top: 6px;
-    &:active #navbar {
-    }
-    .span {
+    @include pad-and-phone-width {
       height: 2px;
       margin: 7px 0;
       transition: all 0.3s ease-out;

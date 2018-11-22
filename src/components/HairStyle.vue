@@ -7,9 +7,8 @@
     </b-container fluid>
     <b-container class="container-body" fluid>
       <b-row>
-        <b-col>
+        <b-col lg="12">
           <ul class="hair-style-list">
-            <li class="active" :class="{active:HairActive}">All</li>
             <li v-for="item in stylelist" :class="{active:HairActive}">{{item.style}}</li>
           </ul>
         </b-col>
@@ -18,7 +17,6 @@
         <b-col lg="2" class="designer-list">
           <h3>設計師</h3>
           <ul>
-            <li :class="{active : DesignerActive}">All</li>
             <li v-for="item in designer" :key=" index" :class="{active : DesignerActive}">{{item.designer}}</li>
           </ul>
         </b-col>
@@ -53,6 +51,7 @@ export default {
       desActive: false,
       hairActive: false,
       stylelist: [
+        { style: 'All' },
         { style: '長髮' },
         { style: '短髮' },
         { style: '直髮' },
@@ -60,12 +59,13 @@ export default {
         { style: '男士髮' }
       ],
       designer: [
+        { designer: 'all' },
         { designer: 'lily' },
         { designer: 'raven' },
         { designer: 'erica' },
         { designer: 'kevin' },
-        { designer: '邦晉' },
-        { designer: '阿哲' }
+        { designer: '邦晉' }
+        // { designer: '阿哲' }
       ],
       DesigneStyle: [
         {
@@ -388,10 +388,49 @@ export default {
 .section-img {
   background: url('../../public/img/img_Work.jpg') center no-repeat;
   height: 410px;
-  margin-bottom: 125px;
+  margin-bottom: 64px;
+  //平板
+  @include pad-width {
+    margin-bottom: 18px;
+  }
+  //平板以下
+  @include pad-and-phone-width {
+    margin-bottom: 18px;
+  }
 }
 .container-body {
   max-width: 1440px;
+}
+
+.hair-style-list {
+  display: inline-flex;
+  margin-bottom: 36px;
+  @include pc-width {
+    margin-left: 10%;
+  }
+  //平板
+  @include pad-width {
+    display: flex;
+    border-bottom: 1px solid #000;
+    margin: auto;
+  }
+  //平板以下
+  @include pad-and-phone-width {
+    display: flex;
+    border-bottom: 1px solid #000;
+    margin: auto;
+  }
+  li {
+    margin: auto 53px;
+    //平板
+    @include pad-width {
+      margin: 0 auto 2.4% auto;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      margin: 0 auto 2.4% auto;
+    }
+  }
 }
 .designer-list {
   > h3 {
@@ -399,25 +438,34 @@ export default {
     text-align: center;
     padding-bottom: 17px;
     border-bottom: solid 1px #707070;
+    @include pad-width {
+      display: none;
+    }
+    @include pad-and-phone-width {
+      display: none;
+    }
   }
   ul {
+    //平板
+    @include pad-width {
+      display: flex;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      display: flex;
+    }
     li {
       text-transform: capitalize;
       margin: 50px auto;
       //平板
       @include pad-width {
         display: inline-flex;
-        margin: 5% 4%;
+        margin: 2.4% auto 3% auto;
       }
-      //小平板
-      @include small-pad-width {
+      //平板以下
+      @include pad-and-phone-width {
         display: inline-flex;
-        margin: 5% 6.5%;
-      }
-      //手機
-      @include phone-width {
-        display: inline-flex;
-        margin: 5% 7.5%;
+        margin: 2.4% auto 3% auto;
       }
     }
   }
@@ -457,38 +505,7 @@ export default {
     }
   }
 }
-.hair-style-list {
-  display: inline-flex;
-  margin-top: 66px;
-  margin-bottom: 36px;
-  //平板
-  @include pad-width {
-    display: flex;
-  }
-  //小平板
-  @include small-pad-width {
-    display: flex;
-  }
-  //手機
-  @include phone-width {
-    display: flex;
-  }
-  li {
-    margin: auto 53px;
-    //平板
-    @include pad-width {
-      margin: 5% auto;
-    }
-    //小平板
-    @include small-pad-width {
-      margin: 5% auto;
-    }
-    //手機
-    @include phone-width {
-      margin: 5% auto;
-    }
-  }
-}
+
 .pagination-nav {
   nav {
     @media screen and (max-width: $pc-media) {

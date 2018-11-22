@@ -2,7 +2,7 @@
   <div class="footer">
     <b-container>
       <b-row class="footer-info">
-        <b-col lg="6" md="4" sm="12" cols="12">
+        <b-col xl="6" lg="6" md="4" sm="12" cols="12">
           <div class="sikainfo">
             <h2>
               希卡 Hair Salon
@@ -19,13 +19,15 @@
         </b-col>
         <b-col lg="2" md="4" sm="12" cols="12">
           <div class="sika-contact">
-            <h2>CONTACT US</h2>
-            <p> +44 345 678 903<br>
-              adobexd@mail.com<br>
-              Find a Store </p>
+            <h2>CONTACT</h2>
+            <p> 04 723 3405<br>
+              彰化縣彰化市民生南路23號
+              <font-awesome-icon :icon="['fas','map-marker-alt']" size="2x" />
+            </p>
+
           </div>
         </b-col>
-        <b-col lg="4" md="4" sm="12" cols="12">
+        <b-col xl="3" lg="4" md="4" sm="12" cols="12">
           <div class="sika-menulist">
             <h2>INFORMATION</h2>
             <p>
@@ -65,6 +67,10 @@
             </p>
           </div>
         </b-col>
+        <b-col xl="1" class="footer-social-icon">
+          <font-awesome-icon :icon="['fab','instagram']" />
+          <font-awesome-icon :icon="['fab','facebook-f']" />
+        </b-col>
       </b-row>
       <b-row class="builder">
         <b-col md="8" sm="12">
@@ -77,6 +83,14 @@
         </b-col>
       </b-row>
     </b-container>
+    <b-container fluid class="builder-pad">
+      <b-row>
+        <b-col md="12" sm="12">
+          <p>© Copyright © 2018 Idea-Infinite Information Marketing Co.Ltd.. All rights reserved
+          </p>
+        </b-col>
+      </b-row>
+    </b-container fluid>
   </div>
 </template>
 
@@ -100,7 +114,7 @@ export default {
     margin: 0 auto;
     display: flex;
     line-height: 25px;
-    margin-bottom: 35px;
+    margin-bottom: 70px;
     .sikainfo {
       margin-bottom: 58px;
       > h2 {
@@ -123,7 +137,7 @@ export default {
         text-align: left;
         position: relative;
         input[type='text'] {
-          width: 286px;
+          width: 270px;
           height: 46px;
           padding-left: 22px;
           font-size: 16px;
@@ -154,11 +168,11 @@ export default {
           height: 20px;
           position: absolute;
           top: 15px;
-          left: 251px;
+          left: 239px;
           width: 20px;
           height: 20px;
           @include pc-width {
-            left: 165px;
+            left: 164px;
           }
           @include pad-width {
             left: 80%;
@@ -207,57 +221,57 @@ export default {
       }
       //小平板
       @include small-pad-width {
-        text-align: center;
         margin: 0;
       }
       //手機
       @include phone-width {
-        text-align: center;
         margin: 0;
       }
       > h2 {
+        font-size: 24px;
         height: 33px;
         padding-top: 14px;
         @include pc-width {
           width: 101px;
         }
-        //小平板
-        @include small-pad-width {
-          text-align: center;
-        }
-        //手機
-        @include phone-width {
-          text-align: center;
-        }
       }
       > p {
         display: block;
         margin-top: 23px;
+        svg {
+          display: none;
+          color: #2699fb;
+          //平板
+          @include pad-width {
+            display: inline-block;
+          }
+
+          //平板以下
+          @include pad-and-phone-width {
+            display: inline-block;
+          }
+        }
       }
     }
     .sika-menulist {
       text-align: left;
-
       //電腦版
       @include pc-width {
         margin-left: 73px;
         margin-right: 30px;
       }
-
-      //小平板
-      @include small-pad-width {
-        text-align: center;
-        margin-bottom: 15px;
+      //平板
+      @include pad-width {
       }
-      //手機
-      @include phone-width {
-        text-align: center;
-        margin-bottom: 15px;
+      //平板以下
+      @include pad-and-phone-width {
+        display: none;
       }
       > h2 {
         height: 33px;
         padding-top: 14px;
         margin-bottom: 23px;
+        font-size: 24px;
       }
       > p {
         // width: 109px;
@@ -270,12 +284,38 @@ export default {
         }
       }
     }
+    .footer-social-icon {
+      margin-top: 62px;
+      text-align: left;
+      //電腦版
+      @include pc-width {
+        display: none;
+      }
+      //平板
+      @include pad-width {
+        display: none;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        margin-right: 22px;
+      }
+    }
   }
   .builder {
     width: 100%;
     margin-bottom: 19px;
     display: inline-flex;
     justify-content: space-between;
+    //平板
+    @include pad-width {
+      display: none;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      display: none;
+    }
     :nth-child(1) {
       text-align: left;
     }
@@ -286,6 +326,27 @@ export default {
       height: 18px;
       font-size: 12px;
       line-height: 1.5;
+    }
+  }
+  .builder-pad {
+    width: 100%;
+    padding: 14px 13px;
+    text-align: left;
+    display: none;
+    background: #707070;
+    font-size: 12px;
+
+    //平板
+    @include pad-width {
+      display: inline-flex;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      display: inline-flex;
+    }
+    p {
+      font-size: 12px;
+      line-height: 25px;
     }
   }
 }

@@ -10,6 +10,7 @@
 // @ is an alias to /src
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import axios from 'axios'
 
 export default {
   name: 'home',
@@ -28,7 +29,6 @@ export default {
       this.$nextTick(() => {
         this.$refs.toolbarChat.scrollTop = 0
       })
-
       axios.post(chat_send_route, message).then(response => {
         console.log(response.data)
       })
@@ -40,7 +40,7 @@ export default {
 @import '@/assets/scss/restscss.scss'; // reset
 @import '@/assets/scss/global.scss';
 
-.toolbar-chat {
+#toolbar-chat {
   background: red;
   width: 20px;
   height: 20px;

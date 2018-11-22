@@ -22,17 +22,10 @@
       <!-- Optional controls -->
       <div class="swiper-pagination" slot="pagination"></div>
       <div class="swiper-button-prev" slot="button-prev">
-        <font-awesome-icon :icon="['fas','chevron-left']" size="2x" />
+        <img src="../../assets/icon/btn_left.svg" alt="" srcset="">
       </div>
       <div class="swiper-button-next" slot="button-next">
-        <font-awesome-icon :icon="['fas','chevron-right']" size="2x" />
-
-        <a href="#">
-          <img src="../../assets/icon/btn_fb.svg" alt="" srcset="">
-        </a>
-        <a href="list.IG">
-          <img src="../../assets/icon/btn_Instagram.svg" alt="" srcset="">
-        </a>
+        <img src="../../assets/icon/btn_right.svg" alt="" srcset="">
       </div>
     </swiper>
 
@@ -46,14 +39,14 @@ export default {
   data() {
     return {
       imgurl: [
-        'https://picsum.photos/260/480/?image=54',
-        'https://picsum.photos/260/480/?image=58',
-        'https://picsum.photos/260/480/?image=55',
-        'https://picsum.photos/260/480/?image=52',
-        'https://picsum.photos/260/480/?image=58',
-        'https://picsum.photos/260/480/?image=54',
-        'https://picsum.photos/260/480/?image=52',
-        'https://picsum.photos/260/480/?image=55'
+        'https://picsum.photos/260/341/?image=54',
+        'https://picsum.photos/260/341/?image=58',
+        'https://picsum.photos/260/341/?image=55',
+        'https://picsum.photos/260/341/?image=52',
+        'https://picsum.photos/260/341/?image=58',
+        'https://picsum.photos/260/341/?image=54',
+        'https://picsum.photos/260/341/?image=52',
+        'https://picsum.photos/260/341/?image=55'
       ],
       swiperOption: {
         // some swiper options/callbacks
@@ -116,7 +109,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 480px;
+    height: 340px;
+    background-position: center;
+    background-repeat: no-repeat;
     img {
       height: 100%;
     }
@@ -130,6 +125,8 @@ export default {
       flex-direction: column;
       color: $submain-T-Color;
       &:hover {
+        background-color: rgba(171, 171, 170, 0.6);
+        color: #fff;
         .panel-top {
           transform: translateY(-125%);
         }
@@ -147,7 +144,7 @@ export default {
       .panel-mid {
         transition: transform 0.5s;
         width: 80%;
-        height: 5px;
+        height: 1px;
         opacity: 0;
         background: #fff;
       }
@@ -157,18 +154,16 @@ export default {
       }
     }
   }
-  // .swiper-slide.swiper-slide-active {
-  //   opacity: 1;
-  // }
+
   .swiper-button-prev,
   .swiper-container-rtl .swiper-button-next,
   .swiper-button-next,
   .swiper-container-rtl .swiper-button-prev {
     background-image: none;
-
     background-color: #000;
-    top: 98%;
-    height: 32px;
+    top: 94%;
+    width: 42px;
+    height: 42px;
     svg {
       color: #fff;
     }

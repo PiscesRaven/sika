@@ -24,12 +24,22 @@ $Menu-Bg-Color:#292827;
   }
 }
 
+
+
 //平板
 @mixin pad-width() {
   @media all and (min-width: $pad-media) and (max-width: $pcs-media) {
     @content;
   }
 }
+
+//平板以下
+@mixin pad-and-phone-width {
+  @media all and (max-width: $pads-media) {
+    @content;
+  }
+}
+
 
 //小平板
 @mixin small-pad-width() {

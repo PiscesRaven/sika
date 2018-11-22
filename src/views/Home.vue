@@ -3,15 +3,20 @@
     <HomeBranner />
     <b-container fluid class="imgshow-container">
       <b-row>
-        <b-col lg="4" md="6" sm="12" cols="12" v-for="pic in imgshow" class="imgshow-col">
-          <img :src="pic.imgurl">
+        <b-col lg="4" md="4" sm="4" cols="4" v-for="pic in imgshow" class="imgshow-col">
+          <div class="imgshow-block">
+            <img :src="pic.imgurl">
+            <div>
+              <p>xxxxxxx</p>
+            </div>
+          </div>
         </b-col>
       </b-row>
     </b-container fluid>
     <!-- 最新優惠資訊 -->
     <b-container>
       <b-row>
-        <b-col lg="4" md="6" sm="12" cols="12">
+        <b-col lg="4" md="6" sm="7" cols="12">
           <h2 class="home-sec-title">
             優惠資訊
             <span class="en-title">
@@ -23,7 +28,7 @@
       <b-row v-for="list in newBlog" class="home-news-row">
         <b-col lg="6" md="6" sm="12" cols="12">
           <div class="blog-sec">
-            <p>{{list.title}}</p>
+            <h3>{{list.title}}</h3>
             <p>{{list.created_date}}</p>
             <router-link to="">more ></router-link>
           </div>
@@ -37,7 +42,7 @@
     <b-container fluid class="home-full-width">
       <b-container>
         <b-row>
-          <b-col md="4">
+          <b-col lg="4" md="6" sm="7" cols="12">
             <h2 class="home-sec-title">
               設計師
               <span class="en-title">
@@ -57,7 +62,7 @@
     <!-- 部落格與影片專區 -->
     <b-container class="blog-video-sec">
       <b-row>
-        <b-col md="4">
+        <b-col lg="4" md="6" sm="7" cols="12">
           <h2 class="home-sec-title">
             流行趨勢
             <span class="en-title">
@@ -77,7 +82,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="4">
+        <b-col lg="4" md="6" sm="7" cols="12">
           <h2 class="home-sec-title">
             影片專區
             <span class="en-title">
@@ -112,7 +117,7 @@
     <!-- 希卡位置 與FB -->
     <b-container>
       <b-row>
-        <b-col md="4">
+        <b-col lg="4" md="6" sm="7" cols="12">
           <h2 class="home-sec-title">
             希卡位置
             <span class="en-title">
@@ -134,7 +139,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="4">
+        <b-col lg="4" md="6" sm="7" cols="12">
           <h2 class="home-sec-title" data-from="booking">
             線上預約
             <span class="en-title">
@@ -146,12 +151,12 @@
       </b-row>
 
     </b-container>
-    <b-container fluid class="home-full-width">
+    <b-container fluid class="home-full-width-form">
       <b-row>
         <b-col md="6" sm="12" cols="12">
           <img src="../../public/img/img_booking_home.jpg" alt="" srcset="">
         </b-col>
-        <b-col md="6" sm="12" cols="12">
+        <b-col md="5" sm="12" cols="12" offset-xl="1">
           <BookingFrom />
         </b-col>
       </b-row>
@@ -179,12 +184,12 @@ export default {
     return {
       newBlog: [],
       imgshow: [
-        { id: '1', imgurl: 'https://fakeimg.pl/640x500/000/fff' },
-        { id: '2', imgurl: 'https://fakeimg.pl/640x500/000/fff' },
-        { id: '3', imgurl: 'https://fakeimg.pl/640x500/000/fff' },
-        { id: '4', imgurl: 'https://fakeimg.pl/640x500/000/fff' },
-        { id: '5', imgurl: 'https://fakeimg.pl/640x500/000/fff' },
-        { id: '6', imgurl: 'https://fakeimg.pl/640x500/000/fff' }
+        { id: '1', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
+        { id: '2', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
+        { id: '3', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
+        { id: '4', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
+        { id: '5', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
+        { id: '6', imgurl: 'https://fakeimg.pl/640x500/fff/000' }
       ],
       blog: [
         {
@@ -208,10 +213,10 @@ export default {
         }
       ],
       productRow: [
-        { id: '1', imgurl: 'https://fakeimg.pl/660x480/000/fff', text: 'TEXT' },
-        { id: '2', imgurl: 'https://fakeimg.pl/660x480/000/fff', text: 'TEXT' },
-        { id: '3', imgurl: 'https://fakeimg.pl/660x480/000/fff', text: 'TEXT' },
-        { id: '4', imgurl: 'https://fakeimg.pl/660x480/000/fff', text: 'TEXT' }
+        { id: '1', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
+        { id: '2', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
+        { id: '3', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
+        { id: '4', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' }
       ]
     }
   },
@@ -239,10 +244,67 @@ export default {
 @import '../assets/scss/global.scss';
 .imgshow-container {
   margin-bottom: 110px;
+  @include pad-width {
+    margin: 0;
+  }
+  //手機
+  @include pad-and-phone-width {
+    margin: 0;
+  }
+
   .imgshow-col {
     padding: 0;
-    img {
-      display: block;
+    .imgshow-block {
+      position: relative;
+      overflow: hidden;
+      img {
+        display: block;
+      }
+      &:hover {
+        div {
+          opacity: 1;
+          position: absolute;
+          right: 0;
+          bottom: 0%;
+        }
+        p {
+          opacity: 1;
+          position: absolute;
+        }
+      }
+      div {
+        position: absolute;
+        opacity: 0;
+        bottom: -30%;
+        right: 0;
+        background: url('../assets/icon/icon_field.png') no-repeat right;
+        transition: 0.3s all ease-in;
+        height: 37%;
+        width: 100%;
+        @include pad-width {
+          display: none;
+        }
+        //手機
+        @include pad-and-phone-width {
+          display: none;
+        }
+      }
+      p {
+        font-size: 50px;
+        color: $submain-T-Color;
+        transition: 0.3s all ease-in;
+        opacity: 0;
+        position: absolute;
+        right: 20%;
+        bottom: 15%;
+        @include pad-width {
+          display: none;
+        }
+        //手機
+        @include pad-and-phone-width {
+          display: none;
+        }
+      }
     }
   }
 }
@@ -255,7 +317,14 @@ export default {
   margin: 70px auto;
   padding-left: 24px;
   text-align: left;
-
+  //平板
+  @include pad-width {
+    margin: 10% auto;
+  }
+  //手機
+  @include pad-and-phone-width {
+    margin: 10% auto;
+  }
   &:after {
     content: '';
     height: 10px;
@@ -273,43 +342,70 @@ export default {
   }
   .en-title {
     font-size: 45px;
+    // 平板
+    @include pad-width {
+      font-size: 22px;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      font-size: 22px;
+    }
   }
 }
 [data-from] {
   margin-top: 180px;
+  //平板
+  @include pad-width {
+    margin-top: 15%;
+  }
+  //小平板
+  @include pad-and-phone-width {
+    margin-top: 15%;
+  }
 }
 
 .blog-sec {
+  text-align: left;
   margin-top: 80px;
   width: 70%;
 
   //平板
   @include pad-width {
     width: 100%;
+    margin-top: 0;
     margin-bottom: 50px;
-    text-align: center;
   }
   //小平板
-  @include small-pad-width {
+  @include pad-and-phone-width {
     width: 100%;
+    margin-top: 0;
     margin-bottom: 50px;
-    text-align: center;
   }
-  //手機
-  @include phone-width {
-    width: 100%;
-    margin-bottom: 50px;
-    text-align: center;
+  h3 {
+    font-size: 34px;
+    letter-spacing: 3.4px;
+    margin-bottom: 15px;
+  }
+  p {
+    margin-bottom: 10px;
   }
 }
 .home-news-row {
   margin-bottom: 170px;
+  //平板
+  @include pad-width {
+    margin-bottom: 50px;
+  }
+  //小平板
+  @include pad-and-phone-width {
+    margin-bottom: 50px;
+  }
   img {
     margin-top: -70px;
     box-shadow: 50px -50px 0px 0px#e5e5e5;
     //平板
     @include pad-width {
-      margin-top: -70px;
+      margin-top: -30px;
     }
     //小平板
     @include small-pad-width {
@@ -329,15 +425,32 @@ export default {
     margin: 0 9px;
     border-radius: 50%;
     margin-bottom: 70px;
+    // 平板
+    @include pad-width {
+      margin-bottom: 5%;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      margin-bottom: 5%;
+    }
   }
 }
-.home-full-width {
+.home-full-width,
+.home-full-width-form {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 774px;
   background: url('../../public/img/bg_stylist.jpg') no-repeat center;
   background-attachment: fixed;
+  // 平板
+  @include pad-width {
+    min-height: 700px;
+  }
+  //平板以下
+  @include pad-and-phone-width {
+    min-height: 600px;
+  }
   .booking-form {
     max-width: 480px;
     .input-row {
@@ -376,9 +489,31 @@ export default {
     }
   }
 }
+
+.home-full-width-form {
+  //平板
+  @include pad-width {
+  }
+  //小平板
+  @include small-pad-width {
+    min-height: 1250px;
+  }
+  //手機
+  @include phone-width {
+    min-height: 1050px;
+  }
+}
 .blog-video-sec {
   .home-sec-title {
     margin: 120px auto 80px auto;
+    // 平板
+    @include pad-width {
+      margin: 10% auto;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      margin: 10% auto;
+    }
   }
   .home-article {
     text-align: left;
@@ -389,6 +524,7 @@ export default {
     h3 {
       letter-spacing: 2.5px;
       margin-bottom: 6px;
+      font-size: 25px;
     }
     h4 {
       overflow: hidden;
@@ -409,6 +545,14 @@ address {
   margin: 70px auto;
   p {
     margin-bottom: 10px;
+  }
+  // 平板
+  @include pad-width {
+    margin: 10% auto;
+  }
+  //平板以下
+  @include pad-and-phone-width {
+    margin: 10% auto;
   }
 }
 .pd-0 {
@@ -440,9 +584,9 @@ address {
   }
   .scrolltop-txt {
     background: linear-gradient(
-      to bottom,
-      rgba(167, 167, 167, 0),
-      rgba(119, 118, 116, 0),
+      359deg,
+      rgba(167, 167, 167, 1) 80%,
+      rgba(119, 118, 116, 1) 90%,
       #454444
     );
 

@@ -104,9 +104,6 @@ export default {
     input {
       padding: 10px;
       position: relative;
-      &::-webkit-input-placeholder {
-        color: $main-T-Color !important;
-      }
     }
     input,
     .select {
@@ -138,14 +135,17 @@ export default {
     //平板
     @include pad-width {
       width: 100%;
+      margin-top: 0;
     }
     //小平板
     @include small-pad-width {
       width: 100%;
+      margin-top: 0;
     }
     //手機
     @include phone-width {
       width: 100%;
+      margin-top: 0;
     }
   }
 }

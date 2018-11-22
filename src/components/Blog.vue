@@ -13,16 +13,16 @@
         </b-col>
         <b-col cols="6" class="article-return">
           <p>
-            <router-link to="/news">回到上一頁</router-link>
+            <router-link to="/news">
+              <span class="page-left"></span>回到上一頁</router-link>
           </p>
         </b-col>
         <b-col cols="12" class="article-community">
           <p>分享</p>
-          <font-awesome-icon :icon="['fab','facebook-square']" size="2x" />
-          <font-awesome-icon :icon="['fab','twitter-square']" size="2x" />
-          <font-awesome-icon :icon="['fab','instagram']" size="2x" />
-          <font-awesome-icon :icon="['fab','youtube-square']" size="2x" />
-
+          <img src="../assets/icon/btn_facebook.svg" alt="" srcset="">
+          <img src="../assets/icon/btn_twitter.svg" alt="" srcset="">
+          <img src="../assets/icon/btn_Instagram.svg" alt="" srcset="">
+          <img src="../assets/icon/btn_youtube.svg" alt="" srcset="">
         </b-col>
         <b-col cols="12">
           <img :src="article.cover_image">
@@ -111,6 +111,28 @@ export default {
 
   .article-return {
     text-align: right;
+    a {
+      color: $main-T-Color;
+    }
+    .page-left {
+      border-right: 3px solid #000;
+      border-top: 3px solid #000;
+      height: 16px;
+      width: 16px;
+      transform: rotate(-135deg);
+      display: inline-block;
+      margin-right: 15px;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 3px;
+        background: #000;
+        top: 6px;
+        left: -4px;
+        transform: rotate(-45deg);
+      }
+    }
   }
   .article-date {
     font-size: 14px;
@@ -131,16 +153,12 @@ export default {
   }
   .article-community {
     margin: 15px auto;
-    svg {
-      margin: 5px;
+    img {
+      display: inline;
+      margin: 10px 10px 5% 0;
       width: 32px;
       background: $submain-Bg-Color;
       color: $main-T-Color;
-      &:nth-child(4) {
-        background: $main-Bg-Color;
-        color: $submain-T-Color;
-        border-radius: 5px;
-      }
     }
   }
 }
