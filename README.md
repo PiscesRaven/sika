@@ -32,6 +32,6 @@ bootstrap vue > 卡片 、格線
 
 fontawesome-cli (未成功)
 
-fontawesome-free(未成功)
+fontawesome-free(未成功)1
 
 ```
