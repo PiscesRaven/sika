@@ -9,6 +9,7 @@
         </div>
       </b-carousel-slide>
     </b-carousel>
+    <img src="../../../public/img/phone_banner.jpg" class="phone-banner">
   </div>
 </template>
 
@@ -35,8 +36,23 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../../assets/scss/global.scss';
+.phone-banner {
+  display: none;
+  //平板以下
+  @include pad-and-phone-width {
+    display: block;
+    margin: auto;
+  }
+}
 
 #carousel1 {
+  @include pad-width {
+    display: none;
+  }
+  //手機
+  @include pad-and-phone-width {
+    display: none;
+  }
   .carousel-inner {
     .carousel-item {
       .social-icon {
@@ -45,13 +61,7 @@ export default {
         display: inline-flex;
         width: 100%;
         color: $submain-T-Color;
-        @include pad-width {
-          display: none;
-        }
-        //手機
-        @include pad-and-phone-width {
-          display: none;
-        }
+
         svg {
           margin-right: 30px;
         }

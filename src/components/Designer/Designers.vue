@@ -88,6 +88,17 @@ export default {
 .section-img {
   background: url('../../../public/img/img_Stylist.jpg') center no-repeat;
   height: 410px;
+  margin-bottom: 64px;
+  //平板
+  @include pad-width {
+    margin-bottom: 18px;
+  }
+  //平板以下
+  @include pad-and-phone-width {
+    background: url('../../../public/img/img_Stylist_pad.jpg') center no-repeat;
+    margin-bottom: 18px;
+    height: 288px;
+  }
 }
 
 .designer-list {

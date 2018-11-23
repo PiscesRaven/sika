@@ -117,6 +117,16 @@ export default {
   background-size: cover;
   height: 410px;
   margin-bottom: 125px;
+  //平板
+  @include pad-width {
+    margin-bottom: 18px;
+  }
+  //平板以下
+  @include pad-and-phone-width {
+    background: url('../../../public/img/img_Stylist_pad.jpg') center no-repeat;
+    margin-bottom: 18px;
+    height: 288px;
+  }
 }
 
 h3 {

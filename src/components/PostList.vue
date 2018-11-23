@@ -7,7 +7,7 @@
     </b-container fluid>
     <b-container class="container-body">
       <b-row class="news-row">
-        <b-col v-for="list in NewsList" lg="4" sm="6" cols="12" :key="list.id">
+        <b-col v-for="list in NewsList" lg="4" sm="6" cols="12">
           <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">
             <b-card :title="list.title" :img-src="list.cover_image" img-alt="Image" img-top tag="article">
               <p class="card-day">{{list.created_date}}</p>
@@ -69,9 +69,19 @@ export default {
 @import '../assets/scss/global.scss';
 
 .section-img {
-  background: url('../../public/img/Image.jpg') center no-repeat;
+  background: url('../../public/img/Image.jpg') right no-repeat;
   height: 410px;
   margin-bottom: 125px;
+  //平板
+  @include pad-width {
+    margin-bottom: 10%;
+  }
+  //平板以下
+  @include pad-and-phone-width {
+    background: url('../../public/img/Image_pad.jpg') right no-repeat;
+    margin-bottom: 10%;
+    height: 288px;
+  }
 }
 .news-row {
   max-width: 900px;

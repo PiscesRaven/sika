@@ -443,13 +443,20 @@ export default {
   min-height: 774px;
   background: url('../../public/img/bg_stylist.jpg') no-repeat center;
   background-attachment: fixed;
-  // 平板
+  margin-bottom: 240px;
+  // 電腦
+  @include pc-width {
+    min-height: 700px;
+    margin-bottom: 10%;
+  } // 平板
   @include pad-width {
     min-height: 700px;
+    margin-bottom: 5%;
   }
   //平板以下
   @include pad-and-phone-width {
     min-height: 600px;
+    margin-bottom: 5%;
   }
   .booking-form {
     max-width: 480px;
@@ -491,6 +498,7 @@ export default {
 }
 
 .home-full-width-form {
+  margin-bottom: 0;
   //平板
   @include pad-width {
   }
@@ -505,7 +513,7 @@ export default {
 }
 .blog-video-sec {
   .home-sec-title {
-    margin: 120px auto 80px auto;
+    margin: 0px auto 80px auto;
     // 平板
     @include pad-width {
       margin: 10% auto;
@@ -517,7 +525,16 @@ export default {
   }
   .home-article {
     text-align: left;
-    margin-bottom: 35px;
+    margin-bottom: 175px;
+
+    // 平板
+    @include pad-width {
+      margin-bottom: 10%;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      margin-bottom: 5%;
+    }
     img {
       margin-bottom: 30px;
     }
@@ -528,7 +545,7 @@ export default {
     }
     h4 {
       overflow: hidden;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
@@ -542,7 +559,7 @@ export default {
 
 address {
   text-align: left;
-  margin: 70px auto;
+  margin: 0px auto 70px auto;
   p {
     margin-bottom: 10px;
   }

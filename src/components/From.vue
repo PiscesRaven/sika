@@ -2,28 +2,26 @@
   <div>
     <form method="post" class="booking-form">
       <div class="input-row">
-        <input type="text" name="name" id="" placeholder="請輸入您的名字">
+        <input type="text" name="name" id="" placeholder="請輸入您的名字" v->
       </div>
       <div class="input-row">
         <input type="email" name="" id="" placeholder="請輸入您的電話號碼">
       </div>
-      <div class="input-row" @click.prevent="selectStatusD = false">
+      <div class="input-row" @click.prevent="selectStatus = false">
         <ul @click.stop.prevent="selectStatusD = !selectStatusD" :class="'select' + (selectStatusD ? ' open' : '')" :selectData="selectData">
           <li @click.prevent="selectData = list" v-for="list in designers">
             {{list}}
           </li>
         </ul>
       </div>
-      <div class="input-row" @click.prevent="selectStatusT = false">
-        <ul @click.stop.prevent="selectStatusT = !selectStatusT" :class="'select' + (selectStatusT ? ' open' : '')" :selectData="'請選擇時間'">
-          <li @click.prevent="selectData = list" v-for="list in time">
-            {{list}}
-          </li>
+      <div class="input-row" @click.prevent="selectStatuD = false">
+        <ul @click.stop.prevent="selectStatusT = !selectStatusT" :class="'select' + (selectStatusT ? ' open' : '')" :selectData="selectDataT">
+          <li @click.prevent="selectDataT= list" v-for="list in time"> {{list}} </li>
         </ul>
       </div>
       <div class="input-row" @click.prevent="selectStatusS = false">
-        <ul @click.stop.prevent="selectStatusS = !selectStatusS" :class="'select' + (selectStatusS ? ' open' : '')" :selectData="'請選擇服務'">
-          <li @click.prevent="selectData = list" v-for="list in service">
+        <ul @click.stop.prevent="selectStatusS = !selectStatusS" :class="'select' + (selectStatusS ? ' open' : '')" :selectData="selectDataS">
+          <li @click.prevent="selectDataS = list" v-for="list in service">
             {{list}}
           </li>
         </ul>
@@ -36,10 +34,13 @@
 <script>
 export default {
   name: 'Booking',
+  props: {},
   data() {
     return {
       selectStatusD: false,
       selectData: '請選擇設計師',
+      selectDataT: '請選擇時間',
+      selectDataS: '請選擇服務',
       selectStatusT: false,
       selectStatusS: false,
 
@@ -161,48 +162,48 @@ export default {
   background: $submain-Bg-Color;
   color: $main-T-Color;
   cursor: pointer;
-}
-.select.open {
-  overflow: visible;
-}
-.select:before {
-  content: attr(selectData);
-  display: block;
-  padding: 20px 10px;
-}
-.select:after {
-  content: '';
-  height: 10px;
-  width: 10px;
-  display: block;
-  position: absolute;
-  top: 23px;
-  right: 1vw;
-  border: 12px dashed #666;
-  border-radius: 2px;
-  border-top-color: #000;
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-  border-right-color: transparent;
-  transform-origin: 50% 25%;
-  font-family: 'Material Icons';
-  font-size: 20px;
-  transition: 0.2s;
-}
-.select.open:after {
-  transform: rotate(-180deg);
-}
-.select li {
-  display: block;
-  padding: 7px 10px;
-  position: relative;
-  z-index: 1;
-  transition: 0.5s;
-  background: $submain-Bg-Color;
-}
-.select li:hover {
-  background: #52504d;
-  color: $submain-T-Color;
-  transition: 0.3s;
+  &.open {
+    overflow: visible;
+  }
+  &:before {
+    content: attr(selectData);
+    display: block;
+    padding: 20px 10px;
+  }
+  &:after {
+    content: '';
+    height: 10px;
+    width: 10px;
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 1vw;
+    border: 12px dashed #666;
+    border-radius: 2px;
+    border-top-color: #000;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    transform-origin: 50% 25%;
+    font-family: 'Material Icons';
+    font-size: 20px;
+    transition: 0.2s;
+  }
+  &.open:after {
+    transform: rotate(180deg);
+  }
+  li {
+    display: block;
+    padding: 7px 10px;
+    position: relative;
+    z-index: 1;
+    transition: 0.5s;
+    background: $submain-Bg-Color;
+    &:hover {
+      background: #52504d;
+      color: $submain-T-Color;
+      transition: 0.3s;
+    }
+  }
 }
 </style>
