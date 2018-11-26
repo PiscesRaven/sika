@@ -25,11 +25,12 @@
           </h2>
         </b-col>
       </b-row>
-      <b-row v-for="list in newBlog" class="home-news-row">
+      <b-row v-for="list in homenews" class="home-news-row">
         <b-col lg="6" md="6" sm="12" cols="12">
           <div class="blog-sec">
             <h3>{{list.title}}</h3>
             <p>{{list.created_date}}</p>
+            <p>{{list.description}}</p>
             <router-link to="">more ></router-link>
           </div>
         </b-col>
@@ -182,7 +183,13 @@ export default {
   },
   data() {
     return {
-      newBlog: [],
+      Api: {
+        NewsApi: 'https://sika.idea-infinite.com/api/v1/news',
+        DesugnerApi: 'https://sika.idea-infinite.com/api/v1/designer'
+      },
+
+      homenews: [],
+      HomeDesigner: [],
       imgshow: [
         { id: '1', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
         { id: '2', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
@@ -225,17 +232,34 @@ export default {
   },
   methods: {
     getBlogList() {
+      let vm = this
+
       axios
-        .get('https://sika.idea-infinite.com/api/v1/article/list', {
-          params: {
-            limit: 1,
-            offset: 0
-          }
-        })
-        .then(res => {
-          console.log(res.data.data)
-          this.newBlog = res.data.data
-        })
+        .all([
+          axios.get(vm.Api.NewsApi, {
+            params: {
+              limit: 1,
+              offset: 0
+            }
+          }),
+          axios.get(vm.Api.DesugnerApi, {
+            params: {
+              limit: 1,
+              offset: 0
+            }
+          })
+        ])
+        .then(
+          axios.spread(function(newsapi, DesignerRes) {
+            vm.homenews = newsapi.data.data
+            console.log(this.homenews)
+            // this.HomeDesigner = DesignerRes.data.data
+          })
+        )
+      // .then(res => {
+      //   console.log(res.data.data)
+      //   this.newBlog = res.data.data
+      // })
     }
   }
 }
