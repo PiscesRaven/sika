@@ -8,8 +8,8 @@
     <b-container class="container-body" fluid>
       <b-row>
         <b-col lg="12">
-          <ul class="hair-style-list">
-            <li v-for="item in stylelist" :class="{active:HairActive}" @click.prevent="selectStyle =item.style">
+          <ul class="hair-style-ul">
+            <li v-for="item in stylelist" :class="status.selectStyle === item.style ? 'active' : ''" class="hair-style-list" @click.prevent="status.selectStyle =item.style">
               <a href="#">
                 {{item.style}}
               </a>
@@ -21,7 +21,9 @@
         <b-col lg="2" class="designer-list">
           <h3>設計師</h3>
           <ul>
-            <li v-for="item in designer" :class="{active : DesignerActive}" @click.prevent="selectDesigner =item.designer">
+            <li v-for="item in designer" :class="status.selectDesigner === item.designer ? 'active' : ''" @click.prevent="status={
+selectDesigner:item.designer,
+selectStyle:'All'}">
               <a href="#">{{item.designer}}</a></li>
           </ul>
         </b-col>
@@ -49,14 +51,18 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HairStyle',
   props: {},
   data() {
     return {
       currentPage: 0,
-      selectDesigner: 'All',
-      selectStyle: 'All',
+      status: {
+        selectDesigner: 'All',
+        selectStyle: 'All'
+      },
       desActive: false,
       hairActive: false,
       stylelist: [
@@ -75,7 +81,7 @@ export default {
         { designer: 'kevin' },
         { designer: '邦晉' }
       ],
-      DesigneStyle: [
+      HairData: [
         {
           id: '1',
           imgurl: 'https://pic.pimg.tw/loory/1513015180-993819727.png',
@@ -91,7 +97,8 @@ export default {
         },
         {
           id: '3',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
+          imgurl:
+            'http://www.sciencenets.com/data/attachment/album/201506/01/100503si77ymzmkuki7lgk.gif',
           designer: 'erica',
           style: '直髮'
         },
@@ -117,7 +124,7 @@ export default {
         },
         {
           id: '7',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
+          imgurl: 'https://wiki.komica.org/images/a/ae/Img2191.jpg',
           designer: 'lily',
           style: '短髮'
         },
@@ -136,7 +143,7 @@ export default {
         },
         {
           id: '10',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
+          imgurl: 'https://pic.pimg.tw/loory/1513015180-993819727.png',
           designer: 'kevin',
           style: '男士髮'
         },
@@ -148,7 +155,7 @@ export default {
         },
         {
           id: '12',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
+          imgurl: 'http://img.malaimo.tw/20171123190951_71.jpg',
           designer: '邦晉',
           style: '短髮'
         },
@@ -176,254 +183,100 @@ export default {
             'http://img4.cache.netease.com/photo/0031/2014-05-01/9R4KPLJ93V8J0031.jpg',
           designer: 'kevin',
           style: '長髮'
+        },
+        {
+          id: '17',
+          imgurl: 'https://wiki.komica.org/images/c/c1/Img6610.jpg',
+          designer: '阿哲',
+          style: '短髮'
+        },
+        {
+          id: '18',
+          imgurl: 'http://i.imgur.com/4fTgqvG.jpg',
+          designer: '邦晉',
+          style: '直髮'
+        },
+        {
+          id: '19',
+          imgurl: 'https://fakeimg.pl/270x250/000/',
+          designer: 'lily',
+          style: '捲髮'
+        },
+        {
+          id: '20',
+          imgurl:
+            'http://photo.ccoo.cn/webdiy/news/2011924/201192420542627.jpg',
+          designer: 'raven',
+          style: '男士髮'
+        },
+        {
+          id: '21',
+          imgurl: 'https://fakeimg.pl/270x250/000/',
+          designer: 'erica',
+          style: '長髮'
+        },
+        {
+          id: '22',
+          imgurl: 'https://fakeimg.pl/270x250/000/',
+          designer: 'kevin',
+          style: '短髮'
+        },
+        {
+          id: '23',
+          imgurl:
+            'https://taiwandl.files.wordpress.com/2016/04/a4fd7f7254c362c97ee7523bb2edbb64.jpg?w=700&h=430&crop=1',
+          designer: '阿哲',
+          style: '直髮'
+        },
+        {
+          id: '24',
+          imgurl: 'https://fakeimg.pl/270x250/000/',
+          designer: '邦晉',
+          style: '捲髮'
+        },
+        {
+          id: '25',
+          imgurl: 'https://fakeimg.pl/270x250/000/',
+          designer: 'lily',
+          style: '男士髮'
         }
-        // {
-        //   id: '17',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '阿哲',
-        //   style: '短髮'
-        // },
-        // {
-        //   id: '18',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '邦晉',
-        //   style: '直髮'
-        // },
-        // {
-        //   id: '19',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'lily',
-        //   style: '捲髮'
-        // },
-        // {
-        //   id: '20',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'raven',
-        //   style: '男士髮'
-        // },
-        // {
-        //   id: '21',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'erica',
-        //   style: '長髮'
-        // },
-        // {
-        //   id: '22',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'kevin',
-        //   style: '短髮'
-        // },
-        // {
-        //   id: '23',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '阿哲',
-        //   style: '直髮'
-        // },
-        // {
-        //   id: '24',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '邦晉',
-        //   style: '捲髮'
-        // },
-        // {
-        //   id: '25',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'lily',
-        //   style: '男士髮'
-        // },
-        // {
-        //   id: '26',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'raven',
-        //   style: '長髮'
-        // },
-        // {
-        //   id: '27',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'erica',
-        //   style: '短髮'
-        // },
-        // {
-        //   id: '28',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'kevin',
-        //   style: '直髮'
-        // },
-        // {
-        //   id: '29',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '阿哲',
-        //   style: '捲髮'
-        // },
-        // {
-        //   id: '30',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '邦晉',
-        //   style: '男士髮'
-        // },
-        // {
-        //   id: '31',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'lily',
-        //   style: '長髮'
-        // },
-        // {
-        //   id: '32',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'raven',
-        //   style: '短髮'
-        // },
-        // {
-        //   id: '33',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'erica',
-        //   style: '直髮'
-        // },
-        // {
-        //   id: '34',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'kevin',
-        //   style: '捲髮'
-        // },
-        // {
-        //   id: '35',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '阿哲',
-        //   style: '男士髮'
-        // },
-        // {
-        //   id: '36',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '邦晉',
-        //   style: '長髮'
-        // },
-        // {
-        //   id: '37',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'lily',
-        //   style: '短髮'
-        // },
-        // {
-        //   id: '38',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'raven',
-        //   style: '直髮'
-        // },
-        // {
-        //   id: '39',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'erica',
-        //   style: '捲髮'
-        // },
-        // {
-        //   id: '40',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'kevin',
-        //   style: '男士髮'
-        // },
-        // {
-        //   id: '41',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '阿哲',
-        //   style: '長髮'
-        // },
-        // {
-        //   id: '42',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '邦晉',
-        //   style: '短髮'
-        // },
-        // {
-        //   id: '43',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'lily',
-        //   style: '直髮'
-        // },
-        // {
-        //   id: '44',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'raven',
-        //   style: '捲髮'
-        // },
-        // {
-        //   id: '45',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'erica',
-        //   style: '男士髮'
-        // },
-        // {
-        //   id: '46',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'kevin',
-        //   style: '長髮'
-        // },
-        // {
-        //   id: '47',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '阿哲',
-        //   style: '短髮'
-        // },
-        // {
-        //   id: '48',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: '邦晉',
-        //   style: '直髮'
-        // },
-        // {
-        //   id: '49',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'lily',
-        //   style: '捲髮'
-        // },
-        // {
-        //   id: '50',
-        //   imgurl: 'https://fakeimg.pl/270x250/000/',
-        //   designer: 'raven',
-        //   style: '男士髮'
-        // }
       ]
     }
   },
   computed: {
     filterList: function() {
-      console.log('有計算')
       let vm = this
-      let selectDesigner = vm.selectDesigner //data的設計師
-      let selectStyle = vm.selectStyle //data的髮型
-      console.log(selectDesigner + '設計師')
-      if (selectDesigner && selectStyle === 'All') {
-        console.log(vm.DesigneStyle)
-        return vm.DesigneStyle
+      let designer = vm.status.selectDesigner //data的設計師
+      let style = vm.status.selectStyle //data的髮型
+      console.log(this.status.selectDesigner + '和' + this.status.selectStyle)
+      if (designer === 'All' && style === 'All') {
+        console.log('常態')
+        return vm.HairData
       }
-      // else if (selectStyle != 'All') {
-      //   return vm.DesigneStyle.filter(function(list) {
-      //     console.log(selectStyle)
-      //     return list.style == selectStyle
-      //   })
-      // }
-      else if (selectDesigner != 'All') {
-        console.log('selectDesigner有近來')
-        return vm.DesigneStyle.filter(function(list) {
-          return list.designer == selectDesigner
+      if (designer !== 'All' && style !== 'All') {
+        return vm.HairData.filter(function(list) {
+          return list.designer == designer && list.style == style
         })
       }
-
-      //縮寫
-      // return this.DesigneStyle.filter(list => {
-      //   if (selectDesigner && selectStyle === 'All') return vm.DesigneStyle
-      //   else if (selectStyle != 'All') return list.style == selectStyle
-      //   else if (selectDesigner != 'All') console.log('selectDesigner有近來')
-      //   return list.designer == selectDesigner
-      // })
+      if (style !== 'All') {
+        console.log('風格')
+        return vm.HairData.filter(function(list) {
+          return list.style == style
+        })
+      }
+      if (designer !== 'All') {
+        console.log('設計師' + designer + ',風格等於' + style)
+        return vm.HairData.filter(function(list) {
+          return list.designer == designer
+        })
+      }
     }
   },
   methods: {
-    DesignerActive() {
-      this.desActive = !this.desActive
-    },
-    HairActive() {
-      this.hairActive = !this.hairActive
-    }
+    // getDesignerList() {},
+    // getStyleList() {},
+    // getHairList(){},
+    // filterList: function() {}
   }
 }
 </script>
@@ -431,6 +284,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../assets/scss/global.scss';
+
 .section-img {
   background: url('../../public/img/img_Work.jpg') center no-repeat;
   height: 410px;
@@ -450,7 +304,7 @@ export default {
   max-width: 1440px;
 }
 
-.hair-style-list {
+.hair-style-ul {
   display: inline-flex;
   margin-bottom: 36px;
   @include pc-width {
@@ -468,7 +322,7 @@ export default {
     border-bottom: 1px solid #000;
     margin: auto;
   }
-  li {
+  .hair-style-list {
     margin: auto 53px;
     //平板
     @include pad-width {
@@ -477,6 +331,16 @@ export default {
     //平板以下
     @include pad-and-phone-width {
       margin: 0 auto 2.4% auto;
+    }
+    a {
+      color: $main-T-Color;
+      text-decoration: none;
+    }
+  }
+  .hair-style-list.active {
+    border-bottom: 1px solid #ababaa;
+    a {
+      color: #ababaa;
     }
   }
 }
@@ -514,6 +378,16 @@ export default {
       @include pad-and-phone-width {
         display: inline-flex;
         margin: 2.4% auto 3% auto;
+      }
+      a {
+        color: $main-T-Color;
+        text-decoration: none;
+      }
+    }
+
+    .active {
+      a {
+        color: #ababaa;
       }
     }
   }
