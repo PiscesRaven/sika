@@ -34,7 +34,7 @@ selectStyle:'All'}">
                 <div class="fz-tw">
                   <img :src="item.imgurl" alt="">
                   <span>{{item.designer}}</span>
-                  <p>{{item.style}}</p>
+                  <p>{{item.style}} 之後要拿掉只是暫時的</p>
                 </div>
               </div>
             </b-col>
@@ -248,9 +248,9 @@ export default {
       let vm = this
       let designer = vm.status.selectDesigner //data的設計師
       let style = vm.status.selectStyle //data的髮型
-      console.log(this.status.selectDesigner + '和' + this.status.selectStyle)
+      console.log('現在是 ' + designer + ' 和 ' + style + ' 風格')
       if (designer === 'All' && style === 'All') {
-        console.log('常態')
+        // console.log('全部設計師與風格')
         return vm.HairData
       }
       if (designer !== 'All' && style !== 'All') {
@@ -259,13 +259,13 @@ export default {
         })
       }
       if (style !== 'All') {
-        console.log('風格')
+        // console.log('只篩選風格')
         return vm.HairData.filter(function(list) {
           return list.style == style
         })
       }
       if (designer !== 'All') {
-        console.log('設計師' + designer + ',風格等於' + style)
+        // console.log('現在設計師' + designer + ',風格是' + style)
         return vm.HairData.filter(function(list) {
           return list.designer == designer
         })

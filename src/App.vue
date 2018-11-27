@@ -18,12 +18,17 @@ export default {
     NavBar,
     scrollTop,
     Footer
+  },
+  watch: {
+    $route(to, from) {
+      console.log(to.path)
+      // console.log(from.path)
+
+      if (to.path == '/news') {
+        console.log('a')
+      }
+    }
   }
-  // watch: {
-  //   $route(to, from) {
-  //     console.log(to.path)
-  //   }
-  // }
 }
 </script>
 <style lang="scss">

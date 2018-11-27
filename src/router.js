@@ -6,12 +6,12 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes: [{
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
     },
     {
       path: '/news',
@@ -42,15 +42,30 @@ export default new Router({
       path: '/bloglist',
       name: '流行趨勢 Blog',
       component: () => import('./components/PostList.vue')
+    },
+    {
+      path: '/bloglist/:postid',
+      name: 'Blog 內文',
+      component: () => import('./components/Blog.vue'),
     }, {
       path: '/video',
       name: '影音專區 Video',
       component: () => import('./components/PostList.vue')
     },
     {
+      path: '/video/:postid',
+      name: '影音專區 內文',
+      component: () => import('./components/Blog.vue'),
+    },
+    {
       path: '/products',
       name: '產品資訊 Products',
       component: () => import('./components/PostList.vue')
+    },
+    {
+      path: '/products/:postid',
+      name: '產品資訊 內文',
+      component: () => import('./components/Blog.vue'),
     },
     {
       path: '/booking',

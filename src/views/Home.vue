@@ -31,7 +31,7 @@
             <h3>{{list.title}}</h3>
             <p>{{list.created_date}}</p>
             <p>{{list.description}}</p>
-            <router-link to="">more ></router-link>
+            <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">more ></router-link>
           </div>
         </b-col>
         <b-col>
@@ -75,10 +75,10 @@
       <b-row>
         <b-col md="4" sm="12" cols="12" v-for="list in blog">
           <div class="home-article">
-            <img :src="list.imgurl">
+            <img :src="list.cover_image">
             <h3>{{list.title}}</h3>
-            <h4>{{list.text}}</h4>
-            <router-link to="#">more ></router-link>
+            <h4>{{list.description}}</h4>
+            <router-link :to="{name:'Blog 內文', params:{postid:list['id']}}">more ></router-link>
           </div>
         </b-col>
       </b-row>
@@ -95,10 +95,10 @@
       <b-row>
         <b-col md="4" sm="12" v-for="list in blog">
           <article class="home-article">
-            <img :src="list.imgurl">
+            <img :src="list.cover_image">
             <h3>{{list.title}}</h3>
-            <h4>{{list.text}}</h4>
-            <router-link to="#">more ></router-link>
+            <h4>{{list.description}}</h4>
+            <router-link :to="{name:'影音專區 內文', params:{postid:list['id']}}">more ></router-link>
           </article>
         </b-col>
       </b-row>
@@ -107,7 +107,7 @@
 
     <b-container fluid>
       <b-row>
-        <b-col md="3" sm="6" v-for="list in productRow" class="pd-0">
+        <b-col md="3" sm="6" cols="6" v-for="list in productRow" class="pd-0">
           <article class="settimg-img slide-TextUp">
             <img :src="list.imgurl">
             <div class="scrolltop-txt">{{list.text}}</div>
@@ -162,13 +162,11 @@
         </b-col>
       </b-row>
     </b-container fluid>
-
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
 import HomeBranner from '@/components/Home/HomeBanner.vue'
 import HomeStylist from '@/components/Home/HomeStylist.vue'
@@ -185,11 +183,10 @@ export default {
     return {
       Api: {
         NewsApi: 'https://sika.idea-infinite.com/api/v1/news',
-        DesugnerApi: 'https://sika.idea-infinite.com/api/v1/designer'
+        StylistApi: 'https://sika.idea-infinite.com/api/v1/designer',
+        BlogApi: 'https://sika.idea-infinite.com/api/v1/article/list'
       },
-
       homenews: [],
-      HomeDesigner: [],
       imgshow: [
         { id: '1', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
         { id: '2', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
@@ -198,27 +195,7 @@ export default {
         { id: '5', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
         { id: '6', imgurl: 'https://fakeimg.pl/640x500/fff/000' }
       ],
-      blog: [
-        {
-          id: '1',
-          imgurl: 'https://fakeimg.pl/370x310/000/fff',
-          title: '文章Title',
-          text:
-            'text 文章內文,text 文章內文,text 文章內文,text 文章內文,text 文章內文,text 文章內文'
-        },
-        {
-          id: '2',
-          imgurl: 'https://fakeimg.pl/370x310/000/fff',
-          title: '文章Title',
-          text: 'text 文章內聞'
-        },
-        {
-          id: '3',
-          imgurl: 'https://fakeimg.pl/370x310/000/fff',
-          title: '文章Title',
-          text: 'text 文章內聞'
-        }
-      ],
+      blog: [],
       productRow: [
         { id: '1', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
         { id: '2', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
@@ -233,7 +210,6 @@ export default {
   methods: {
     getBlogList() {
       let vm = this
-
       axios
         .all([
           axios.get(vm.Api.NewsApi, {
@@ -242,24 +218,20 @@ export default {
               offset: 0
             }
           }),
-          axios.get(vm.Api.DesugnerApi, {
+
+          axios.get(vm.Api.BlogApi, {
             params: {
-              limit: 1,
+              limit: 3,
               offset: 0
             }
           })
         ])
         .then(
-          axios.spread(function(newsapi, DesignerRes) {
-            vm.homenews = newsapi.data.data
-            console.log(this.homenews)
-            // this.HomeDesigner = DesignerRes.data.data
+          axios.spread(function(newsApi, BlogApi) {
+            vm.homenews = newsApi.data.data
+            vm.blog = BlogApi.data.data
           })
         )
-      // .then(res => {
-      //   console.log(res.data.data)
-      //   this.newBlog = res.data.data
-      // })
     }
   }
 }
@@ -391,17 +363,14 @@ export default {
 .blog-sec {
   text-align: left;
   margin-top: 80px;
-  width: 70%;
 
   //平板
   @include pad-width {
-    width: 100%;
     margin-top: 0;
     margin-bottom: 50px;
   }
   //小平板
   @include pad-and-phone-width {
-    width: 100%;
     margin-top: 0;
     margin-bottom: 50px;
   }
@@ -412,6 +381,12 @@ export default {
   }
   p {
     margin-bottom: 10px;
+    line-height: 30px;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 }
 .home-news-row {
@@ -576,7 +551,7 @@ export default {
       letter-spacing: 0.8px;
       margin-bottom: 7px;
       width: 80%;
-      line-height: 18px;
+      line-height: 30px;
     }
   }
 }

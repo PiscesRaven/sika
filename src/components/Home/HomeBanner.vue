@@ -9,7 +9,7 @@
         </div>
       </b-carousel-slide>
     </b-carousel>
-    <img src="../../../public/img/phone_banner.jpg" class="phone-banner">
+    <img src="../../../public/img/phone768_banner.jpg" class="phone-banner">
   </div>
 </template>
 

@@ -6,12 +6,13 @@
       <div class="span" id="bottom"></div>
     </button>
     <div id="navbar" class="navbar" :class="{active: isActive}">
+      <router-link to="/" class="rwd-home"><img src="../../public/img/navbar_logo.svg"></router-link>
       <ul class="nav-bar">
         <li class="nav-items"><span class="navbar-brand">
             <router-link to="/"><img src="../../public/img/navbar_logo.svg"></router-link>
           </span></li>
         <li class="nav-items">
-          <router-link to="/news">
+          <router-link :to="{name:'優惠資訊',params:{title:'最新資訊 News'}}">
             優惠資訊<span>News</span>
           </router-link>
         </li>
@@ -26,17 +27,17 @@
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/bloglist">
+          <router-link :to="{name:'流行趨勢 Blog',params:{title:'流行趨勢 Blog'}}">
             流行趨勢 <span>Blog</span>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/video">
+          <router-link :to="{name:'影音專區 Video',params:{title:'影音專區 Video'}}">
             影片專區 <span>Video</span>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/products">
+          <router-link :to="{name:'產品資訊 Products',params:{title:'產品資訊 Products'}}">
             產品資訊 <span>Products</span>
           </router-link>
         </li>
@@ -118,8 +119,37 @@ export default {
     }
   }
   .router-link-active {
+    border: none;
+    img {
+      padding-top: 10px;
+      width: 80px;
+      height: 75px;
+      border: none;
+    }
+  }
+  .router-link-active {
     border-bottom: 1px solid #fff;
   }
+  .rwd-home {
+    display: none;
+    //平板
+    @include pad-width {
+      img {
+        padding-top: 10px;
+        width: 100px;
+      }
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      display: block;
+      border-bottom: none;
+      img {
+        padding-top: 10px;
+        width: 100px;
+      }
+    }
+  }
+
   .nav-bar {
     display: inline-flex;
     //小平板
@@ -138,7 +168,7 @@ export default {
         @include pad-width {
           margin: 37px 10px;
         }
-        //平板
+        //平板以下
         @include pad-and-phone-width {
           margin: 11px 15px;
         }

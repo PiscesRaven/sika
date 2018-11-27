@@ -10,16 +10,19 @@
       <b-row>
         <b-col>
           <ul class="designer-list">
-            <li v-for="item in DesignerName">{{item.name}}</li>
+
+            <li v-for="item in DesignerList">
+              <router-link to="/designer/designerinfo">{{item.name}} </router-link>
+            </li>
+
           </ul>
         </b-col>
       </b-row>
       <b-row class="designer-row">
-        <b-col v-for="list in DesignerName" xl="3" lg="4" sm="6" cols="12">
+        <b-col v-for="list in DesignerList" xl="3" lg="4" sm="6" cols="12">
           <router-link to="/designer/designerinfo">
-            <b-card :title="list.name" :img-src="list.pic" img-alt="Image" img-top tag="article">
+            <b-card :title="list.name" :img-src="list.image_pc" :img-alt="list.name" img-top tag="article">
               <p class="card-text">
-                Some quick example text to build on the card title and make up the bulk of the card's content.
               </p>
               <div class="card-social">
                 <a :href="list.facebook">
@@ -32,51 +35,30 @@
             </b-card>
           </router-link>
         </b-col>
-        <div class="pagination-nav">
-          <b-pagination-nav base-url="#" :number-of-pages="15" v-model="currentPage" />
-        </div>
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Designers',
   data() {
     return {
-      DesignerName: [
-        {
-          name: 'ebbby',
-          pic: 'https://fakeimg.pl/270x200/000/',
-          facebook: 'https://www.facebook.com/ideainfinitey/',
-          IG: 'https://www.instagram.com/idea_infinite/'
-        },
-        {
-          name: 'lili',
-          pic: 'https://fakeimg.pl/270x200/000/',
-          facebook: 'https://www.facebook.com/ideainfinitey/',
-          IG: 'https://www.instagram.com/idea_infinite/'
-        },
-        {
-          name: 'sam ',
-          pic: 'https://fakeimg.pl/270x200/000/',
-          facebook: 'https://www.facebook.com/ideainfinitey/',
-          IG: 'https://www.instagram.com/idea_infinite/'
-        },
-        {
-          name: 'mary',
-          pic: 'https://fakeimg.pl/270x200/000/',
-          facebook: 'https://www.facebook.com/ideainfinitey/',
-          IG: 'https://www.instagram.com/idea_infinite/'
-        },
-        {
-          name: 'kerven',
-          pic: 'https://fakeimg.pl/270x200/000/',
-          facebook: 'https://www.facebook.com/ideainfinitey/',
-          IG: 'https://www.instagram.com/idea_infinite/'
-        }
-      ]
+      DesignerList: []
+    }
+  },
+  created() {
+    this.getList()
+  },
+  methods: {
+    getList() {
+      axios.get('https://sika.idea-infinite.com/api/v1/designer').then(res => {
+        // console.log(res.data.data)
+        this.DesignerList = res.data.data
+      })
     }
   }
 }

@@ -13,16 +13,18 @@
         </b-col>
         <b-col cols="6" class="article-return">
           <p>
-            <router-link to="/news">
-              <span class="page-left"></span>回到上一頁</router-link>
+            <a href="#" @click.prevent="goBack">
+              <span class="page-left"></span>回到上一頁
+            </a>
           </p>
         </b-col>
         <b-col cols="12" class="article-community">
           <p>分享</p>
-          <img src="../assets/icon/btn_facebook.svg" alt="" srcset="">
+          <a :href="fbshare">
+            <img src="../assets/icon/btn_facebook.svg" alt="" srcset="">
+          </a>
           <img src="../assets/icon/btn_twitter.svg" alt="" srcset="">
           <img src="../assets/icon/btn_Instagram.svg" alt="" srcset="">
-          <img src="../assets/icon/btn_youtube.svg" alt="" srcset="">
         </b-col>
         <b-col cols="12">
           <img :src="article.cover_image">
@@ -46,8 +48,7 @@ export default {
   data() {
     return {
       post: [],
-      selectStatus: false,
-      selectData: '請選擇一個選項'
+      fbshare: ' https://www.facebook.com/sharer/sharer.php?u=' + document.URL
     }
   },
   methods: {
@@ -66,7 +67,7 @@ export default {
     getList() {
       let vm = this
       axios
-        .get('https://sika.idea-infinite.com/api/v1/article/content', {
+        .get('https://sika.idea-infinite.com/api/v1/news/content', {
           params: {
             id: vm.page
           }
@@ -75,6 +76,9 @@ export default {
           vm.post = []
           vm.post.push(res.data.data)
         })
+    },
+    goBack() {
+      this.$router.back()
     }
   },
   created: function() {

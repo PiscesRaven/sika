@@ -4,21 +4,13 @@
     <!-- Swiper -->
     <swiper :options="swiperOption" ref="mySwiper">
       <!-- slides -->
-      <swiper-slide v-for="item in imgurl" :style="{backgroundImage: 'url(' + item + ')'}">
+      <swiper-slide v-for="item in stylist" :style="{backgroundImage: 'url(' +item.image_pc+ ')'}">
         <div class="designer-info-hover">
-          <p class="panel-top">設計師 Name Erica</p>
+          <p class="panel-top">{{item.name}}</p>
           <p class="panel-mid"></p>
-          <p class="panel-down">2018.11.11</p>
-
+          <!-- <p class="panel-down">2018.11.11</p> -->
         </div>
       </swiper-slide>
-      <!-- <swiper-slide><img src="https://picsum.photos/260/480/?image=58"></swiper-slide> -->
-      <!-- <swiper-slide><img src="https://picsum.photos/260/480/?image=54"></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/260/480/?image=58"></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/260/480/?image=54"></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/260/480/?image=58"></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/260/480/?image=54"></swiper-slide>
-      <swiper-slide><img src="https://picsum.photos/260/480/?image=58"></swiper-slide> -->
       <!-- Optional controls -->
       <div class="swiper-pagination" slot="pagination"></div>
       <div class="swiper-button-prev" slot="button-prev">
@@ -34,20 +26,14 @@
 
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'carrousel',
   data() {
     return {
-      imgurl: [
-        'https://picsum.photos/260/341/?image=54',
-        'https://picsum.photos/260/341/?image=58',
-        'https://picsum.photos/260/341/?image=55',
-        'https://picsum.photos/260/341/?image=52',
-        'https://picsum.photos/260/341/?image=58',
-        'https://picsum.photos/260/341/?image=54',
-        'https://picsum.photos/260/341/?image=52',
-        'https://picsum.photos/260/341/?image=55'
-      ],
+      stylistApi: 'https://sika.idea-infinite.com/api/v1/designer',
+      stylist: [],
       swiperOption: {
         // some swiper options/callbacks
         // 所有的参数同 swiper 官方 api 参数
@@ -95,6 +81,21 @@ export default {
     // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
     console.log('this is current swiper instance object', this.swiper)
     this.swiper.slideTo(0, 1000, false)
+  },
+  created() {
+    this.getStylist()
+  },
+  methods: {
+    getStylist() {
+      // axios.get(stylistApi).then(res => {
+      //   this.stylist = res.data.data
+      // })
+
+      axios.get('https://sika.idea-infinite.com/api/v1/designer').then(res => {
+        console.log(res.data.data)
+        this.stylist = res.data.data
+      })
+    }
   }
 }
 </script>

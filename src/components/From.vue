@@ -2,26 +2,26 @@
   <div>
     <form method="post" class="booking-form">
       <div class="input-row">
-        <input type="text" name="name" id="" placeholder="請輸入您的名字" v->
+        <input type="text" name="name" id="" placeholder="請輸入您的名字" v-model="form.name">
       </div>
       <div class="input-row">
-        <input type="email" name="" id="" placeholder="請輸入您的電話號碼">
+        <input type="text" name="" id="" placeholder="請輸入您的電話號碼" v-model="form.tel">
       </div>
       <div class="input-row" @click.prevent="selectStatus = false">
         <ul @click.stop.prevent="selectStatusD = !selectStatusD" :class="'select' + (selectStatusD ? ' open' : '')" :selectData="selectData">
-          <li @click.prevent="selectData = list" v-for="list in designers">
+          <li @click.prevent="selectData = list" v-for="list in designers" :value="list" v-model="form.designers =selectData">
             {{list}}
           </li>
         </ul>
       </div>
       <div class="input-row" @click.prevent="selectStatuD = false">
         <ul @click.stop.prevent="selectStatusT = !selectStatusT" :class="'select' + (selectStatusT ? ' open' : '')" :selectData="selectDataT">
-          <li @click.prevent="selectDataT= list" v-for="list in time"> {{list}} </li>
+          <li @click.prevent="selectDataT= list" v-for="list in time" v-model="form.time = selectDataT"> {{list}} </li>
         </ul>
       </div>
       <div class="input-row" @click.prevent="selectStatusS = false">
         <ul @click.stop.prevent="selectStatusS = !selectStatusS" :class="'select' + (selectStatusS ? ' open' : '')" :selectData="selectDataS">
-          <li @click.prevent="selectDataS = list" v-for="list in service">
+          <li @click.prevent="selectDataS = list" v-for="list in service" v-model="form.service =selectDataS">
             {{list}}
           </li>
         </ul>
@@ -34,7 +34,6 @@
 <script>
 export default {
   name: 'Booking',
-  props: {},
   data() {
     return {
       selectStatusD: false,
@@ -45,7 +44,7 @@ export default {
       selectStatusS: false,
 
       form: {
-        email: '',
+        tel: '',
         name: '',
         designers: null,
         time: null,

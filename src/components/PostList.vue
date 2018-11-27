@@ -2,17 +2,19 @@
   <div>
     <b-container fluid>
       <b-row class="section-img">
-        <h1 class="page-title">優惠資訊 News</h1>
+        <h1 class="page-title">{{$route.params.title}}</h1>
       </b-row>
     </b-container fluid>
     <b-container class="container-body">
       <b-row class="news-row">
         <b-col v-for="list in NewsList" lg="4" sm="6" cols="12">
           <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">
+            <!-- <router-link :to="{name:'流行趨勢 Blog', params:{postid:list['id']}}" v-if="$route.name == '流行趨勢 Blog'"> -->
+
             <b-card :title="list.title" :img-src="list.cover_image" img-alt="Image" img-top tag="article">
               <p class="card-day">{{list.created_date}}</p>
               <p class="card-text">
-                {{list.text}}
+                {{list.description}}
               </p>
             </b-card>
           </router-link>
@@ -35,6 +37,7 @@ export default {
       NewsList: []
     }
   },
+
   watch: {
     currentPage: function(pageNum) {
       this.getList(pageNum)
@@ -46,14 +49,14 @@ export default {
   methods: {
     getList(pageNum = 1) {
       axios
-        .get('https://sika.idea-infinite.com/api/v1/article/list', {
+        .get('https://sika.idea-infinite.com/api/v1/news/list', {
           params: {
             limit: 6,
             offset: (pageNum - 1) * 6
           }
         })
         .then(res => {
-          console.log(res.data.data)
+          //console.log(res.data.data)
           this.NewsList = res.data.data
         })
     },
@@ -122,6 +125,7 @@ export default {
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-box-orient: vertical;
+        line-height: 20px;
       }
     }
   }
