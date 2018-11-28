@@ -2,7 +2,13 @@
   <div class="footer">
     <b-container>
       <b-row class="footer-info">
-        <b-col xl="6" lg="6" md="4" sm="12" cols="12">
+        <b-col
+          xl="6"
+          lg="6"
+          md="4"
+          sm="12"
+          cols="12"
+        >
           <div class="sikainfo">
             <h2>
               希卡 Hair Salon
@@ -11,23 +17,42 @@
               Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
             </p>
             <div id="footer-input">
-              <input type="text" name="" id="" placeholder="Search">
+              <input
+                type="text"
+                name=""
+                id=""
+                placeholder="Search"
+              >
               <img src="../assets/icon/btn_search.svg">
               <button class="ft-booking-btn">線上預約</button>
             </div>
           </div>
         </b-col>
-        <b-col lg="2" md="4" sm="12" cols="12">
+        <b-col
+          lg="2"
+          md="4"
+          sm="12"
+          cols="12"
+        >
           <div class="sika-contact">
             <h2>CONTACT</h2>
             <p> 04 723 3405<br>
               彰化縣彰化市民生南路23號
-              <font-awesome-icon :icon="['fas','map-marker-alt']" size="2x" />
+              <font-awesome-icon
+                :icon="['fas','map-marker-alt']"
+                size="2x"
+              />
             </p>
 
           </div>
         </b-col>
-        <b-col xl="3" lg="4" md="4" sm="12" cols="12">
+        <b-col
+          xl="3"
+          lg="4"
+          md="4"
+          sm="12"
+          cols="12"
+        >
           <div class="sika-menulist">
             <h2>INFORMATION</h2>
             <p>
@@ -67,25 +92,40 @@
             </p>
           </div>
         </b-col>
-        <b-col xl="1" class="footer-social-icon">
+        <b-col
+          xl="1"
+          class="footer-social-icon"
+        >
           <font-awesome-icon :icon="['fab','instagram']" />
           <font-awesome-icon :icon="['fab','facebook-f']" />
         </b-col>
       </b-row>
       <b-row class="builder">
-        <b-col md="8" sm="12">
+        <b-col
+          md="8"
+          sm="12"
+        >
           <p>© Copyright © 2018 Idea-Infinite Information Marketing Co.Ltd.. All rights reserved
 
           </p>
         </b-col>
-        <b-col md="4" sm="12">
+        <b-col
+          md="4"
+          sm="12"
+        >
           <p>Design by idea infinite 網頁設計</p>
         </b-col>
       </b-row>
     </b-container>
-    <b-container fluid class="builder-pad">
+    <b-container
+      fluid
+      class="builder-pad"
+    >
       <b-row>
-        <b-col md="12" sm="12">
+        <b-col
+          md="12"
+          sm="12"
+        >
           <p>© Copyright © 2018 Idea-Infinite Information Marketing Co.Ltd.. All rights reserved
           </p>
         </b-col>
@@ -96,13 +136,13 @@
 
 <script>
 export default {
-  name: 'Footer'
-}
+  name: "Footer"
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../assets/scss/global.scss';
+@import "../assets/scss/global.scss";
 
 .footer {
   background: $main-Bg-Color;
@@ -136,7 +176,7 @@ export default {
       #footer-input {
         text-align: left;
         position: relative;
-        input[type='text'] {
+        input[type="text"] {
           width: 270px;
           height: 46px;
           padding-left: 22px;

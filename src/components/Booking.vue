@@ -19,46 +19,19 @@
   </div>
 </template>
 <script>
-import BookingFrom from '@/components/From.vue'
+import BookingFrom from "@/components/From.vue";
 export default {
-  name: 'Booking',
+  name: "Booking",
   components: {
     BookingFrom
   }
-  // data() {
-  //   return {
-  //     selectStatusD: false,
-  //     selectData: '請選擇設計師',
-  //     selectStatusT: false,
-  //     selectStatusS: false,
-
-  //     form: {
-  //       email: '',
-  //       name: '',
-  //       designers: null,
-  //       time: null,
-  //       service: null
-  //     },
-
-  //     designers: ['Erica', 'Raven', 'Lili', 'Keven'],
-  //     time: ['10:00~10:30', '10:30~11:00', '11:00~11:30', '11:30~12:00'],
-  //     service: ['剪髮', '洗髮', '按摩', '燙髮'],
-  //     show: true
-  //   }
-  // },
-  // methods: {
-  //   onSubmit(evt) {
-  //     evt.preventDefault()
-  //     alert(JSON.stringify(this.form))
-  //   }
-  // }
-}
+};
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../assets/scss/global.scss';
+@import "../assets/scss/global.scss";
 .booking-sec {
-  background: url('../../public/img/img_Booking.jpg') center no-repeat;
+  background: url("../../public/img/img_Booking.jpg") center no-repeat;
   height: 1240px;
   justify-content: center;
   align-items: center;

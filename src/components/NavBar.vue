@@ -1,18 +1,37 @@
 <template>
   <div>
-    <button id="toggle" @click="select()">
-      <div class="span" id="top"></div>
-      <div class="span" id="middle"></div>
-      <div class="span" id="bottom"></div>
+    <button
+      id="toggle"
+      @click="select()"
+    >
+      <div
+        class="span"
+        id="top"
+      ></div>
+      <div
+        class="span"
+        id="middle"
+      ></div>
+      <div
+        class="span"
+        id="bottom"
+      ></div>
     </button>
-    <div id="navbar" class="navbar" :class="{active: isActive}">
-      <router-link to="/" class="rwd-home"><img src="../../public/img/navbar_logo.svg"></router-link>
+    <div
+      id="navbar"
+      class="navbar"
+      :class="{active: isActive}"
+    >
+      <router-link
+        to="/"
+        class="rwd-home"
+      ><img src="../../public/img/navbar_logo.svg"></router-link>
       <ul class="nav-bar">
         <li class="nav-items"><span class="navbar-brand">
             <router-link to="/"><img src="../../public/img/navbar_logo.svg"></router-link>
           </span></li>
         <li class="nav-items">
-          <router-link :to="{name:'優惠資訊',params:{title:'最新資訊 News'}}">
+          <router-link to="/news">
             優惠資訊<span>News</span>
           </router-link>
         </li>
@@ -27,17 +46,17 @@
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link :to="{name:'流行趨勢 Blog',params:{title:'流行趨勢 Blog'}}">
+          <router-link to="/bloglist">
             流行趨勢 <span>Blog</span>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link :to="{name:'影音專區 Video',params:{title:'影音專區 Video'}}">
+          <router-link to="/video">
             影片專區 <span>Video</span>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link :to="{name:'產品資訊 Products',params:{title:'產品資訊 Products'}}">
+          <router-link to="/products">
             產品資訊 <span>Products</span>
           </router-link>
         </li>
@@ -55,27 +74,27 @@
 
 <script>
 export default {
-  name: 'NavBar',
+  name: "NavBar",
   data() {
     return {
       isActive: false,
-      openerText: 'Open',
+      openerText: "Open",
       isOpen: false,
-      menu: ['Home', 'Work', 'Contact'],
-      smallMenu: ['Tips', 'Resources', 'Shenanigans']
-    }
+      menu: ["Home", "Work", "Contact"],
+      smallMenu: ["Tips", "Resources", "Shenanigans"]
+    };
   },
   methods: {
     select() {
-      this.isActive = !this.isActive
+      this.isActive = !this.isActive;
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../assets/scss/global.scss';
+@import "../assets/scss/global.scss";
 .navbar {
   text-align: left;
   display: flex;

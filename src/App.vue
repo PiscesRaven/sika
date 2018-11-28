@@ -8,44 +8,40 @@
 </template>
 <script>
 // @ is an alias to /src
-import NavBar from '@/components/NavBar.vue'
-import scrollTop from '@/components/scrollTop.vue'
-import Footer from '@/components/Footer.vue'
-import axios from 'axios'
+import NavBar from "@/components/NavBar.vue";
+import scrollTop from "@/components/scrollTop.vue";
+import Footer from "@/components/Footer.vue";
+import axios from "axios";
 export default {
-  name: 'home',
+  name: "home",
   components: {
     NavBar,
     scrollTop,
     Footer
-  },
-  watch: {
-    $route(to, from) {
-      console.log(to.path)
-      // console.log(from.path)
-
-      if (to.path == '/news') {
-        console.log('a')
-      }
-    }
   }
-}
+  // watch: {
+  //   $route(to, from) {
+  //     console.log(to.path);
+  //     console.log(from.path);
+  //   }
+  // }
+};
 </script>
 <style lang="scss">
-@import '@/assets/scss/restscss.scss'; // reset
-@import '@/assets/scss/global.scss';
+@import "@/assets/scss/restscss.scss"; // reset
+@import "@/assets/scss/global.scss";
 
 // RWD 響應式尺寸
 .fz-tw {
-  font-family: 'NotoSansCJKtc';
+  font-family: "NotoSansCJKtc";
 }
 
 @font-face {
-  font-family: 'NotoSansCJKtc';
-  src: url('assets/font/NotoSansCJKtc-Regular.otf') format('woff2');
+  font-family: "NotoSansCJKtc";
+  src: url("assets/font/NotoSansCJKtc-Regular.otf") format("woff2");
 }
 #app {
-  font-family: 'Georgia', 'NotoSansCJKtc', 'Avenir', Helvetica, Arial,
+  font-family: "Georgia", "NotoSansCJKtc", "Avenir", Helvetica, Arial,
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

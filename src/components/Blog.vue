@@ -1,30 +1,60 @@
 <template>
   <div>
-    <b-container fluid>
-      <b-row class="section-img"> </b-row>
-    </b-container fluid>
+    <!-- 文章區title圖片 -->
+    <Card v-if="$route.name == '優惠內文'" />
+    <Card1 v-if="$route.name == 'Blog 內文'" />
     <b-container>
-      <b-row v-for="article in post" class="article-row">
+      <b-row
+        v-for="article in post"
+        class="article-row"
+      >
         <b-col cols="12">
+          <!-- 文章 title -->
           <h1 class="article-title">{{article.title}}</h1>
         </b-col>
-        <b-col cols="6" class="article-date">
+        <b-col
+          cols="6"
+          class="article-date"
+        >
+          <!-- 文章 日期 -->
           <p>{{article.created_date}}</p>
         </b-col>
-        <b-col cols="6" class="article-return">
+        <b-col
+          cols="6"
+          class="article-return"
+        >
           <p>
-            <a href="#" @click.prevent="goBack">
+            <a
+              href="#"
+              @click.prevent="goBack"
+            >
               <span class="page-left"></span>回到上一頁
             </a>
           </p>
         </b-col>
-        <b-col cols="12" class="article-community">
+        <!-- 文章 分享社群 -->
+        <b-col
+          cols="12"
+          class="article-community"
+        >
           <p>分享</p>
           <a :href="fbshare">
-            <img src="../assets/icon/btn_facebook.svg" alt="" srcset="">
+            <img
+              src="../assets/icon/btn_facebook.svg"
+              alt=""
+              srcset=""
+            >
           </a>
-          <img src="../assets/icon/btn_twitter.svg" alt="" srcset="">
-          <img src="../assets/icon/btn_Instagram.svg" alt="" srcset="">
+          <img
+            src="../assets/icon/btn_twitter.svg"
+            alt=""
+            srcset=""
+          >
+          <img
+            src="../assets/icon/btn_Instagram.svg"
+            alt=""
+            srcset=""
+          >
         </b-col>
         <b-col cols="12">
           <img :src="article.cover_image">
@@ -32,8 +62,9 @@
         <b-col cols="12">
           <h2 class="article-title-sec">{{article.title}}</h2>
         </b-col>
+        <!-- 文章 內容 -->
         <b-col cols="12">
-          <p class="article-content">{{article.description}}</p>
+          <p class="article-content">{{article.article}}</p>
         </b-col>
       </b-row>
     </b-container>
@@ -42,63 +73,80 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import Card from "@/components/Card/Card.vue";
+import Card1 from "@/components/Card/Card1.vue";
 export default {
-  name: 'Blog',
+  name: "Blog",
+  components: {
+    Card,
+    Card1
+  },
   data() {
     return {
       post: [],
-      fbshare: ' https://www.facebook.com/sharer/sharer.php?u=' + document.URL
-    }
+      fbshare: " https://www.facebook.com/sharer/sharer.php?u=" + document.URL
+    };
   },
   methods: {
     getUrl() {
-      let vm = this
-      let url = document.URL
-      console.log(url)
-      let sliceposition = url.lastIndexOf('/')
-      console.log(sliceposition)
-      let slicedata = url.slice(sliceposition + 1)
-      console.log(slicedata)
-      vm.page = parseInt(slicedata)
-      console.log('url給的>>' + vm.page)
-      vm.getList()
+      let vm = this;
+      let url = document.URL;
+      // console.log(url);
+      let sliceposition = url.lastIndexOf("/");
+      // console.log(sliceposition);
+      let slicedata = url.slice(sliceposition + 1);
+      // console.log(slicedata);
+      vm.page = parseInt(slicedata);
+      // console.log("url給的>>" + vm.page);
+      vm.getList();
     },
     getList() {
-      let vm = this
+      let vm = this;
+      var api = "";
+      if (this.$route.name == "優惠內文") {
+        console.log("to.path");
+        vm.api = "https://sika.idea-infinite.com/api/v1/news/content";
+      }
+      if (this.$route.name == "Blog 內文") {
+        vm.api = "https://sika.idea-infinite.com/api/v1/article/content";
+        console.log("流行趨勢 Blog 內文");
+      }
+
       axios
-        .get('https://sika.idea-infinite.com/api/v1/news/content', {
+        .get(this.api, {
           params: {
             id: vm.page
           }
         })
         .then(res => {
-          vm.post = []
-          vm.post.push(res.data.data)
-        })
+          vm.post = [];
+          vm.post.push(res.data.data);
+          console.log(res.data.data);
+        });
     },
     goBack() {
-      this.$router.back()
+      this.$router.back();
     }
   },
   created: function() {
-    this.getUrl()
+    this.getUrl();
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../assets/scss/global.scss';
+@import "../assets/scss/global.scss";
 .section-img {
-  background: url('../../public/img/Image.jpg') center no-repeat;
+  background: url("../../public/img/Image.jpg") center no-repeat;
   height: 410px;
   margin-bottom: 125px;
 }
 
 .article-row {
   > div {
-    padding: 0;
+    // padding: 0;
   }
   text-align: left;
   .article-title {
@@ -127,7 +175,7 @@ export default {
       display: inline-block;
       margin-right: 15px;
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         width: 20px;
         height: 3px;
