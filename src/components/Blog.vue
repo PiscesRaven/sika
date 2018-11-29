@@ -1,8 +1,7 @@
 <template>
   <div>
     <!-- 文章區title圖片 -->
-    <Card v-if="$route.name == '優惠內文'" />
-    <Card1 v-if="$route.name == 'Blog 內文'" />
+    <CardSectionImg />
     <b-container>
       <b-row
         v-for="article in post"
@@ -64,7 +63,11 @@
         </b-col>
         <!-- 文章 內容 -->
         <b-col cols="12">
-          <p class="article-content">{{article.article}}</p>
+          <p
+            class="article-content"
+            v-html="article.content"
+          ></p>
+          <!-- {{article.content}} -->
         </b-col>
       </b-row>
     </b-container>
@@ -74,18 +77,27 @@
 
 <script>
 import axios from "axios";
-import Card from "@/components/Card/Card.vue";
-import Card1 from "@/components/Card/Card1.vue";
+import CardSectionImg from "@/components/SectionImg/SectionImg.vue";
+
 export default {
-  name: "Blog",
+  name: "article",
   components: {
-    Card,
-    Card1
+    CardSectionImg
   },
   data() {
     return {
       post: [],
-      fbshare: " https://www.facebook.com/sharer/sharer.php?u=" + document.URL
+      fbshare: " https://www.facebook.com/sharer/sharer.php?u=" + document.URL,
+      data: [
+        {
+          name: "newspost",
+          api: "https://sika.idea-infinite.com/api/v1/news/content"
+        },
+        {
+          name: "articlepost",
+          api: "https://sika.idea-infinite.com/api/v1/article/content"
+        }
+      ]
     };
   },
   methods: {
@@ -104,15 +116,11 @@ export default {
     getList() {
       let vm = this;
       var api = "";
-      if (this.$route.name == "優惠內文") {
-        console.log("to.path");
-        vm.api = "https://sika.idea-infinite.com/api/v1/news/content";
+      for (let i = 0; i < vm.data.length; i++) {
+        if (this.$route.name == vm.data[i].name) {
+          vm.api = vm.data[i].api;
+        }
       }
-      if (this.$route.name == "Blog 內文") {
-        vm.api = "https://sika.idea-infinite.com/api/v1/article/content";
-        console.log("流行趨勢 Blog 內文");
-      }
-
       axios
         .get(this.api, {
           params: {

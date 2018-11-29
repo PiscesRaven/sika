@@ -5,42 +5,76 @@
         <h1 class="page-title">作品專區 Hair</h1>
       </b-row>
     </b-container fluid>
-    <b-container class="container-body" fluid>
+    <b-container
+      class="container-body"
+      fluid
+    >
       <b-row>
         <b-col lg="12">
           <ul class="hair-style-ul">
-            <li v-for="item in stylelist" :class="status.selectStyle === item.style ? 'active' : ''" class="hair-style-list" @click.prevent="status.selectStyle =item.style">
+            <li
+              v-for="item in stylelist"
+              :class="status.selectStyle === item.name ? 'active' : ''"
+              class="hair-style-list"
+              @click.prevent="status.selectStyle =item.name"
+            >
               <a href="#">
-                {{item.style}}
+                {{item.name}}
               </a>
             </li>
           </ul>
         </b-col>
       </b-row>
       <b-row>
-        <b-col lg="2" class="designer-list">
+        <b-col
+          lg="2"
+          class="designer-list"
+        >
           <h3>設計師</h3>
           <ul>
-            <li v-for="item in designer" :class="status.selectDesigner === item.designer ? 'active' : ''" @click.prevent="status={
-selectDesigner:item.designer,
-selectStyle:'All'}">
-              <a href="#">{{item.designer}}</a></li>
+            <li
+              :class="status.selectDesigner === 'All' ? 'active' : ''"
+              @click.prevent="status={
+selectDesigner:'All',
+selectStyle:'All'}"
+            ><a href="#">All</a></li>
+            <li
+              v-for="item in DesignerList"
+              :class="status.selectDesigner === item.designer_name ? 'active' : ''"
+              @click.prevent="status={
+selectDesigner:item.designer_name,
+selectStyle:'All'}"
+            >
+              <a href="#">{{item.designer_name}}</a></li>
           </ul>
         </b-col>
         <b-col lg="10">
           <b-row>
-            <b-col v-for="item in filterList" xl="3" lg="4" md="6" sm="6" cols="12">
+            <b-col
+              v-for="item in filterList"
+              xl="3"
+              lg="4"
+              md="6"
+              sm="6"
+              cols="12"
+            >
               <div class="hair-style-sec">
                 <div class="fz-tw">
-                  <img :src="item.imgurl" alt="">
-                  <span>{{item.designer}}</span>
-                  <p>{{item.style}} 之後要拿掉只是暫時的</p>
+                  <img
+                    :src="item.image"
+                    alt=""
+                  >
+                  <span>{{item.designer_name}}</span>
                 </div>
               </div>
             </b-col>
           </b-row>
           <div class="pagination-nav">
-            <b-pagination-nav base-url="#" :number-of-pages="15" v-model="currentPage" />
+            <b-pagination-nav
+              base-url="#"
+              :number-of-pages="15"
+              v-model="currentPage"
+            />
           </div>
         </b-col>
 
@@ -51,242 +85,95 @@ selectStyle:'All'}">
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-  name: 'HairStyle',
+  name: "HairStyle",
   props: {},
   data() {
     return {
       currentPage: 0,
       status: {
-        selectDesigner: 'All',
-        selectStyle: 'All'
+        selectDesigner: "All",
+        selectStyle: "All"
+      },
+      Api: {
+        PhotoWallApi: "https://sika.idea-infinite.com/api/v1/hair/style",
+        StyleListApi: "https://sika.idea-infinite.com/api/v1/hair/type"
       },
       desActive: false,
       hairActive: false,
-      stylelist: [
-        { style: 'All' },
-        { style: '長髮' },
-        { style: '短髮' },
-        { style: '直髮' },
-        { style: '捲髮' },
-        { style: '男士髮' }
-      ],
-      designer: [
-        { designer: 'All' },
-        { designer: 'lily' },
-        { designer: 'raven' },
-        { designer: 'erica' },
-        { designer: 'kevin' },
-        { designer: '邦晉' }
-      ],
-      HairData: [
-        {
-          id: '1',
-          imgurl: 'https://pic.pimg.tw/loory/1513015180-993819727.png',
-          designer: 'lily',
-          style: '長髮'
-        },
-        {
-          id: '2',
-          imgurl:
-            'http://ws1.sinaimg.cn/large/9150e4e5ly1fe6b7s0ohaj205i053web.jpg',
-          designer: 'raven',
-          style: '短髮'
-        },
-        {
-          id: '3',
-          imgurl:
-            'http://www.sciencenets.com/data/attachment/album/201506/01/100503si77ymzmkuki7lgk.gif',
-          designer: 'erica',
-          style: '直髮'
-        },
-        {
-          id: '4',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: 'kevin',
-          style: '捲髮'
-        },
-        {
-          id: '5',
-          imgurl:
-            'https://cdn-images-1.medium.com/max/800/0*J6Non4YDjq1BPZrK.png',
-          designer: '阿哲',
-          style: '男士髮'
-        },
-        {
-          id: '6',
-          imgurl:
-            'https://cc.tvbs.com.tw/img/_data/i/upload/2018/01/02/20180102113246-466c0ae6-me.jpg',
-          designer: '邦晉',
-          style: '長髮'
-        },
-        {
-          id: '7',
-          imgurl: 'https://wiki.komica.org/images/a/ae/Img2191.jpg',
-          designer: 'lily',
-          style: '短髮'
-        },
-        {
-          id: '8',
-          imgurl: 'http://img.malaimo.tw/20171123190951_71.jpg',
-          designer: 'raven',
-          style: '直髮'
-        },
-        {
-          id: '9',
-          imgurl:
-            'http://www.sciencenets.com/data/attachment/album/201506/01/100503si77ymzmkuki7lgk.gif',
-          designer: 'erica',
-          style: '捲髮'
-        },
-        {
-          id: '10',
-          imgurl: 'https://pic.pimg.tw/loory/1513015180-993819727.png',
-          designer: 'kevin',
-          style: '男士髮'
-        },
-        {
-          id: '11',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: '阿哲',
-          style: '長髮'
-        },
-        {
-          id: '12',
-          imgurl: 'http://img.malaimo.tw/20171123190951_71.jpg',
-          designer: '邦晉',
-          style: '短髮'
-        },
-        {
-          id: '13',
-          imgurl: 'http://m.acg.ms/photo/33990_0_392.png',
-          designer: 'lily',
-          style: '直髮'
-        },
-        {
-          id: '14',
-          imgurl: 'https://i.ytimg.com/vi/4lFPUi4A5i0/hqdefault.jpg',
-          designer: 'raven',
-          style: '捲髮'
-        },
-        {
-          id: '15',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: 'erica',
-          style: '男士髮'
-        },
-        {
-          id: '16',
-          imgurl:
-            'http://img4.cache.netease.com/photo/0031/2014-05-01/9R4KPLJ93V8J0031.jpg',
-          designer: 'kevin',
-          style: '長髮'
-        },
-        {
-          id: '17',
-          imgurl: 'https://wiki.komica.org/images/c/c1/Img6610.jpg',
-          designer: '阿哲',
-          style: '短髮'
-        },
-        {
-          id: '18',
-          imgurl: 'http://i.imgur.com/4fTgqvG.jpg',
-          designer: '邦晉',
-          style: '直髮'
-        },
-        {
-          id: '19',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: 'lily',
-          style: '捲髮'
-        },
-        {
-          id: '20',
-          imgurl:
-            'http://photo.ccoo.cn/webdiy/news/2011924/201192420542627.jpg',
-          designer: 'raven',
-          style: '男士髮'
-        },
-        {
-          id: '21',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: 'erica',
-          style: '長髮'
-        },
-        {
-          id: '22',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: 'kevin',
-          style: '短髮'
-        },
-        {
-          id: '23',
-          imgurl:
-            'https://taiwandl.files.wordpress.com/2016/04/a4fd7f7254c362c97ee7523bb2edbb64.jpg?w=700&h=430&crop=1',
-          designer: '阿哲',
-          style: '直髮'
-        },
-        {
-          id: '24',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: '邦晉',
-          style: '捲髮'
-        },
-        {
-          id: '25',
-          imgurl: 'https://fakeimg.pl/270x250/000/',
-          designer: 'lily',
-          style: '男士髮'
-        }
-      ]
-    }
+      stylelist: [],
+      designer: [],
+      HairData: []
+    };
   },
   computed: {
     filterList: function() {
-      let vm = this
-      let designer = vm.status.selectDesigner //data的設計師
-      let style = vm.status.selectStyle //data的髮型
-      console.log('現在是 ' + designer + ' 和 ' + style + ' 風格')
-      if (designer === 'All' && style === 'All') {
+      let vm = this;
+      let designer = vm.status.selectDesigner; //data的設計師
+      let style = vm.status.selectStyle; //data的髮型
+      console.log("現在是 " + designer + " 和 " + style + " 風格");
+      if (designer === "All" && style === "All") {
         // console.log('全部設計師與風格')
-        return vm.HairData
+        return vm.HairData;
       }
-      if (designer !== 'All' && style !== 'All') {
+      if (designer !== "All" && style !== "All") {
         return vm.HairData.filter(function(list) {
-          return list.designer == designer && list.style == style
-        })
+          return list.designer_name == designer && list.type_name == style;
+        });
       }
-      if (style !== 'All') {
+      if (style !== "All") {
         // console.log('只篩選風格')
         return vm.HairData.filter(function(list) {
-          return list.style == style
-        })
+          return list.type_name == style;
+        });
       }
-      if (designer !== 'All') {
+      if (designer !== "All") {
         // console.log('現在設計師' + designer + ',風格是' + style)
         return vm.HairData.filter(function(list) {
-          return list.designer == designer
-        })
+          return list.designer_name == designer;
+        });
       }
+    },
+    DesignerList: function() {
+      //過濾設計師清單
+      const set = new Set();
+      return this.designer.filter(item =>
+        !set.has(item.designer_name) ? set.add(item.designer_name) : false
+      );
     }
   },
+  created() {
+    this.getAllList();
+  },
   methods: {
-    // getDesignerList() {},
-    // getStyleList() {},
-    // getHairList(){},
-    // filterList: function() {}
+    getAllList() {
+      let vm = this;
+      axios
+        .all([axios.get(vm.Api.StyleListApi), axios.get(vm.Api.PhotoWallApi)])
+        .then(
+          axios.spread(function(stylelist, PhotoWall) {
+            vm.stylelist = stylelist.data.data;
+            vm.stylelist.splice(0, 0, {
+              id: "0",
+              name: "All"
+            });
+            vm.HairData = PhotoWall.data.data;
+            vm.designer = PhotoWall.data.data;
+          })
+        );
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../assets/scss/global.scss';
+@import "../assets/scss/global.scss";
 
 .section-img {
-  background: url('../../public/img/img_Work.jpg') center no-repeat;
+  background: url("../../public/img/img_Work.jpg") center no-repeat;
   height: 410px;
   margin-bottom: 64px;
   //平板
@@ -295,7 +182,7 @@ export default {
   }
   //平板以下
   @include pad-and-phone-width {
-    background: url('../../public/img/img_Work_pad.jpg') center no-repeat;
+    background: url("../../public/img/img_Work_pad.jpg") center no-repeat;
     margin-bottom: 18px;
     height: 288px;
   }

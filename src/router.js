@@ -13,13 +13,13 @@ export default new Router({
     },
     {
       path: '/news',
-      name: '優惠資訊',
+      name: 'news',
       component: () => import('./components/PostList.vue'),
 
     },
     {
       path: '/news/:postid',
-      name: '優惠內文',
+      name: 'newspost',
       component: () => import('./components/Blog.vue'),
     },
     {
@@ -38,13 +38,13 @@ export default new Router({
       component: () => import('./components/Designer/DesignersInfo.vue')
     },
     {
-      path: '/bloglist',
-      name: '流行趨勢 Blog',
+      path: '/article',
+      name: 'article',
       component: () => import('./components/PostList.vue')
     },
     {
-      path: '/bloglist/:postid',
-      name: 'Blog 內文',
+      path: '/article/:postid',
+      name: 'articlepost',
       component: () => import('./components/Blog.vue'),
     }, {
       path: '/video',

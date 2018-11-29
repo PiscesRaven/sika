@@ -46,7 +46,7 @@
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/bloglist">
+          <router-link to="/article">
             流行趨勢 <span>Blog</span>
           </router-link>
         </li>

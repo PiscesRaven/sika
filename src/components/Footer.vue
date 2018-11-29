@@ -71,7 +71,7 @@
               </router-link>
             </p>
             <p>
-              <router-link to="/bloglist">
+              <router-link to="/article">
                 流行趨勢 Blog
               </router-link>
             </p>

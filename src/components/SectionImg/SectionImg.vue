@@ -5,20 +5,41 @@
         <h1 class="page-title">{{title}}</h1>
       </b-row>
     </b-container fluid>
+
+    <!-- <b-container fluid>
+      <b-row class="section-img">
+        <h1 class="page-title">{{title}}</h1>
+      </b-row>
+    </b-container fluid> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "News title",
+  name: "title",
   data() {
     return {
-      title: "優惠資訊 News"
+      title: "",
+      data: [
+        {
+          title: "優惠資訊 News",
+          listname: "news",
+          articleName: "newspost"
+        },
+        {
+          title: "流行趨勢 Blog",
+          listName: "article",
+          articleName: "articlepost"
+        }
+      ]
     };
   },
   created() {
-    if (this.$route.name == "優惠內文") {
-      this.title = "";
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.$route.name == this.data[i].listname) {
+        this.title = this.data[i].title;
+        console.log("if");
+      }
     }
   }
 };
