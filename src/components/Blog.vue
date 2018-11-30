@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- 文章區title圖片 -->
-    <CardSectionImg />
+    <Card v-if="this.$route.name == 'newspost'" />
+    <Card1 v-if="this.$route.name == 'articlepost'" />
     <b-container>
       <b-row
         v-for="article in post"
@@ -31,30 +32,6 @@
             </a>
           </p>
         </b-col>
-        <!-- 文章 分享社群 -->
-        <b-col
-          cols="12"
-          class="article-community"
-        >
-          <p>分享</p>
-          <a :href="fbshare">
-            <img
-              src="../assets/icon/btn_facebook.svg"
-              alt=""
-              srcset=""
-            >
-          </a>
-          <img
-            src="../assets/icon/btn_twitter.svg"
-            alt=""
-            srcset=""
-          >
-          <img
-            src="../assets/icon/btn_Instagram.svg"
-            alt=""
-            srcset=""
-          >
-        </b-col>
         <b-col cols="12">
           <img :src="article.cover_image">
         </b-col>
@@ -67,7 +44,6 @@
             class="article-content"
             v-html="article.content"
           ></p>
-          <!-- {{article.content}} -->
         </b-col>
       </b-row>
     </b-container>
@@ -77,17 +53,22 @@
 
 <script>
 import axios from "axios";
-import CardSectionImg from "@/components/SectionImg/SectionImg.vue";
+import Card from "@/components/SectionImg/Card.vue";
+import Card1 from "@/components/SectionImg/Card1.vue";
+import Card2 from "@/components/SectionImg/Card2.vue";
+import Card3 from "@/components/SectionImg/Card3.vue";
 
 export default {
   name: "article",
   components: {
-    CardSectionImg
+    Card,
+    Card1,
+    Card2,
+    Card3
   },
   data() {
     return {
       post: [],
-      fbshare: " https://www.facebook.com/sharer/sharer.php?u=" + document.URL,
       data: [
         {
           name: "newspost",
@@ -96,6 +77,10 @@ export default {
         {
           name: "articlepost",
           api: "https://sika.idea-infinite.com/api/v1/article/content"
+        },
+        {
+          name: "productspost",
+          api: "https://sika.idea-infinite.com/api/v1/products"
         }
       ]
     };
@@ -130,7 +115,7 @@ export default {
         .then(res => {
           vm.post = [];
           vm.post.push(res.data.data);
-          console.log(res.data.data);
+          // console.log(res.data.data);
         });
     },
     goBack() {
@@ -167,6 +152,7 @@ export default {
   .article-return {
     padding-bottom: 15px;
     border-bottom: 2px solid #707070;
+    margin-bottom: 70px;
   }
 
   .article-return {
@@ -210,16 +196,6 @@ export default {
     font-size: 14px;
     line-height: 25px;
     margin-bottom: 90px;
-  }
-  .article-community {
-    margin: 15px auto;
-    img {
-      display: inline;
-      margin: 10px 10px 5% 0;
-      width: 32px;
-      background: $submain-Bg-Color;
-      color: $main-T-Color;
-    }
   }
 }
 </style>

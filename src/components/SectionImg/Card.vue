@@ -10,14 +10,14 @@
 
 <script>
 export default {
-  name: "blog title",
+  name: "titleSec",
   data() {
     return {
-      title: "流行趨勢 Blog"
+      title: "優惠資訊 News"
     };
   },
   created() {
-    if (this.$route.name == "articlepost") {
+    if (this.$route.name !== "news") {
       this.title = "";
     }
   }
@@ -27,20 +27,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "../../assets/scss/global.scss";
-
 .section-img {
-  background: url("../../../public/img/img_Blog.jpg") right no-repeat;
+  background: url("../../../public/img/Image.jpg") right no-repeat;
   height: 410px;
   margin-bottom: 125px;
-  //平板
-  @include pad-width {
-    margin-bottom: 10%;
-  }
   //平板以下
   @include pad-and-phone-width {
-    background: url("../../../public/img/img_Blog_pad.jpg") right no-repeat;
-    margin-bottom: 10%;
-    height: 288px;
+    background: url("../../../public/img/Image_pad.jpg") right no-repeat;
   }
 }
 </style>

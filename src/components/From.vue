@@ -1,73 +1,126 @@
 <template>
   <div>
-    <form method="post" class="booking-form">
+    <form
+      method="post"
+      class="booking-form"
+    >
       <div class="input-row">
-        <input type="text" name="name" id="" placeholder="請輸入您的名字" v-model="form.name">
+        <input
+          type="text"
+          name="name"
+          id=""
+          placeholder="請輸入您的名字"
+          v-model="form.name"
+        >
       </div>
       <div class="input-row">
-        <input type="text" name="" id="" placeholder="請輸入您的電話號碼" v-model="form.tel">
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="請輸入您的電話號碼"
+          v-model="form.tel"
+        >
       </div>
-      <div class="input-row" @click.prevent="selectStatus = false">
-        <ul @click.stop.prevent="selectStatusD = !selectStatusD" :class="'select' + (selectStatusD ? ' open' : '')" :selectData="selectData">
-          <li @click.prevent="selectData = list" v-for="list in designers" :value="list" v-model="form.designers =selectData">
+      <div
+        class="input-row"
+        @click.prevent="selectStatus = false"
+      >
+        <ul
+          @click.stop.prevent="selectStatusD = !selectStatusD"
+          :class="'select' + (selectStatusD ? ' open' : '')"
+          :selectData="selectData"
+        >
+          <li
+            @click.prevent="selectData = list"
+            v-for="list in designers"
+            :value="list"
+            v-model="form.designers =selectData"
+          >
             {{list}}
           </li>
         </ul>
       </div>
-      <div class="input-row" @click.prevent="selectStatuD = false">
-        <ul @click.stop.prevent="selectStatusT = !selectStatusT" :class="'select' + (selectStatusT ? ' open' : '')" :selectData="selectDataT">
-          <li @click.prevent="selectDataT= list" v-for="list in time" v-model="form.time = selectDataT"> {{list}} </li>
+      <div
+        class="input-row"
+        @click.prevent="selectStatuD = false"
+      >
+        <ul
+          @click.stop.prevent="selectStatusT = !selectStatusT"
+          :class="'select' + (selectStatusT ? ' open' : '')"
+          :selectData="selectDataT"
+        >
+          <li
+            @click.prevent="selectDataT= list"
+            v-for="list in time"
+            v-model="form.time = selectDataT"
+          > {{list}} </li>
         </ul>
       </div>
-      <div class="input-row" @click.prevent="selectStatusS = false">
-        <ul @click.stop.prevent="selectStatusS = !selectStatusS" :class="'select' + (selectStatusS ? ' open' : '')" :selectData="selectDataS">
-          <li @click.prevent="selectDataS = list" v-for="list in service" v-model="form.service =selectDataS">
+      <div
+        class="input-row"
+        @click.prevent="selectStatusS = false"
+      >
+        <ul
+          @click.stop.prevent="selectStatusS = !selectStatusS"
+          :class="'select' + (selectStatusS ? ' open' : '')"
+          :selectData="selectDataS"
+        >
+          <li
+            @click.prevent="selectDataS = list"
+            v-for="list in service"
+            v-model="form.service =selectDataS"
+          >
             {{list}}
           </li>
         </ul>
       </div>
-      <button type="button" class="submit-btn">送出</button>
+      <button
+        type="button"
+        class="submit-btn"
+      >送出</button>
     </form>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: 'Booking',
+  name: "Booking",
   data() {
     return {
       selectStatusD: false,
-      selectData: '請選擇設計師',
-      selectDataT: '請選擇時間',
-      selectDataS: '請選擇服務',
+      selectData: "請選擇設計師",
+      selectDataT: "請選擇時間",
+      selectDataS: "請選擇服務",
       selectStatusT: false,
       selectStatusS: false,
 
       form: {
-        tel: '',
-        name: '',
+        tel: "",
+        name: "",
         designers: null,
         time: null,
         service: null
       },
 
-      designers: ['Erica', 'Raven', 'Lili', 'Keven'],
-      time: ['10:00~10:30', '10:30~11:00', '11:00~11:30', '11:30~12:00'],
-      service: ['剪髮', '洗髮', '按摩', '燙髮'],
+      designers: ["Erica", "Raven", "Lili", "Keven"],
+      time: ["10:00~10:30", "10:30~11:00", "11:00~11:30", "11:30~12:00"],
+      service: ["剪髮", "洗髮", "按摩", "燙髮"],
       show: true
-    }
+    };
   },
   methods: {
     onSubmit(evt) {
-      evt.preventDefault()
-      alert(JSON.stringify(this.form))
+      evt.preventDefault();
+      alert(JSON.stringify(this.form));
     }
   }
-}
+};
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../assets/scss/global.scss';
+@import "../assets/scss/global.scss";
 
 .booking-form {
   display: inline-block;
@@ -170,7 +223,7 @@ export default {
     padding: 20px 10px;
   }
   &:after {
-    content: '';
+    content: "";
     height: 10px;
     width: 10px;
     display: block;
@@ -184,7 +237,7 @@ export default {
     border-bottom-color: transparent;
     border-right-color: transparent;
     transform-origin: 50% 25%;
-    font-family: 'Material Icons';
+    font-family: "Material Icons";
     font-size: 20px;
     transition: 0.2s;
   }

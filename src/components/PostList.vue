@@ -1,6 +1,9 @@
 <template>
   <div>
-    <SectionImg />
+    <Card v-if="$route.name == 'news'" />
+    <Card1 v-if="$route.name == 'article'" />
+    <Card2 v-if="$route.name == 'video'" />
+    <Card3 v-if="$route.name == 'products'" />
     <b-container class="container-body">
       <b-row class="news-row">
         <b-col
@@ -8,6 +11,7 @@
           lg="4"
           sm="6"
           cols="12"
+          v-if="$route.name !== 'video'"
         >
           <router-link :to="{name:path, params:{postid:list['id']}}">
             <b-card
@@ -24,6 +28,23 @@
             </b-card>
           </router-link>
         </b-col>
+
+        <b-row>
+          <b-col
+            v-if="$route.name == 'video'"
+            v-for="item in youtube"
+            lg="6"
+            md="12"
+            sm="12"
+            cols="12"
+          >
+            <div class="video-section">
+              <div v-html="item.url"></div>
+              <h1>{{item.title}}</h1>
+            </div>
+          </b-col>
+        </b-row>
+
         <div class="pagination-nav">
           <b-pagination-nav
             base-url="#"
@@ -39,16 +60,48 @@
 
 <script>
 import axios from "axios";
-import SectionImg from "@/components/SectionImg/SectionImg.vue";
+import Card from "@/components/SectionImg/Card.vue";
+import Card1 from "@/components/SectionImg/Card1.vue";
+import Card2 from "@/components/SectionImg/Card2.vue";
+import Card3 from "@/components/SectionImg/Card3.vue";
 export default {
   name: "Postlist",
   components: {
-    SectionImg
+    Card,
+    Card1,
+    Card2,
+    Card3
   },
   data() {
     return {
       currentPage: 1,
       NewsList: [],
+      youtube: [
+        {
+          title: "The Sound of Silence (Original Version from 1964)",
+          url: `
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/4zLfCnGVeL4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        },
+        {
+          title:
+            "Dr. Manhattan Remembers Comedian | Watchmen (2009) Movie Clip",
+          url: `
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/mCHUw7ACS8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        },
+        {
+          title: "The Sound of Silence (Original Version from 1964)",
+          url: `<iframe width="100%" height="315" src="https://www.youtube.com/embed/L-JQ1q-13Ek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        },
+        {
+          title: "The Sound of Silence (Original Version from 1964)",
+          url: `
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/GIzDsGyxsQM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        }
+      ],
       data: [
         {
           path: "/news", //現在路徑
@@ -61,7 +114,19 @@ export default {
           name: "article",
           topath: "articlepost",
           api: "https://sika.idea-infinite.com/api/v1/article/list"
+        },
+        {
+          path: "/products",
+          name: "products",
+          topath: "productspost",
+          api: "https://sika.idea-infinite.com/api/v1/products"
         }
+        // {
+        //   path: "/video",
+        //   name: "video",
+        //   topath: "videopost",
+        //   api: "https://sika.idea-infinite.com/api/v1/products"
+        // }
       ]
     };
   },
@@ -73,7 +138,6 @@ export default {
       for (let i = 0; i < this.data.length; i++) {
         if (to.path == this.data[i].path) {
           this.getList();
-          console.log("to");
         }
       }
     }
@@ -150,6 +214,14 @@ export default {
         -webkit-box-orient: vertical;
         line-height: 20px;
       }
+    }
+  }
+  .video-section {
+    margin: 70px auto;
+    box-shadow: 5px 5px 19px 0px #ebebeb;
+    h1 {
+      height: 100px;
+      padding: 15px 10px;
     }
   }
 }

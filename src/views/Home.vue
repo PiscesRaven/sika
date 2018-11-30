@@ -1,9 +1,19 @@
 <template>
   <div>
     <HomeBranner />
-    <b-container fluid class="imgshow-container">
+    <b-container
+      fluid
+      class="imgshow-container"
+    >
       <b-row>
-        <b-col lg="4" md="4" sm="4" cols="4" v-for="pic in imgshow" class="imgshow-col">
+        <b-col
+          lg="4"
+          md="4"
+          sm="4"
+          cols="4"
+          v-for="pic in imgshow"
+          class="imgshow-col"
+        >
           <div class="imgshow-block">
             <img :src="pic.imgurl">
             <div>
@@ -16,7 +26,12 @@
     <!-- 最新優惠資訊 -->
     <b-container>
       <b-row>
-        <b-col lg="4" md="6" sm="7" cols="12">
+        <b-col
+          lg="4"
+          md="6"
+          sm="7"
+          cols="12"
+        >
           <h2 class="home-sec-title">
             優惠資訊
             <span class="en-title">
@@ -25,8 +40,16 @@
           </h2>
         </b-col>
       </b-row>
-      <b-row v-for="list in homenews" class="home-news-row">
-        <b-col lg="6" md="6" sm="12" cols="12">
+      <b-row
+        v-for="list in homenews"
+        class="home-news-row"
+      >
+        <b-col
+          lg="6"
+          md="6"
+          sm="12"
+          cols="12"
+        >
           <div class="blog-sec">
             <h3>{{list.title}}</h3>
             <p>{{list.created_date}}</p>
@@ -40,10 +63,18 @@
       </b-row>
     </b-container>
     <!-- 設計師清單 -->
-    <b-container fluid class="home-full-width">
+    <b-container
+      fluid
+      class="home-full-width"
+    >
       <b-container>
         <b-row>
-          <b-col lg="4" md="6" sm="7" cols="12">
+          <b-col
+            lg="4"
+            md="6"
+            sm="7"
+            cols="12"
+          >
             <h2 class="home-sec-title">
               設計師
               <span class="en-title">
@@ -63,7 +94,12 @@
     <!-- 部落格與影片專區 -->
     <b-container class="blog-video-sec">
       <b-row>
-        <b-col lg="4" md="6" sm="7" cols="12">
+        <b-col
+          lg="4"
+          md="6"
+          sm="7"
+          cols="12"
+        >
           <h2 class="home-sec-title">
             流行趨勢
             <span class="en-title">
@@ -73,7 +109,12 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="4" sm="12" cols="12" v-for="list in blog">
+        <b-col
+          md="4"
+          sm="12"
+          cols="12"
+          v-for="list in blog"
+        >
           <div class="home-article">
             <img :src="list.cover_image">
             <h3>{{list.title}}</h3>
@@ -83,7 +124,12 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col lg="4" md="6" sm="7" cols="12">
+        <b-col
+          lg="4"
+          md="6"
+          sm="7"
+          cols="12"
+        >
           <h2 class="home-sec-title">
             影片專區
             <span class="en-title">
@@ -93,24 +139,33 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="4" sm="12" v-for="list in blog">
+        <b-col
+          md="4"
+          sm="12"
+          v-for="item in video.slice(0,3)"
+        >
           <article class="home-article">
-            <img :src="list.cover_image">
-            <h3>{{list.title}}</h3>
-            <h4>{{list.description}}</h4>
-            <router-link :to="{name:'影音專區 內文', params:{postid:list['id']}}">more ></router-link>
+            <div class="video-section">
+              <div v-html="item.url"></div>
+              <h1>{{item.title}}</h1>
+            </div>
           </article>
         </b-col>
       </b-row>
       </b-row>
     </b-container>
-
     <b-container fluid>
       <b-row>
-        <b-col md="3" sm="6" cols="6" v-for="list in productRow" class="pd-0">
+        <b-col
+          md="3"
+          sm="6"
+          cols="6"
+          v-for="list in productRow"
+          class="pd-0"
+        >
           <article class="settimg-img slide-TextUp">
-            <img :src="list.imgurl">
-            <div class="scrolltop-txt">{{list.text}}</div>
+            <img :src="list.cover_image">
+            <div class="scrolltop-txt">{{list.title}}</div>
           </article>
         </b-col>
       </b-row>
@@ -118,7 +173,12 @@
     <!-- 希卡位置 與FB -->
     <b-container>
       <b-row>
-        <b-col lg="4" md="6" sm="7" cols="12">
+        <b-col
+          lg="4"
+          md="6"
+          sm="7"
+          cols="12"
+        >
           <h2 class="home-sec-title">
             希卡位置
             <span class="en-title">
@@ -128,20 +188,47 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col lg="6" md="12">
+        <b-col
+          lg="6"
+          md="12"
+        >
           <address>
             <p>Tel. 04 723 3405</p>
             <p>Add. 彰化縣彰化市民生南路23號</p>
           </address>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5458.063410319871!2d120.5419531651003!3d24.07263338772579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469388f1b64e687%3A0xecb0929a6bd94e5!2z5biM5Y2hIFNpa2EgaGFpciBzYWxvbg!5e0!3m2!1szh-TW!2stw!4v1542599832447" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5458.063410319871!2d120.5419531651003!3d24.07263338772579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469388f1b64e687%3A0xecb0929a6bd94e5!2z5biM5Y2hIFNpa2EgaGFpciBzYWxvbg!5e0!3m2!1szh-TW!2stw!4v1542599832447"
+            width="100%"
+            height="300"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen
+          ></iframe>
         </b-col>
         <b-col class="fb-col">
-          <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsikahairsalon%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId" width="400" height="480" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+          <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fsikahairsalon%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=true&appId"
+            width="400"
+            height="480"
+            style="border:none;overflow:hidden"
+            scrolling="no"
+            frameborder="0"
+            allowTransparency="true"
+            allow="encrypted-media"
+          ></iframe>
         </b-col>
       </b-row>
       <b-row>
-        <b-col lg="4" md="6" sm="7" cols="12">
-          <h2 class="home-sec-title" data-from="booking">
+        <b-col
+          lg="4"
+          md="6"
+          sm="7"
+          cols="12"
+        >
+          <h2
+            class="home-sec-title"
+            data-from="booking"
+          >
             線上預約
             <span class="en-title">
               Booking
@@ -152,12 +239,28 @@
       </b-row>
 
     </b-container>
-    <b-container fluid class="home-full-width-form">
+    <b-container
+      fluid
+      class="home-full-width-form"
+    >
       <b-row>
-        <b-col md="6" sm="12" cols="12">
-          <img src="../../public/img/img_booking_home.jpg" alt="" srcset="">
+        <b-col
+          md="6"
+          sm="12"
+          cols="12"
+        >
+          <img
+            src="../../public/img/img_booking_home.jpg"
+            alt=""
+            srcset=""
+          >
         </b-col>
-        <b-col md="5" sm="12" cols="12" offset-xl="1">
+        <b-col
+          md="5"
+          sm="12"
+          cols="12"
+          offset-xl="1"
+        >
           <BookingFrom />
         </b-col>
       </b-row>
@@ -167,13 +270,13 @@
 
 <script>
 // @ is an alias to /src
-import axios from 'axios'
-import HomeBranner from '@/components/Home/HomeBanner.vue'
-import HomeStylist from '@/components/Home/HomeStylist.vue'
-import BookingFrom from '@/components/From.vue'
+import axios from "axios";
+import HomeBranner from "@/components/Home/HomeBanner.vue";
+import HomeStylist from "@/components/Home/HomeStylist.vue";
+import BookingFrom from "@/components/From.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     HomeBranner,
     HomeStylist,
@@ -182,34 +285,60 @@ export default {
   data() {
     return {
       Api: {
-        NewsApi: 'https://sika.idea-infinite.com/api/v1/news',
-        StylistApi: 'https://sika.idea-infinite.com/api/v1/designer',
-        BlogApi: 'https://sika.idea-infinite.com/api/v1/article/list'
+        NewsApi: "https://sika.idea-infinite.com/api/v1/news",
+        HairStyleApi: "https://sika.idea-infinite.com/api/v1/hair/style",
+        StylistApi: "https://sika.idea-infinite.com/api/v1/designer",
+        BlogApi: "https://sika.idea-infinite.com/api/v1/article/list",
+        ProductApi: "https://sika.idea-infinite.com/api/v1/products"
       },
       homenews: [],
       imgshow: [
-        { id: '1', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
-        { id: '2', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
-        { id: '3', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
-        { id: '4', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
-        { id: '5', imgurl: 'https://fakeimg.pl/640x500/fff/000' },
-        { id: '6', imgurl: 'https://fakeimg.pl/640x500/fff/000' }
+        { id: "1", imgurl: "https://fakeimg.pl/640x500/fff/000" },
+        { id: "2", imgurl: "https://fakeimg.pl/640x500/fff/000" },
+        { id: "3", imgurl: "https://fakeimg.pl/640x500/fff/000" },
+        { id: "4", imgurl: "https://fakeimg.pl/640x500/fff/000" },
+        { id: "5", imgurl: "https://fakeimg.pl/640x500/fff/000" },
+        { id: "6", imgurl: "https://fakeimg.pl/640x500/fff/000" }
       ],
       blog: [],
-      productRow: [
-        { id: '1', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
-        { id: '2', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
-        { id: '3', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' },
-        { id: '4', imgurl: 'https://fakeimg.pl/660x480/0f0/fff', text: 'TEXT' }
-      ]
-    }
+      video: [
+        {
+          title: "The Sound of Silence (Original Version from 1964)",
+          url: `
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/4zLfCnGVeL4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        },
+        {
+          title:
+            "Dr. Manhattan Remembers Comedian | Watchmen (2009) Movie Clip",
+          url: `
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/mCHUw7ACS8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        },
+        {
+          title: "The Sound of Silence (Original Version from 1964)",
+          url: `<iframe width="100%" height="315" src="https://www.youtube.com/embed/L-JQ1q-13Ek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        },
+        {
+          title: "The Sound of Silence (Original Version from 1964)",
+          url: `
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/GIzDsGyxsQM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        }
+      ],
+      productRow: []
+    };
   },
   created() {
-    this.getBlogList()
+    this.getBlogList();
   },
   methods: {
+    back() {
+      window.scrollTo(0, 0);
+    },
     getBlogList() {
-      let vm = this
+      let vm = this;
       axios
         .all([
           axios.get(vm.Api.NewsApi, {
@@ -218,26 +347,41 @@ export default {
               offset: 0
             }
           }),
-
+          axios.get(vm.Api.HairStyleApi, {
+            params: {
+              limit: 4,
+              offset: 0
+            }
+          }),
           axios.get(vm.Api.BlogApi, {
             params: {
               limit: 3,
               offset: 0
             }
+          }),
+          axios.get(vm.Api.ProductApi, {
+            params: {
+              limit: 4,
+              offset: 0
+            }
           })
         ])
         .then(
-          axios.spread(function(newsApi, BlogApi) {
-            vm.homenews = newsApi.data.data
-            vm.blog = BlogApi.data.data
+          axios.spread(function(newsApi, HairStyleApi, BlogApi, ProductApi) {
+            vm.homenews = newsApi.data.data;
+            vm.blog = BlogApi.data.data;
+            vm.productRow = ProductApi.data.data;
           })
-        )
+        );
     }
+  },
+  mounted() {
+    window.scrollTo(0, 0);
   }
-}
+};
 </script>
 <style lang="scss">
-@import '../assets/scss/global.scss';
+@import "../assets/scss/global.scss";
 .imgshow-container {
   margin-bottom: 110px;
   @include pad-width {
@@ -273,7 +417,7 @@ export default {
         opacity: 0;
         bottom: -30%;
         right: 0;
-        background: url('../assets/icon/icon_field.png') no-repeat right;
+        background: url("../assets/icon/icon_field.png") no-repeat right;
         transition: 0.3s all ease-in;
         height: 37%;
         width: 100%;
@@ -322,7 +466,7 @@ export default {
     margin: 10% auto;
   }
   &:after {
-    content: '';
+    content: "";
     height: 10px;
     width: 10px;
     display: block;
@@ -440,7 +584,7 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 774px;
-  background: url('../../public/img/bg_stylist.jpg') no-repeat center;
+  background: url("../../public/img/bg_stylist.jpg") no-repeat center;
   background-attachment: fixed;
   margin-bottom: 240px;
   // 電腦
@@ -552,6 +696,14 @@ export default {
       margin-bottom: 7px;
       width: 80%;
       line-height: 30px;
+    }
+    .video-section {
+      margin: 20px auto;
+      box-shadow: 5px 5px 19px 0px #ebebeb;
+      h1 {
+        height: 100px;
+        padding: 15px 10px;
+      }
     }
   }
 }

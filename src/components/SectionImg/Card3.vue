@@ -10,14 +10,14 @@
 
 <script>
 export default {
-  name: "blog title",
+  name: "product title",
   data() {
     return {
-      title: "流行趨勢 Blog"
+      title: "產品資訊 Products"
     };
   },
   created() {
-    if (this.$route.name == "articlepost") {
+    if (this.$route.name == "productspost") {
       this.title = "";
     }
   }
@@ -29,7 +29,7 @@ export default {
 @import "../../assets/scss/global.scss";
 
 .section-img {
-  background: url("../../../public/img/img_Blog.jpg") right no-repeat;
+  background: url("../../../public/img/img_Products.jpg") center no-repeat;
   height: 410px;
   margin-bottom: 125px;
   //平板
@@ -38,7 +38,7 @@ export default {
   }
   //平板以下
   @include pad-and-phone-width {
-    background: url("../../../public/img/img_Blog_pad.jpg") right no-repeat;
+    background: url("../../../public/img/img_Products_pad.jpg") center no-repeat;
     margin-bottom: 10%;
     height: 288px;
   }

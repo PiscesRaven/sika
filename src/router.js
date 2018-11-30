@@ -48,22 +48,22 @@ export default new Router({
       component: () => import('./components/Blog.vue'),
     }, {
       path: '/video',
-      name: '影音專區 Video',
+      name: 'video',
       component: () => import('./components/PostList.vue')
     },
     {
       path: '/video/:postid',
-      name: '影音專區 內文',
+      name: 'videopost',
       component: () => import('./components/Blog.vue'),
     },
     {
       path: '/products',
-      name: '產品資訊 Products',
+      name: 'products',
       component: () => import('./components/PostList.vue')
     },
     {
       path: '/products/:postid',
-      name: '產品資訊 內文',
+      name: 'productspost',
       component: () => import('./components/Blog.vue'),
     },
     {

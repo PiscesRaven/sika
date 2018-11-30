@@ -13,9 +13,6 @@ import {
 import solid from '@fortawesome/fontawesome-free-solid'
 import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
-
-
-
 ////
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
@@ -25,7 +22,31 @@ import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper, /* { default global options } */ )
 
 ////
-Vue.use(BootstrapVue);
+// Vue.use(BootstrapVue);
+
+
+import {
+  PaginationNav
+
+} from 'bootstrap-vue/es/components';
+import {
+  Carousel
+
+} from 'bootstrap-vue/es/components';
+import {
+
+  Layout
+} from 'bootstrap-vue/es/components';
+import {
+  Card
+} from 'bootstrap-vue/es/components';
+
+
+Vue.use(PaginationNav);
+Vue.use(Carousel);
+Vue.use(Layout);
+Vue.use(Card);
+
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
 fontawesome.library.add(brands)
