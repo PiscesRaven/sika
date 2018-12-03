@@ -19,17 +19,37 @@
         </b-col>
       </b-row>
       <b-row class="designer-row">
-        <b-col v-for="list in DesignerList" xl="3" lg="4" sm="6" cols="12">
+        <b-col
+          v-for="list in DesignerList"
+          xl="3"
+          lg="4"
+          sm="6"
+          cols="12"
+        >
           <router-link to="/designer/designerinfo">
-            <b-card :title="list.name" :img-src="list.image_pc" :img-alt="list.name" img-top tag="article">
+            <b-card
+              :title="list.name"
+              :img-src="list.image_pc"
+              :img-alt="list.name"
+              img-top
+              tag="article"
+            >
               <p class="card-text">
               </p>
               <div class="card-social">
                 <a :href="list.facebook">
-                  <img src="../../assets/icon/btn_fb.svg" alt="" srcset="">
+                  <img
+                    src="../../assets/icon/btn_fb.svg"
+                    alt=""
+                    srcset=""
+                  >
                 </a>
                 <a :href="list.IG">
-                  <img src="../../assets/icon/btn_Instagram.svg" alt="" srcset="">
+                  <img
+                    src="../../assets/icon/btn_Instagram.svg"
+                    alt=""
+                    srcset=""
+                  >
                 </a>
               </div>
             </b-card>
@@ -41,43 +61,45 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-  name: 'Designers',
+  name: "Designers",
   data() {
     return {
       DesignerList: []
-    }
+    };
   },
   created() {
-    this.getList()
+    this.getList();
   },
   methods: {
     getList() {
-      axios.get('https://sika.idea-infinite.com/api/v1/designer').then(res => {
+      axios.get("https://sika.idea-infinite.com/api/v1/designer").then(res => {
         // console.log(res.data.data)
-        this.DesignerList = res.data.data
-      })
+        this.DesignerList = res.data.data;
+      });
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../../assets/scss/global.scss';
+@import "../../assets/scss/global.scss";
 .section-img {
-  background: url('../../../public/img/img_Stylist.jpg') center no-repeat;
+  background: url("../../../public/img/img_Stylist.jpg") center no-repeat;
   height: 410px;
   margin-bottom: 64px;
+  background-size: cover;
+
   //平板
   @include pad-width {
     margin-bottom: 18px;
   }
   //平板以下
   @include pad-and-phone-width {
-    background: url('../../../public/img/img_Stylist_pad.jpg') center no-repeat;
+    background: url("../../../public/img/img_Stylist_pad.jpg") center no-repeat;
     margin-bottom: 18px;
     height: 288px;
   }

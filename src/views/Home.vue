@@ -11,13 +11,13 @@
           md="4"
           sm="4"
           cols="4"
-          v-for="pic in imgshow"
+          v-for="item in imgshow.works.slice(0,6)"
           class="imgshow-col"
         >
           <div class="imgshow-block">
-            <img :src="pic.imgurl">
+            <img :src="item.image">
             <div>
-              <p>xxxxxxx</p>
+              <p>{{item.name}}</p>
             </div>
           </div>
         </b-col>
@@ -49,13 +49,18 @@
           md="6"
           sm="12"
           cols="12"
+          class="blog-sec"
         >
-          <div class="blog-sec">
+          <h3>{{list.title}}</h3>
+          <p>{{list.created_date}}</p>
+          <p>{{list.description}}</p>
+          <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">more ></router-link>
+          <!-- <div class="blog-sec">
             <h3>{{list.title}}</h3>
             <p>{{list.created_date}}</p>
             <p>{{list.description}}</p>
             <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">more ></router-link>
-          </div>
+          </div> -->
         </b-col>
         <b-col>
           <img :src="list.cover_image">
@@ -286,20 +291,13 @@ export default {
     return {
       Api: {
         NewsApi: "https://sika.idea-infinite.com/api/v1/news",
-        HairStyleApi: "https://sika.idea-infinite.com/api/v1/hair/style",
         StylistApi: "https://sika.idea-infinite.com/api/v1/designer",
         BlogApi: "https://sika.idea-infinite.com/api/v1/article/list",
-        ProductApi: "https://sika.idea-infinite.com/api/v1/products"
+        ProductApi: "https://sika.idea-infinite.com/api/v1/products",
+        DisplayApi: "https://sika.idea-infinite.com/api/v1/display"
       },
       homenews: [],
-      imgshow: [
-        { id: "1", imgurl: "https://fakeimg.pl/640x500/fff/000" },
-        { id: "2", imgurl: "https://fakeimg.pl/640x500/fff/000" },
-        { id: "3", imgurl: "https://fakeimg.pl/640x500/fff/000" },
-        { id: "4", imgurl: "https://fakeimg.pl/640x500/fff/000" },
-        { id: "5", imgurl: "https://fakeimg.pl/640x500/fff/000" },
-        { id: "6", imgurl: "https://fakeimg.pl/640x500/fff/000" }
-      ],
+      imgshow: [],
       blog: [],
       video: [
         {
@@ -333,6 +331,7 @@ export default {
   created() {
     this.getBlogList();
   },
+  mounted() {},
   methods: {
     back() {
       window.scrollTo(0, 0);
@@ -347,12 +346,7 @@ export default {
               offset: 0
             }
           }),
-          axios.get(vm.Api.HairStyleApi, {
-            params: {
-              limit: 4,
-              offset: 0
-            }
-          }),
+
           axios.get(vm.Api.BlogApi, {
             params: {
               limit: 3,
@@ -364,13 +358,15 @@ export default {
               limit: 4,
               offset: 0
             }
-          })
+          }),
+          axios.get(vm.Api.DisplayApi)
         ])
         .then(
-          axios.spread(function(newsApi, HairStyleApi, BlogApi, ProductApi) {
+          axios.spread(function(newsApi, BlogApi, ProductApi, DisplayApi) {
             vm.homenews = newsApi.data.data;
             vm.blog = BlogApi.data.data;
             vm.productRow = ProductApi.data.data;
+            vm.imgshow = DisplayApi.data.data;
           })
         );
     }
@@ -517,6 +513,7 @@ export default {
   @include pad-and-phone-width {
     margin-top: 0;
     margin-bottom: 50px;
+    order: 2;
   }
   h3 {
     font-size: 34px;
@@ -549,14 +546,20 @@ export default {
     //平板
     @include pad-width {
       margin-top: -30px;
+      box-shadow: none;
     }
     //小平板
     @include small-pad-width {
-      margin-top: 50px;
+      margin-top: 0px;
+      margin-bottom: 50px;
+
+      box-shadow: none;
     }
     //手機
     @include phone-width {
+      margin-top: 0px;
       margin-top: 50px;
+      box-shadow: none;
     }
   }
 }
@@ -584,7 +587,8 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 774px;
-  background: url("../../public/img/bg_stylist.jpg") no-repeat center;
+  background: url("../../public/img/bg_stylist.jpg") no-repeat bottom;
+  background-size: cover;
   background-attachment: fixed;
   margin-bottom: 240px;
   // 電腦

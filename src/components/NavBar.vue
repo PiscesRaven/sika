@@ -26,7 +26,10 @@
         to="/"
         class="rwd-home"
       ><img src="../../public/img/navbar_logo.svg"></router-link>
-      <ul class="nav-bar">
+      <ul
+        class="nav-bar"
+        @click="select()"
+      >
         <li class="nav-items"><span class="navbar-brand">
             <router-link to="/"><img src="../../public/img/navbar_logo.svg"></router-link>
           </span></li>
@@ -77,11 +80,7 @@ export default {
   name: "NavBar",
   data() {
     return {
-      isActive: false,
-      openerText: "Open",
-      isOpen: false,
-      menu: ["Home", "Work", "Contact"],
-      smallMenu: ["Tips", "Resources", "Shenanigans"]
+      isActive: false
     };
   },
   methods: {
@@ -177,7 +176,7 @@ export default {
     }
     //手機
     @include phone-width {
-      width: 100%;
+      width: 75%;
     }
 
     .nav-items {

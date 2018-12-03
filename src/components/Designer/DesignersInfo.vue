@@ -12,8 +12,18 @@
       </b-row>
       <div class="designer-card">
         <b-row v-for="item in designer">
-          <b-col lg="6" md="12" sm="12" cols="12"><img src="https://fakeimg.pl/670x660/fff/000"></b-col>
-          <b-col lg="6" md="12" sm="12" cols="12">
+          <b-col
+            lg="6"
+            md="12"
+            sm="12"
+            cols="12"
+          ><img src="https://fakeimg.pl/670x660/fff/000"></b-col>
+          <b-col
+            lg="6"
+            md="12"
+            sm="12"
+            cols="12"
+          >
             <div class="designer-info">
               <div class="info-block">
                 <h1>Name {{item.name}}</h1>
@@ -22,9 +32,18 @@
 
               <div class="info-block">
                 <div class="contact-icons">
-                  <font-awesome-icon :icon="['fab','instagram']" size="2x" />
-                  <font-awesome-icon :icon="['fab','facebook-f']" size="2x" />
-                  <font-awesome-icon :icon="['fab','line']" size="2x" />
+                  <font-awesome-icon
+                    :icon="['fab','instagram']"
+                    size="2x"
+                  />
+                  <font-awesome-icon
+                    :icon="['fab','facebook-f']"
+                    size="2x"
+                  />
+                  <font-awesome-icon
+                    :icon="['fab','line']"
+                    size="2x"
+                  />
                 </div>
                 <div class="designer-contact">
                   <h5>T: {{item.tel}}</h5>
@@ -41,14 +60,26 @@
     </b-container>
     <b-container fluid>
       <b-row>
-        <b-col md="3" sm="6" cols="12" class="work-row" v-for="pic in works">
-          <b-img :src="pic.img" alt="" />
+        <b-col
+          md="3"
+          sm="6"
+          cols="12"
+          class="work-row"
+          v-for="pic in works"
+        >
+          <b-img
+            :src="pic.img"
+            alt=""
+          />
         </b-col>
       </b-row>
     </b-container fluid>
     <b-container>
       <b-row>
-        <b-col cols="12" class="return-work">
+        <b-col
+          cols="12"
+          class="return-work"
+        >
           <router-link to="/hairstyle">
             <span class="page-left"></span> 作品集觀看更多
           </router-link>
@@ -73,7 +104,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     msg: String
   },
@@ -81,21 +112,21 @@ export default {
     return {
       designer: [
         {
-          name: 'Raven',
-          info: '我是誰?我是程序猿!Who am I? I am F2E',
-          tel: '+886 0123 456 789',
-          mail: 'zxczxc@gamil.cmo'
+          name: "Raven",
+          info: "我是誰?我是程序猿!Who am I? I am F2E",
+          tel: "+886 0123 456 789",
+          mail: "zxczxc@gamil.cmo"
         }
       ],
       works: [
-        { img: 'https://fakeimg.pl/480x500/000/fff' },
-        { img: 'https://fakeimg.pl/480x500/c3c3c3/fff' },
-        { img: 'https://fakeimg.pl/480x500/000/fff' },
-        { img: 'https://fakeimg.pl/480x500/000/fff' },
-        { img: 'https://fakeimg.pl/480x500/000/fff' },
-        { img: 'https://fakeimg.pl/480x500/000/fff' },
-        { img: 'https://fakeimg.pl/480x500/000/fff' },
-        { img: 'https://fakeimg.pl/480x500/000/fff' }
+        { img: "https://fakeimg.pl/480x500/000/fff" },
+        { img: "https://fakeimg.pl/480x500/c3c3c3/fff" },
+        { img: "https://fakeimg.pl/480x500/000/fff" },
+        { img: "https://fakeimg.pl/480x500/000/fff" },
+        { img: "https://fakeimg.pl/480x500/000/fff" },
+        { img: "https://fakeimg.pl/480x500/000/fff" },
+        { img: "https://fakeimg.pl/480x500/000/fff" },
+        { img: "https://fakeimg.pl/480x500/000/fff" }
         // { img: 'https://fakeimg.pl/480x500/fff/000' },
         // { img: 'https://fakeimg.pl/480x500/000/fff' },
         // { img: 'https://fakeimg.pl/480x500/fff/000' },
@@ -104,26 +135,28 @@ export default {
         // { img: 'https://fakeimg.pl/480x500/fff/000' },
         // { img: 'https://fakeimg.pl/480x500/000/fff' }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../../assets/scss/global.scss';
+@import "../../assets/scss/global.scss";
 .section-img {
-  background: url('../../../public/img/img_Stylist.jpg') center center no-repeat;
+  background: url("../../../public/img/img_Stylist.jpg") center center no-repeat;
   background-size: cover;
   height: 410px;
   margin-bottom: 125px;
+  background-size: cover;
+
   //平板
   @include pad-width {
     margin-bottom: 18px;
   }
   //平板以下
   @include pad-and-phone-width {
-    background: url('../../../public/img/img_Stylist_pad.jpg') center no-repeat;
+    background: url("../../../public/img/img_Stylist_pad.jpg") center no-repeat;
     margin-bottom: 18px;
     height: 288px;
   }
@@ -157,7 +190,7 @@ p {
   display: inline-block;
   margin-right: 15px;
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 20px;
     height: 3px;

@@ -135,6 +135,7 @@ export default {
   background: url("../../public/img/Image.jpg") center no-repeat;
   height: 410px;
   margin-bottom: 125px;
+  background-size: cover;
 }
 
 .article-row {

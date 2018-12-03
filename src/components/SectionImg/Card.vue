@@ -29,6 +29,7 @@ export default {
 @import "../../assets/scss/global.scss";
 .section-img {
   background: url("../../../public/img/Image.jpg") right no-repeat;
+  background-size: cover;
   height: 410px;
   margin-bottom: 125px;
   //平板以下

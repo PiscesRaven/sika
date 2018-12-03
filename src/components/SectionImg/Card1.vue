@@ -32,6 +32,7 @@ export default {
   background: url("../../../public/img/img_Blog.jpg") right no-repeat;
   height: 410px;
   margin-bottom: 125px;
+  background-size: cover;
   //平板
   @include pad-width {
     margin-bottom: 10%;

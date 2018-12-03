@@ -2,9 +2,15 @@
   <div>
 
     <!-- Swiper -->
-    <swiper :options="swiperOption" ref="mySwiper">
+    <swiper
+      :options="swiperOption"
+      ref="mySwiper"
+    >
       <!-- slides -->
-      <swiper-slide v-for="item in stylist" :style="{backgroundImage: 'url(' +item.image_pc+ ')'}">
+      <swiper-slide
+        v-for="item in stylist"
+        :style="{backgroundImage: 'url(' +item.image_pc+ ')'}"
+      >
         <div class="designer-info-hover">
           <p class="panel-top">{{item.name}}</p>
           <p class="panel-mid"></p>
@@ -12,12 +18,29 @@
         </div>
       </swiper-slide>
       <!-- Optional controls -->
-      <div class="swiper-pagination" slot="pagination"></div>
-      <div class="swiper-button-prev" slot="button-prev">
-        <img src="../../assets/icon/btn_left.svg" alt="" srcset="">
+      <div
+        class="swiper-pagination"
+        slot="pagination"
+      ></div>
+      <div
+        class="swiper-button-prev"
+        slot="button-prev"
+      >
+        <img
+          src="../../assets/icon/btn_left.svg"
+          alt=""
+          srcset=""
+        >
       </div>
-      <div class="swiper-button-next" slot="button-next">
-        <img src="../../assets/icon/btn_right.svg" alt="" srcset="">
+      <div
+        class="swiper-button-next"
+        slot="button-next"
+      >
+        <img
+          src="../../assets/icon/btn_right.svg"
+          alt=""
+          srcset=""
+        >
       </div>
     </swiper>
 
@@ -26,13 +49,13 @@
 
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-  name: 'carrousel',
+  name: "carrousel",
   data() {
     return {
-      stylistApi: 'https://sika.idea-infinite.com/api/v1/designer',
+      stylistApi: "https://sika.idea-infinite.com/api/v1/designer",
       stylist: [],
       swiperOption: {
         // some swiper options/callbacks
@@ -44,8 +67,8 @@ export default {
         breakpointsInverse: true,
         loop: true,
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
         },
         breakpoints: {
           // // when window width is >= 320px
@@ -69,21 +92,21 @@ export default {
           }
         }
       }
-    }
+    };
   },
   computed: {
     swiper() {
-      return this.$refs.mySwiper.swiper
+      return this.$refs.mySwiper.swiper;
     }
   },
   mounted() {
     // current swiper instance
     // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
-    console.log('this is current swiper instance object', this.swiper)
-    this.swiper.slideTo(0, 1000, false)
+    // console.log('this is current swiper instance object', this.swiper)
+    this.swiper.slideTo(0, 1000, false);
   },
   created() {
-    this.getStylist()
+    this.getStylist();
   },
   methods: {
     getStylist() {
@@ -91,17 +114,17 @@ export default {
       //   this.stylist = res.data.data
       // })
 
-      axios.get('https://sika.idea-infinite.com/api/v1/designer').then(res => {
-        console.log(res.data.data)
-        this.stylist = res.data.data
-      })
+      axios.get("https://sika.idea-infinite.com/api/v1/designer").then(res => {
+        // console.log(res.data.data)
+        this.stylist = res.data.data;
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/scss/global.scss';
+@import "../../assets/scss/global.scss";
 .swiper-container {
   width: 100%;
   .swiper-slide {

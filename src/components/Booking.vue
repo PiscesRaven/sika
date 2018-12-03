@@ -35,6 +35,8 @@ export default {
   height: 1240px;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+
   .book-title {
     margin-top: 120px;
     font-size: 32px;

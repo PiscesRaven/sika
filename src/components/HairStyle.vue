@@ -113,7 +113,7 @@ export default {
       let vm = this;
       let designer = vm.status.selectDesigner; //data的設計師
       let style = vm.status.selectStyle; //data的髮型
-      console.log("現在是 " + designer + " 和 " + style + " 風格");
+      // console.log("現在是 " + designer + " 和 " + style + " 風格");
       if (designer === "All" && style === "All") {
         // console.log('全部設計師與風格')
         return vm.HairData;
@@ -176,6 +176,8 @@ export default {
   background: url("../../public/img/img_Work.jpg") center no-repeat;
   height: 410px;
   margin-bottom: 64px;
+  background-size: cover;
+
   //平板
   @include pad-width {
     margin-bottom: 18px;
