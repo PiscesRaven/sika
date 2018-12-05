@@ -29,12 +29,12 @@ export default new Router({
     },
     {
       path: '/designer',
-      name: '設計師 Stylist',
+      name: '/designer',
       component: () => import('./components/Designer/Designers.vue')
     },
     {
-      path: '/designer/designerinfo',
-      name: '設計師 個人資訊',
+      path: '/designer/:postid',
+      name: 'designerinfo',
       component: () => import('./components/Designer/DesignersInfo.vue')
     },
     {
@@ -52,20 +52,15 @@ export default new Router({
       component: () => import('./components/PostList.vue')
     },
     {
-      path: '/video/:postid',
-      name: 'videopost',
-      component: () => import('./components/Blog.vue'),
-    },
-    {
       path: '/products',
       name: 'products',
       component: () => import('./components/PostList.vue')
     },
-    {
-      path: '/products/:postid',
-      name: 'productspost',
-      component: () => import('./components/Blog.vue'),
-    },
+    // {
+    //   path: '/products/:postid',
+    //   name: 'productspost',
+    //   component: () => import('./components/Blog.vue'),
+    // },
     {
       path: '/booking',
       name: '線上預約 Booking',

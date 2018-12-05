@@ -54,7 +54,7 @@
           <h3>{{list.title}}</h3>
           <p>{{list.created_date}}</p>
           <p>{{list.description}}</p>
-          <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">more ></router-link>
+          <router-link :to="{name:'newspost', params:{postid:list['id']}}">more ></router-link>
           <!-- <div class="blog-sec">
             <h3>{{list.title}}</h3>
             <p>{{list.created_date}}</p>
@@ -124,7 +124,7 @@
             <img :src="list.cover_image">
             <h3>{{list.title}}</h3>
             <h4>{{list.description}}</h4>
-            <router-link :to="{name:'Blog 內文', params:{postid:list['id']}}">more ></router-link>
+            <router-link :to="{name:'articlepost', params:{postid:list['id']}}">more ></router-link>
           </div>
         </b-col>
       </b-row>
@@ -151,7 +151,15 @@
         >
           <article class="home-article">
             <div class="video-section">
-              <div v-html="item.url"></div>
+              <iframe
+                width="100%"
+                height="315"
+                :src="item.embed_url"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              <!-- <div v-html="item.embed_url"></div> -->
               <h1>{{item.title}}</h1>
             </div>
           </article>
@@ -169,7 +177,7 @@
           class="pd-0"
         >
           <article class="settimg-img slide-TextUp">
-            <img :src="list.cover_image">
+            <img :src="list.slider_image">
             <div class="scrolltop-txt">{{list.title}}</div>
           </article>
         </b-col>
@@ -294,37 +302,13 @@ export default {
         StylistApi: "https://sika.idea-infinite.com/api/v1/designer",
         BlogApi: "https://sika.idea-infinite.com/api/v1/article/list",
         ProductApi: "https://sika.idea-infinite.com/api/v1/products",
-        DisplayApi: "https://sika.idea-infinite.com/api/v1/display"
+        DisplayApi: "https://sika.idea-infinite.com/api/v1/display",
+        VideoApi: "https://sika.idea-infinite.com/api/v1/video"
       },
       homenews: [],
       imgshow: [],
       blog: [],
-      video: [
-        {
-          title: "The Sound of Silence (Original Version from 1964)",
-          url: `
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/4zLfCnGVeL4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        },
-        {
-          title:
-            "Dr. Manhattan Remembers Comedian | Watchmen (2009) Movie Clip",
-          url: `
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/mCHUw7ACS8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        },
-        {
-          title: "The Sound of Silence (Original Version from 1964)",
-          url: `<iframe width="100%" height="315" src="https://www.youtube.com/embed/L-JQ1q-13Ek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        },
-        {
-          title: "The Sound of Silence (Original Version from 1964)",
-          url: `
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/GIzDsGyxsQM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        }
-      ],
+      video: [],
       productRow: []
     };
   },
@@ -359,14 +343,22 @@ export default {
               offset: 0
             }
           }),
-          axios.get(vm.Api.DisplayApi)
+          axios.get(vm.Api.DisplayApi),
+          axios.get(vm.Api.VideoApi)
         ])
         .then(
-          axios.spread(function(newsApi, BlogApi, ProductApi, DisplayApi) {
+          axios.spread(function(
+            newsApi,
+            BlogApi,
+            ProductApi,
+            DisplayApi,
+            VideoApi
+          ) {
             vm.homenews = newsApi.data.data;
             vm.blog = BlogApi.data.data;
             vm.productRow = ProductApi.data.data;
             vm.imgshow = DisplayApi.data.data;
+            vm.video = VideoApi.data.data;
           })
         );
     }
@@ -586,7 +578,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 774px;
+  min-height: 850px;
   background: url("../../public/img/bg_stylist.jpg") no-repeat bottom;
   background-size: cover;
   background-attachment: fixed;
@@ -756,20 +748,20 @@ address {
   }
   .scrolltop-txt {
     background: linear-gradient(
-      359deg,
-      rgba(167, 167, 167, 1) 80%,
-      rgba(119, 118, 116, 1) 90%,
-      #454444
+      to bottom,
+      rgba(68, 68, 68, 0) 0%,
+      rgba(68, 68, 68, 0.01) 1%,
+      rgba(68, 68, 68, 0.7) 18%,
+      rgba(68, 68, 68, 1) 100%
     );
-
     padding-top: 18%;
     color: $submain-T-Color;
     position: absolute;
-    top: 0;
+    top: 5px;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
+    width: 101%;
     height: 100%;
     display: block;
     transition: all 0.3s ease;

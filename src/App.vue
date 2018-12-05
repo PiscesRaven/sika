@@ -1,9 +1,21 @@
 <template>
   <div id="app">
-    <NavBar></NavBar>
+    <NavBar />
     <scrollTop />
-    <router-view />
-    <Footer></Footer>
+    <transition
+      name="fade"
+      mode="out-in"
+      appear
+    >
+      <router-view />
+    </transition>
+    <transition
+      name="show"
+      mode="out-in"
+      appear
+    >
+      <Footer />
+    </transition>
   </div>
 </template>
 <script>
@@ -19,12 +31,6 @@ export default {
     scrollTop,
     Footer
   }
-  // watch: {
-  //   $route(to, from) {
-  //     console.log(to.path);
-  //     console.log(from.path);
-  //   }
-  // }
 };
 </script>
 <style lang="scss">
@@ -138,5 +144,25 @@ img {
       }
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+.show-enter-active,
+.show-leave-active {
+  transition: opacity 4s;
+}
+
+.show-enter,
+.show-leave-active {
+  opacity: 0;
 }
 </style>

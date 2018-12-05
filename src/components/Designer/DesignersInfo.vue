@@ -7,17 +7,25 @@
     <b-container>
       <b-row>
         <div class="return-row">
-          <span class="page-left"></span> 回到上一頁
+          <span class="page-left"></span>
+          <a
+            href="#"
+            @click.prevent="goBack"
+          >回到上一頁
+          </a>
         </div>
       </b-row>
-      <div class="designer-card">
-        <b-row v-for="item in designer">
+      <div
+        class="designer-card"
+        v-for="item in designer"
+      >
+        <b-row>
           <b-col
             lg="6"
             md="12"
             sm="12"
             cols="12"
-          ><img src="https://fakeimg.pl/670x660/fff/000"></b-col>
+          ><img :src="item.image_pc"></b-col>
           <b-col
             lg="6"
             md="12"
@@ -27,27 +35,33 @@
             <div class="designer-info">
               <div class="info-block">
                 <h1>Name {{item.name}}</h1>
-                <h4>資料簡介:{{item.info}}</h4>
+                <h4>資料簡介:{{item.description}}</h4>
               </div>
 
               <div class="info-block">
                 <div class="contact-icons">
-                  <font-awesome-icon
-                    :icon="['fab','instagram']"
-                    size="2x"
-                  />
-                  <font-awesome-icon
-                    :icon="['fab','facebook-f']"
-                    size="2x"
-                  />
-                  <font-awesome-icon
-                    :icon="['fab','line']"
-                    size="2x"
-                  />
+                  <a :href="item.instagram_link">
+                    <font-awesome-icon
+                      :icon="['fab','instagram']"
+                      size="2x"
+                    />
+                  </a>
+                  <a :href="item.facebook_link">
+                    <font-awesome-icon
+                      :icon="['fab','facebook-f']"
+                      size="2x"
+                    />
+                  </a>
+                  <a :href="item.line_link">
+                    <font-awesome-icon
+                      :icon="['fab','line']"
+                      size="2x"
+                    />
+                  </a>
                 </div>
                 <div class="designer-contact">
-                  <h5>T: {{item.tel}}</h5>
-                  <h5>E: {{item.mail}}</h5>
+                  <h5>T: {{item.phone}}</h5>
+                  <h5>E: {{item.email}}</h5>
                 </div>
               </div>
             </div>
@@ -67,10 +81,7 @@
           class="work-row"
           v-for="pic in works"
         >
-          <b-img
-            :src="pic.img"
-            alt=""
-          />
+          <img :src="pic.image">
         </b-col>
       </b-row>
     </b-container fluid>
@@ -84,18 +95,9 @@
             <span class="page-left"></span> 作品集觀看更多
           </router-link>
         </b-col>
-        <b-col>
+        <b-col v-for="item in designer">
           <h2>簡介</h2>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Fugiat commodi doloribus porro non ducimus necessitatibus voluptate illum eaque.
-            Doloremque eligendi, iusto aperiam quasi quibusdam tenetur dolores minus temporibus quidem,
-            voluptates numquam est laudantium quisquam culpa,
-            similique nostrum? Maxime iure doloribus, beatae natus, accusamus
-            dolore magni perspiciatis odio quia eum nulla esse illo? Consequatur p
-            ariatur aspernatur ipsam odio ut perferendis doloribus ea eius. Culpa
-            doloribus totam nihil impedit minus ipsa delectus, nemo vitae labore,
-            dolorem quis optio consequuntur quod, eligendi animi distinctio tempora nisi dicta magnam quae a maxime.
-            Alias impedit amet quis, quaerat deserunt ullam aliquid corrupti commodi? Ut, eveniet.</p>
+          <p v-html="item.content"></p>
         </b-col>
       </b-row>
     </b-container>
@@ -103,39 +105,47 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String
-  },
+  name: "DersinerInfo",
   data() {
     return {
-      designer: [
-        {
-          name: "Raven",
-          info: "我是誰?我是程序猿!Who am I? I am F2E",
-          tel: "+886 0123 456 789",
-          mail: "zxczxc@gamil.cmo"
-        }
-      ],
-      works: [
-        { img: "https://fakeimg.pl/480x500/000/fff" },
-        { img: "https://fakeimg.pl/480x500/c3c3c3/fff" },
-        { img: "https://fakeimg.pl/480x500/000/fff" },
-        { img: "https://fakeimg.pl/480x500/000/fff" },
-        { img: "https://fakeimg.pl/480x500/000/fff" },
-        { img: "https://fakeimg.pl/480x500/000/fff" },
-        { img: "https://fakeimg.pl/480x500/000/fff" },
-        { img: "https://fakeimg.pl/480x500/000/fff" }
-        // { img: 'https://fakeimg.pl/480x500/fff/000' },
-        // { img: 'https://fakeimg.pl/480x500/000/fff' },
-        // { img: 'https://fakeimg.pl/480x500/fff/000' },
-        // { img: 'https://fakeimg.pl/480x500/fff/000' },
-        // { img: 'https://fakeimg.pl/480x500/000/fff' },
-        // { img: 'https://fakeimg.pl/480x500/fff/000' },
-        // { img: 'https://fakeimg.pl/480x500/000/fff' }
-      ]
+      designer: [],
+      works: []
     };
+  },
+  methods: {
+    getUrl() {
+      let vm = this;
+      let url = document.URL;
+      // console.log(url);
+      let sliceposition = url.lastIndexOf("/");
+      // console.log(sliceposition);
+      let slicedata = url.slice(sliceposition + 1);
+      // console.log(slicedata);
+      vm.page = parseInt(slicedata);
+      // console.log("url給的>>" + vm.page);
+      vm.getList();
+    },
+    getList() {
+      let vm = this;
+      axios
+        .get("https://sika.idea-infinite.com/api/v1/designer/content", {
+          params: {
+            id: vm.page
+          }
+        })
+        .then(res => {
+          vm.designer.push(res.data.data);
+          vm.works = res.data.data.works;
+        });
+    },
+    goBack() {
+      this.$router.back();
+    }
+  },
+  created: function() {
+    this.getUrl();
   }
 };
 </script>
@@ -206,6 +216,9 @@ p {
   justify-content: flex-end;
   padding-right: 15px;
   margin-bottom: 25px;
+  > a {
+    color: #000;
+  }
 }
 
 .designer-card {
@@ -247,6 +260,9 @@ p {
       height: 100px;
       justify-content: center;
       width: 100%;
+      a {
+        color: $submain-T-Color;
+      }
       svg {
         margin: 0 15px;
       }

@@ -69,17 +69,15 @@ selectStyle:'All'}"
               </div>
             </b-col>
           </b-row>
-          <div class="pagination-nav">
+          <!-- <div class="pagination-nav">
             <b-pagination-nav
               base-url="#"
               :number-of-pages="15"
               v-model="currentPage"
             />
-          </div>
+          </div> -->
         </b-col>
-
       </b-row>
-
     </b-container fluid>
   </div>
 </template>
@@ -191,6 +189,8 @@ export default {
 }
 .container-body {
   max-width: 1440px;
+  min-height: 750px;
+  margin-bottom: 100px;
 }
 
 .hair-style-ul {
@@ -324,6 +324,6 @@ export default {
     }
   }
   width: 100%;
-  margin: 140px auto;
+  margin: 70px auto;
 }
 </style>

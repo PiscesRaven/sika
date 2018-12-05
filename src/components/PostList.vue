@@ -7,11 +7,11 @@
     <b-container class="container-body">
       <b-row class="news-row">
         <b-col
-          v-for="list in NewsList"
+          v-for="list in PostList"
           lg="4"
           sm="6"
           cols="12"
-          v-if="$route.name !== 'video'"
+          v-if="$route.name !== 'video' && $route.name !== 'products'"
         >
           <router-link :to="{name:path, params:{postid:list['id']}}">
             <b-card
@@ -29,27 +29,53 @@
           </router-link>
         </b-col>
 
-        <b-row>
-          <b-col
-            v-if="$route.name == 'video'"
-            v-for="item in youtube"
-            lg="6"
-            md="12"
-            sm="12"
-            cols="12"
+        <b-col
+          v-if="$route.name == 'video'"
+          v-for="item in PostList"
+          lg="6"
+          md="12"
+          sm="12"
+          cols="12"
+        >
+          <div class="video-section">
+            <iframe
+              width="100%"
+              height="315"
+              :src="item.embed_url"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+            <h1>{{item.title}}</h1>
+          </div>
+        </b-col>
+
+        <b-col
+          v-for="list in PostList"
+          lg="4"
+          sm="6"
+          cols="12"
+          v-if=" $route.name == 'products'"
+        >
+          <b-card
+            :title="list.title"
+            :img-src="list.cover_image"
+            img-alt="Image"
+            img-top
+            tag="article"
           >
-            <div class="video-section">
-              <div v-html="item.url"></div>
-              <h1>{{item.title}}</h1>
-            </div>
-          </b-col>
-        </b-row>
+            <p class="card-day">{{list.created_date}}</p>
+            <p class="card-text">
+              {{list.description}}
+            </p>
+          </b-card>
+        </b-col>
 
         <div class="pagination-nav">
           <b-pagination-nav
             base-url="#"
             :link-gen="linkGen"
-            :number-of-pages="15"
+            :number-of-pages="totalPage"
             v-model="currentPage"
           />
         </div>
@@ -75,33 +101,9 @@ export default {
   data() {
     return {
       currentPage: 1,
-      NewsList: [],
-      youtube: [
-        {
-          title: "The Sound of Silence (Original Version from 1964)",
-          url: `
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/4zLfCnGVeL4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        },
-        {
-          title:
-            "Dr. Manhattan Remembers Comedian | Watchmen (2009) Movie Clip",
-          url: `
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/mCHUw7ACS8o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        },
-        {
-          title: "The Sound of Silence (Original Version from 1964)",
-          url: `<iframe width="100%" height="315" src="https://www.youtube.com/embed/L-JQ1q-13Ek" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        },
-        {
-          title: "The Sound of Silence (Original Version from 1964)",
-          url: `
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/GIzDsGyxsQM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-`
-        }
-      ],
+      PostList: [],
+      numPages: 0,
+      total: "",
       data: [
         {
           path: "/news", //現在路徑
@@ -120,15 +122,19 @@ export default {
           name: "products",
           topath: "productspost",
           api: "https://sika.idea-infinite.com/api/v1/products"
+        },
+        {
+          path: "/video",
+          name: "video",
+          api: "https://sika.idea-infinite.com/api/v1/video"
         }
-        // {
-        //   path: "/video",
-        //   name: "video",
-        //   topath: "videopost",
-        //   api: "https://sika.idea-infinite.com/api/v1/products"
-        // }
       ]
     };
+  },
+  computed: {
+    totalPage() {
+      return this.total;
+    }
   },
   watch: {
     currentPage: function(pageNum) {
@@ -163,7 +169,9 @@ export default {
           }
         })
         .then(res => {
-          this.NewsList = res.data.data;
+          this.PostList = res.data.data;
+          this.numPages = res.data.total;
+          this.total = Math.ceil(this.numPages / 6);
         });
     },
     linkGen(pageNum) {

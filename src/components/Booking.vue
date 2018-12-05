@@ -5,7 +5,6 @@
         <b-container>
           <b-col cols="12">
             <h1 class="book-title">線上預約 Booking
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt </p>
             </h1>
           </b-col>
           <b-col cols="12">
@@ -43,11 +42,6 @@ export default {
     line-height: 1.47;
     color: $main-T-Color;
     margin-bottom: 45px;
-  }
-  p {
-    font-size: 20px;
-    line-height: 1.5;
-    color: $main-T-Color;
   }
 }
 </style>

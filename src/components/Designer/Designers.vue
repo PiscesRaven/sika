@@ -5,19 +5,7 @@
         <h1 class="page-title">設計師 Stylist</h1>
       </b-row>
     </b-container fluid>
-
     <b-container>
-      <b-row>
-        <b-col>
-          <ul class="designer-list">
-
-            <li v-for="item in DesignerList">
-              <router-link to="/designer/designerinfo">{{item.name}} </router-link>
-            </li>
-
-          </ul>
-        </b-col>
-      </b-row>
       <b-row class="designer-row">
         <b-col
           v-for="list in DesignerList"
@@ -26,7 +14,7 @@
           sm="6"
           cols="12"
         >
-          <router-link to="/designer/designerinfo">
+          <router-link :to="{name:'designerinfo', params:{postid:list['id']}}">
             <b-card
               :title="list.name"
               :img-src="list.image_pc"
@@ -35,25 +23,27 @@
               tag="article"
             >
               <p class="card-text">
+                {{list.description}}
               </p>
-              <div class="card-social">
-                <a :href="list.facebook">
-                  <img
-                    src="../../assets/icon/btn_fb.svg"
-                    alt=""
-                    srcset=""
-                  >
-                </a>
-                <a :href="list.IG">
-                  <img
-                    src="../../assets/icon/btn_Instagram.svg"
-                    alt=""
-                    srcset=""
-                  >
-                </a>
-              </div>
+
             </b-card>
           </router-link>
+          <div class="card-social">
+            <a :href="list.facebook_link">
+              <img
+                src="../../assets/icon/btn_fb_w.svg"
+                alt=""
+                srcset=""
+              >
+            </a>
+            <a :href="list.instagram_link">
+              <img
+                src="../../assets/icon/btn_Instagram_w.svg"
+                alt=""
+                srcset=""
+              >
+            </a>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -147,12 +137,21 @@ export default {
     @include phone-width {
       margin: 5% auto;
     }
+    a {
+      color: $main-T-Color;
+    }
   }
 }
 .designer-row {
   max-width: 1200px;
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
 
   .card {
+    position: relative;
     width: 270px;
     text-align: left;
     margin-bottom: 30px;
@@ -170,11 +169,14 @@ export default {
     //手機
     @include phone-width {
       width: auto;
+      padding-bottom: 4%;
     }
     .card-body {
-      color: $main-T-Color;
-      background: #d5d5d5;
+      color: $submain-T-Color;
+      background: #707070;
       text-decoration: none;
+      min-height: 135px;
+
       .card-title {
         font-size: 20px;
         font-weight: 700;
@@ -189,19 +191,37 @@ export default {
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-box-orient: vertical;
+        line-height: 20px;
       }
-
-      .card-social {
-        display: flex;
-        justify-content: center;
-        > a {
-          display: block;
-          margin: 5px 15px;
-          img {
-            width: 20px;
-            height: 20px;
-          }
-        }
+    }
+  }
+  .card-social {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 28%;
+    //平板
+    @include pad-width {
+      bottom: 23.5%;
+    }
+    //小平板
+    @include small-pad-width {
+      bottom: 25%;
+    }
+    //手機
+    @include phone-width {
+      padding: 15px;
+      bottom: 18.5%;
+    }
+    @media screen and (max-width: 480px) {
+      bottom: 21%;
+    }
+    > a {
+      display: block;
+      margin: 5px 15px;
+      img {
+        width: 20px;
+        height: 20px;
       }
     }
   }

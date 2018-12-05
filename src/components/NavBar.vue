@@ -258,10 +258,14 @@ export default {
     @include pad-and-phone-width {
       height: 2px;
       margin: 7px 0;
+      width: 26px;
       transition: all 0.3s ease-out;
       backface-visibility: visible;
       display: block;
       opacity: 1;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 }

@@ -14,7 +14,7 @@
               希卡 Hair Salon
             </h2>
             <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+              Don’t wait for the perfect moment. Take the moment and make it perfect.
             </p>
             <div id="footer-input">
               <input
@@ -24,7 +24,12 @@
                 placeholder="Search"
               >
               <img src="../assets/icon/btn_search.svg">
-              <button class="ft-booking-btn">線上預約</button>
+              <button class="ft-booking-btn">
+                <router-link to="/booking">
+                  線上預約 Booking
+                </router-link>
+              </button>
+
             </div>
           </div>
         </b-col>
@@ -97,7 +102,9 @@
           class="footer-social-icon"
         >
           <font-awesome-icon :icon="['fab','instagram']" />
-          <font-awesome-icon :icon="['fab','facebook-f']" />
+          <a href="https://www.facebook.com/sikahairsalon/">
+            <font-awesome-icon :icon="['fab','facebook-f']" />
+          </a>
         </b-col>
       </b-row>
       <b-row class="builder">
@@ -113,24 +120,33 @@
           md="4"
           sm="12"
         >
-          <p>Design by idea infinite 網頁設計</p>
+          <p>
+            <a href="https://idea-infinite.com/">
+              Design by idea infinite 網頁設計
+            </a>
+          </p>
         </b-col>
       </b-row>
     </b-container>
+
     <b-container
       fluid
       class="builder-pad"
     >
       <b-row>
-        <b-col
-          md="12"
-          sm="12"
-        >
-          <p>© Copyright © 2018 Idea-Infinite Information Marketing Co.Ltd.. All rights reserved
+        <b-col cols="12">
+          <div>© Copyright © 2018 Idea-Infinite Information Marketing Co.Ltd.. All rights reserved
+          </div>
+          <p>
+            <a href="https://idea-infinite.com/">
+              Design by idea infinite 網頁設計
+            </a>
           </p>
         </b-col>
+
       </b-row>
     </b-container fluid>
+
   </div>
 </template>
 
@@ -233,6 +249,13 @@ export default {
           border-radius: 4px;
           border: solid 1px #ababaa;
           background: $main-Bg-Color;
+          a {
+            color: #fff;
+            text-decoration: none;
+            &:hover {
+              color: #fff;
+            }
+          }
 
           @include pad-width {
             margin-left: 0;
@@ -335,10 +358,12 @@ export default {
       @include pad-width {
         display: none;
       }
-
       svg {
         width: 24px;
         height: 24px;
+      }
+      a {
+        color: #fff;
       }
     }
   }
@@ -360,6 +385,9 @@ export default {
     }
     :nth-child(2) p {
       text-align: right;
+      a {
+        color: #00e1ff;
+      }
     }
     > p {
       height: 18px;
@@ -382,10 +410,14 @@ export default {
     //平板以下
     @include pad-and-phone-width {
       display: inline-flex;
+      overflow-x: hidden;
     }
     p {
       font-size: 12px;
       line-height: 25px;
+      a {
+        color: #00e1ff;
+      }
     }
   }
 }
