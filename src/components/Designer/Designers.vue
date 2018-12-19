@@ -178,6 +178,7 @@ export default {
       min-height: 135px;
 
       .card-title {
+        text-align: center;
         font-size: 20px;
         font-weight: 700;
       }

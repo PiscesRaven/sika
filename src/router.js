@@ -12,49 +12,76 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/news',
+      path: '/news1',
       name: 'news',
-      component: () => import('./components/PostList.vue'),
+      component: () => import( /* webpackChunkName: "news" */ './components/PostList.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-優惠資訊'
+      }
 
     },
     {
       path: '/news/:postid',
       name: 'newspost',
-      component: () => import('./components/Blog.vue'),
+      component: () => import( /* webpackChunkName: "newspost" */ './components/Blog.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-優惠資訊'
+      }
     },
     {
       path: '/hairstyle',
       name: '髮型專區 Hair',
-      component: () => import('./components/HairStyle.vue'),
+      component: () => import( /* webpackChunkName: "hairstyle" */ './components/HairStyle.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-髮型風格'
+      }
     },
     {
       path: '/designer',
       name: '/designer',
-      component: () => import('./components/Designer/Designers.vue')
+      component: () => import( /* webpackChunkName: "designer" */ './components/Designer/Designers.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-設計師群'
+      }
     },
     {
       path: '/designer/:postid',
       name: 'designerinfo',
-      component: () => import('./components/Designer/DesignersInfo.vue')
+      component: () => import( /* webpackChunkName: "designerinfo" */ './components/Designer/DesignersInfo.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-設計師'
+      }
     },
     {
       path: '/article',
       name: 'article',
-      component: () => import('./components/PostList.vue')
+      component: () => import( /* webpackChunkName: "article" */ './components/PostList.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-部落格'
+      }
     },
     {
       path: '/article/:postid',
       name: 'articlepost',
-      component: () => import('./components/Blog.vue'),
+      component: () => import( /* webpackChunkName: "articlepost" */ './components/Blog.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-部落格'
+      }
     }, {
       path: '/video',
       name: 'video',
-      component: () => import('./components/PostList.vue')
+      component: () => import( /* webpackChunkName: "video" */ './components/PostList.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-影片專區'
+      }
     },
     {
       path: '/products',
       name: 'products',
-      component: () => import('./components/PostList.vue')
+      component: () => import( /* webpackChunkName: "nproducts" */ './components/PostList.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-產品資訊'
+      }
     },
     // {
     //   path: '/products/:postid',
@@ -64,7 +91,10 @@ export default new Router({
     {
       path: '/booking',
       name: '線上預約 Booking',
-      component: () => import('./components/Booking.vue')
+      component: () => import( /* webpackChunkName: "booking" */ './components/Booking.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-線上預約'
+      }
     }
   ],
   scrollBehavior(to, from, savedPosition) {

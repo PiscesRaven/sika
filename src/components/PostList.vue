@@ -131,28 +131,8 @@ export default {
       ]
     };
   },
-  computed: {
-    totalPage() {
-      return this.total;
-    }
-  },
-  watch: {
-    currentPage: function(pageNum) {
-      this.getList(pageNum);
-    },
-    $route(to, from) {
-      for (let i = 0; i < this.data.length; i++) {
-        if (to.path == this.data[i].path) {
-          this.getList();
-        }
-      }
-    }
-  },
-  created() {
-    this.getList();
-  },
   methods: {
-    getList(pageNum = 1) {
+    getList(pageNum) {
       let vm = this;
       var api = "";
       for (let i = 0; i < vm.data.length; i++) {
@@ -161,6 +141,8 @@ export default {
           vm.path = vm.data[i].topath;
         }
       }
+
+      console.log("getList傳入" + pageNum);
       axios
         .get(this.api, {
           params: {
@@ -177,6 +159,36 @@ export default {
     linkGen(pageNum) {
       return "#/" + pageNum;
     }
+  },
+  computed: {
+    totalPage() {
+      return this.total;
+    }
+  },
+  watch: {
+    currentPage: function(pageNum) {
+      this.getList(pageNum);
+      console.log("currentPage 變換");
+    },
+    $route(to, from) {
+      let vm = this;
+
+      for (let i = 0; i < this.data.length; i++) {
+        if (to.path == this.data[i].path) {
+          console.log("$route變換 to的");
+          this.getList();
+        }
+      }
+      for (let i = 0; i < this.data.length; i++) {
+        if (from.path == this.data[i].path) {
+          console.log("$route變換 from的");
+          this.getList(vm.currentPage);
+        }
+      }
+    }
+  },
+  mounted() {
+    this.getList();
   }
 };
 </script>
