@@ -12,12 +12,12 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/news1',
+      path: '/news',
       name: 'news',
       component: () => import( /* webpackChunkName: "news" */ './components/PostList.vue'),
       meta: {
         title: '希卡 Sika hair salon-優惠資訊'
-      }
+      },
 
     },
     {
@@ -78,16 +78,16 @@ export default new Router({
     {
       path: '/products',
       name: 'products',
-      component: () => import( /* webpackChunkName: "nproducts" */ './components/PostList.vue'),
+      component: () => import( /* webpackChunkName: "products" */ './components/PostList.vue'),
       meta: {
         title: '希卡 Sika hair salon-產品資訊'
       }
     },
-    // {
-    //   path: '/products/:postid',
-    //   name: 'productspost',
-    //   component: () => import('./components/Blog.vue'),
-    // },
+    {
+      path: '/products/:postid',
+      name: 'productspost',
+      component: () => import( /* webpackChunkName: "productspost" */ './components/Blog.vue'),
+    },
     {
       path: '/booking',
       name: '線上預約 Booking',

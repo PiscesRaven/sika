@@ -61,7 +61,7 @@
           <div class="sika-menulist">
             <h2>INFORMATION</h2>
             <p>
-              <router-link to="/news">
+              <router-link to="/news#/1">
                 優惠訊息 News
               </router-link>
             </p>
@@ -76,17 +76,17 @@
               </router-link>
             </p>
             <p>
-              <router-link to="/article">
+              <router-link to="/article#/1">
                 流行趨勢 Blog
               </router-link>
             </p>
             <p>
-              <router-link to="/video">
+              <router-link to="/video#/1">
                 影片專區 Video
               </router-link>
             </p>
             <p>
-              <router-link to="/products">
+              <router-link to="/products#/1">
                 產品資訊 Products
               </router-link>
             </p>
@@ -101,7 +101,9 @@
           xl="1"
           class="footer-social-icon"
         >
-          <font-awesome-icon :icon="['fab','instagram']" />
+          <a href="https://www.instagram.com/sika_hairsalon/">
+            <font-awesome-icon :icon="['fab','instagram']" />
+          </a>
           <a href="https://www.facebook.com/sikahairsalon/">
             <font-awesome-icon :icon="['fab','facebook-f']" />
           </a>

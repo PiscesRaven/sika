@@ -11,7 +11,7 @@
           lg="4"
           sm="6"
           cols="12"
-          v-if="$route.name !== 'video' && $route.name !== 'products'"
+          v-if="$route.name !== 'video'"
         >
           <router-link :to="{name:path, params:{postid:list['id']}}">
             <b-card
@@ -73,7 +73,7 @@
 
         <div class="pagination-nav">
           <b-pagination-nav
-            base-url="#"
+            base-url="/"
             :link-gen="linkGen"
             :number-of-pages="totalPage"
             v-model="currentPage"
@@ -132,7 +132,7 @@ export default {
     };
   },
   methods: {
-    getList(pageNum) {
+    getList(pageNum = 1) {
       let vm = this;
       var api = "";
       for (let i = 0; i < vm.data.length; i++) {
@@ -141,8 +141,6 @@ export default {
           vm.path = vm.data[i].topath;
         }
       }
-
-      console.log("getList傳入" + pageNum);
       axios
         .get(this.api, {
           params: {
@@ -168,26 +166,15 @@ export default {
   watch: {
     currentPage: function(pageNum) {
       this.getList(pageNum);
-      console.log("currentPage 變換");
     },
     $route(to, from) {
       let vm = this;
-
-      for (let i = 0; i < this.data.length; i++) {
-        if (to.path == this.data[i].path) {
-          console.log("$route變換 to的");
-          this.getList();
-        }
-      }
-      for (let i = 0; i < this.data.length; i++) {
-        if (from.path == this.data[i].path) {
-          console.log("$route變換 from的");
-          this.getList(vm.currentPage);
-        }
+      if (to.path !== from.path) {
+        vm.getList(1);
       }
     }
   },
-  mounted() {
+  created() {
     this.getList();
   }
 };

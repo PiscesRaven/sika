@@ -12,7 +12,12 @@
         :style="{backgroundImage: 'url(' +item.image_pc+ ')'}"
       >
         <div class="designer-info-hover">
-          <p class="panel-top">{{item.name}}</p>
+          <p class="panel-top">
+            <router-link :to="{name:'designerinfo', params:{postid:item['id']}}">
+              {{item.name}}
+            </router-link>
+
+          </p>
           <p class="panel-mid"></p>
           <!-- <p class="panel-down">2018.11.11</p> -->
         </div>
@@ -153,7 +158,11 @@ export default {
       color: $submain-T-Color;
       &:hover {
         background-color: rgba(171, 171, 170, 0.6);
-        color: #fff;
+        a {
+          color: #fff;
+          text-decoration: none;
+          cursor: pointer;
+        }
         .panel-top {
           transform: translateY(-125%);
         }

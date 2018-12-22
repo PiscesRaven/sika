@@ -55,12 +55,6 @@
           <p>{{list.created_date}}</p>
           <p>{{list.description}}</p>
           <router-link :to="{name:'newspost', params:{postid:list['id']}}">more ></router-link>
-          <!-- <div class="blog-sec">
-            <h3>{{list.title}}</h3>
-            <p>{{list.created_date}}</p>
-            <p>{{list.description}}</p>
-            <router-link :to="{name:'優惠內文', params:{postid:list['id']}}">more ></router-link>
-          </div> -->
         </b-col>
         <b-col>
           <img :src="list.cover_image">
@@ -159,7 +153,6 @@
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>
-              <!-- <div v-html="item.embed_url"></div> -->
               <h1>{{item.title}}</h1>
             </div>
           </article>
@@ -178,7 +171,11 @@
         >
           <article class="settimg-img slide-TextUp">
             <img :src="list.slider_image">
-            <div class="scrolltop-txt">{{list.title}}</div>
+            <div class="scrolltop-txt">
+              <router-link :to="{name:'productspost', params:{postid:list['id']}}">
+                {{list.title}}
+              </router-link>
+            </div>
           </article>
         </b-col>
       </b-row>
@@ -755,7 +752,6 @@ address {
       rgba(68, 68, 68, 1) 100%
     );
     padding-top: 18%;
-    color: $submain-T-Color;
     position: absolute;
     top: 5px;
     left: 0;
@@ -766,6 +762,9 @@ address {
     display: block;
     transition: all 0.3s ease;
     transform: translateY(100%);
+    a {
+      color: $submain-T-Color;
+    }
     //平板
     @include pad-width {
       padding-top: 7%;

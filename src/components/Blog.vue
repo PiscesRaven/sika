@@ -80,7 +80,7 @@ export default {
         },
         {
           name: "productspost",
-          api: "https://sika.idea-infinite.com/api/v1/products"
+          api: "https://sika.idea-infinite.com/api/v1/products/content"
         }
       ]
     };
@@ -115,7 +115,6 @@ export default {
         .then(res => {
           vm.post = [];
           vm.post.push(res.data.data);
-          // console.log(res.data.data);
         });
     },
     goBack() {

@@ -175,7 +175,6 @@ export default {
       });
     },
     onSubmit(evt) {
-      // evt.preventDefault();
       let vm = this;
       if (vm.form.user_name == "") {
         vm.error.erN = true;
@@ -192,14 +191,11 @@ export default {
       if (vm.form.service == "請選擇服務") {
         vm.error.erS = true;
       }
-      // if (is_send)
       axios
         .post("https://sika.idea-infinite.com/api/v1/booking", vm.form)
 
         .then(function(res) {
           vm.resData = res.data;
-          console.log(vm.resData);
-          // vm.error = vm.resData.error;
           if (vm.resData.status == false) {
           } else {
             vm.form.user_name = "";
@@ -250,6 +246,7 @@ export default {
 .submit-success-none {
   opacity: 0;
   padding: 5px 0;
+  color: #dc190f;
 }
 .submit-success-show {
   opacity: 1;

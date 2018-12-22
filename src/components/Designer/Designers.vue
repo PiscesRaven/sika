@@ -14,7 +14,39 @@
           sm="6"
           cols="12"
         >
-          <router-link :to="{name:'designerinfo', params:{postid:list['id']}}">
+          <div class="designer-card">
+            <router-link :to="{name:'designerinfo', params:{postid:list['id']}}">
+              <img
+                :src="list.image_pc"
+                alt=""
+              >
+              <div class="designer-body">
+
+                <h1 class="designer-name">{{list.name}}</h1>
+                <p class="designer-text">
+                  {{list.description}}
+                </p>
+              </div>
+
+            </router-link>
+            <div class="card-social">
+              <a :href="list.facebook_link">
+                <img
+                  src="../../assets/icon/btn_fb_w.svg"
+                  alt=""
+                  srcset=""
+                >
+              </a>
+              <a :href="list.instagram_link">
+                <img
+                  src="../../assets/icon/btn_Instagram_w.svg"
+                  alt=""
+                  srcset=""
+                >
+              </a>
+            </div>
+          </div>
+          <!-- <router-link :to="{name:'designerinfo', params:{postid:list['id']}}">
             <b-card
               :title="list.name"
               :img-src="list.image_pc"
@@ -43,7 +75,7 @@
                 srcset=""
               >
             </a>
-          </div>
+          </div> -->
         </b-col>
       </b-row>
     </b-container>
@@ -150,73 +182,47 @@ export default {
     }
   }
 
-  .card {
-    position: relative;
-    width: 270px;
+  .designer-card {
     text-align: left;
-    margin-bottom: 30px;
-    padding-bottom: 30px;
-    border: none;
-    border-radius: 0px;
-    //平板
-    @include pad-width {
-      width: auto;
+    img {
+      width: 100%;
     }
-    //小平板
-    @include small-pad-width {
-      width: auto;
-    }
-    //手機
-    @include phone-width {
-      width: auto;
-      padding-bottom: 4%;
-    }
-    .card-body {
+    > a {
       color: $submain-T-Color;
       background: #707070;
       text-decoration: none;
       min-height: 135px;
-
-      .card-title {
-        text-align: center;
-        font-size: 20px;
-        font-weight: 700;
-      }
-      .card-day {
-        color: #707070;
-      }
-      .card-text {
-        text-align: left;
-        overflow: hidden;
-        -webkit-line-clamp: 1;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        line-height: 20px;
-      }
+      display: block;
+    }
+    margin-bottom: 30px;
+    //手機
+    @include phone-width {
+      padding-bottom: 4%;
+    }
+    .designer-name {
+      text-align: center;
+      margin-bottom: 0.75rem;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .designer-text {
+      text-align: left;
+      overflow: hidden;
+      -webkit-line-clamp: 1;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      line-height: 20px;
+    }
+    .designer-body {
+      padding: 1.25rem;
     }
   }
   .card-social {
     display: flex;
     justify-content: center;
-    position: relative;
-    bottom: 28%;
-    //平板
-    @include pad-width {
-      bottom: 23.5%;
-    }
-    //小平板
-    @include small-pad-width {
-      bottom: 25%;
-    }
-    //手機
-    @include phone-width {
-      padding: 15px;
-      bottom: 18.5%;
-    }
-    @media screen and (max-width: 480px) {
-      bottom: 21%;
-    }
+    background: #707070;
+    height: 50px;
     > a {
       display: block;
       margin: 5px 15px;

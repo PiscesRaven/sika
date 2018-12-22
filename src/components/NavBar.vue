@@ -172,11 +172,11 @@ export default {
     display: inline-flex;
     //小平板
     @include small-pad-width {
-      width: 50%;
+      width: 100%;
     }
     //手機
     @include phone-width {
-      width: 75%;
+      width: 100%;
     }
 
     .nav-items {
@@ -212,17 +212,45 @@ export default {
       }
     }
   }
-  @include pad-and-phone-width {
+
+  @include small-pad-width {
     .navbar-brand {
       display: none;
     }
     .nav-bar {
       display: inline-block;
       padding-left: 13px;
-      height: 600px;
+      height: 100vh;
       padding-top: 114px;
       opacity: 0.9;
-      background: $Menu-Bg-Color;
+      background: linear-gradient(
+        to right,
+        rgba(41, 40, 39, 1) 0%,
+        rgba(41, 40, 39, 1) 50%,
+        rgba(255, 255, 255, 0) 50%
+      );
+      position: fixed;
+      top: 0;
+      left: -100%;
+      transition: 1s;
+    }
+  }
+  @include phone-width {
+    .navbar-brand {
+      display: none;
+    }
+    .nav-bar {
+      display: inline-block;
+      padding-left: 13px;
+      height: 100vh;
+      padding-top: 114px;
+      opacity: 0.9;
+      background: linear-gradient(
+        to right,
+        rgba(41, 40, 39, 1) 0%,
+        rgba(41, 40, 39, 1) 75%,
+        rgba(255, 255, 255, 0) 75%
+      );
       position: fixed;
       top: 0;
       left: -100%;
