@@ -50,7 +50,6 @@
 
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import Card from "@/components/SectionImg/Card.vue";
@@ -72,15 +71,15 @@ export default {
       data: [
         {
           name: "newspost",
-          api: "https://sika.idea-infinite.com/api/v1/news/content"
+          api: `${process.env.VUE_APP_APIPATH}/news/content`
         },
         {
           name: "articlepost",
-          api: "https://sika.idea-infinite.com/api/v1/article/content"
+          api: `${process.env.VUE_APP_APIPATH}/article/content`
         },
         {
           name: "productspost",
-          api: "https://sika.idea-infinite.com/api/v1/products/content"
+          api: `${process.env.VUE_APP_APIPATH}/service/content`
         }
       ]
     };
@@ -129,7 +128,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/scss/global.scss";
+
 .section-img {
   background: url("../../public/img/Image.jpg") center no-repeat;
   height: 410px;

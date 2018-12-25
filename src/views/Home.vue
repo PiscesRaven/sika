@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeBranner />
+    <HomeBranner :image="imgshow.banner" />
     <b-container
       fluid
       class="imgshow-container"
@@ -169,14 +169,14 @@
           v-for="list in productRow"
           class="pd-0"
         >
-          <article class="settimg-img slide-TextUp">
-            <img :src="list.slider_image">
-            <div class="scrolltop-txt">
-              <router-link :to="{name:'productspost', params:{postid:list['id']}}">
+          <router-link :to="{name:'productspost', params:{postid:list['id']}}">
+            <article class="settimg-img slide-TextUp">
+              <img :src="list.slider_image">
+              <div class="scrolltop-txt">
                 {{list.title}}
-              </router-link>
-            </div>
-          </article>
+              </div>
+            </article>
+          </router-link>
         </b-col>
       </b-row>
     </b-container fluid>
@@ -275,6 +275,7 @@
         </b-col>
       </b-row>
     </b-container fluid>
+
   </div>
 </template>
 
@@ -295,12 +296,12 @@ export default {
   data() {
     return {
       Api: {
-        NewsApi: "https://sika.idea-infinite.com/api/v1/news",
-        StylistApi: "https://sika.idea-infinite.com/api/v1/designer",
-        BlogApi: "https://sika.idea-infinite.com/api/v1/article/list",
-        ProductApi: "https://sika.idea-infinite.com/api/v1/products",
-        DisplayApi: "https://sika.idea-infinite.com/api/v1/display",
-        VideoApi: "https://sika.idea-infinite.com/api/v1/video"
+        NewsApi: `${process.env.VUE_APP_APIPATH}/news`,
+        StylistApi: `${process.env.VUE_APP_APIPATH}/designer`,
+        BlogApi: `${process.env.VUE_APP_APIPATH}/article/list`,
+        ProductApi: `${process.env.VUE_APP_APIPATH}/service/list`,
+        DisplayApi: `${process.env.VUE_APP_APIPATH}/display`,
+        VideoApi: `${process.env.VUE_APP_APIPATH}/video`
       },
       homenews: [],
       imgshow: [],
@@ -366,7 +367,6 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "../assets/scss/global.scss";
 .imgshow-container {
   margin-bottom: 110px;
   @include pad-width {
@@ -384,6 +384,7 @@ export default {
       overflow: hidden;
       img {
         display: block;
+        width: 100%;
       }
       &:hover {
         div {
@@ -594,6 +595,12 @@ export default {
     min-height: 600px;
     margin-bottom: 5%;
   }
+  img {
+    //平板以下
+    @include pad-and-phone-width {
+      display: none;
+    }
+  }
   .booking-form {
     max-width: 480px;
     .input-row {
@@ -640,11 +647,11 @@ export default {
   }
   //小平板
   @include small-pad-width {
-    min-height: 1250px;
+    min-height: 750px;
   }
   //手機
   @include phone-width {
-    min-height: 1050px;
+    min-height: 750px;
   }
 }
 .blog-video-sec {
@@ -762,9 +769,7 @@ address {
     display: block;
     transition: all 0.3s ease;
     transform: translateY(100%);
-    a {
-      color: $submain-T-Color;
-    }
+    color: $submain-T-Color;
     //平板
     @include pad-width {
       padding-top: 7%;

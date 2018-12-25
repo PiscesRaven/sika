@@ -109,24 +109,24 @@ export default {
           path: "/news", //現在路徑
           name: "news", //這個路徑name
           topath: "newspost", //前往的路徑
-          api: "https://sika.idea-infinite.com/api/v1/news/list"
+          api: `${process.env.VUE_APP_APIPATH}/news/list`
         },
         {
           path: "/article",
           name: "article",
           topath: "articlepost",
-          api: "https://sika.idea-infinite.com/api/v1/article/list"
+          api: `${process.env.VUE_APP_APIPATH}/article/list`
         },
         {
           path: "/products",
           name: "products",
           topath: "productspost",
-          api: "https://sika.idea-infinite.com/api/v1/products"
+          api: `${process.env.VUE_APP_APIPATH}/service/list`
         },
         {
           path: "/video",
           name: "video",
-          api: "https://sika.idea-infinite.com/api/v1/video"
+          api: `8${process.env.VUE_APP_APIPATH}/video`
         }
       ]
     };
@@ -182,7 +182,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/scss/global.scss";
 .news-row {
   max-width: 900px;
   margin: auto;

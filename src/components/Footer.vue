@@ -160,8 +160,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/scss/global.scss";
-
 .footer {
   background: $main-Bg-Color;
   color: $submain-T-Color;
@@ -262,7 +260,6 @@ export default {
           @include pad-width {
             margin-left: 0;
             margin-top: 12px;
-            width: 50%;
           }
           @include small-pad-width {
             margin-left: 0;
@@ -272,7 +269,6 @@ export default {
           @include phone-width {
             margin-left: 0;
             margin-top: 12px;
-            width: 50%;
           }
         }
       }

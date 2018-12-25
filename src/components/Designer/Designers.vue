@@ -97,7 +97,7 @@ export default {
   },
   methods: {
     getList() {
-      axios.get("https://sika.idea-infinite.com/api/v1/designer").then(res => {
+      axios.get(`${process.env.VUE_APP_APIPATH}/designer`).then(res => {
         // console.log(res.data.data)
         this.DesignerList = res.data.data;
       });
@@ -206,7 +206,7 @@ export default {
       font-weight: 700;
     }
     .designer-text {
-      text-align: left;
+      text-align: center;
       overflow: hidden;
       -webkit-line-clamp: 1;
       text-overflow: ellipsis;
@@ -242,5 +242,11 @@ export default {
   }
   width: 100%;
   margin-bottom: 140px;
+}
+.page-title {
+  //平板以下
+  @include pad-and-phone-width {
+    font-size: 25px;
+  }
 }
 </style>

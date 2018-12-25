@@ -77,6 +77,7 @@ selectStyle:'All'}"
             />
           </div> -->
         </b-col>
+
       </b-row>
     </b-container fluid>
   </div>
@@ -96,8 +97,8 @@ export default {
         selectStyle: "All"
       },
       Api: {
-        PhotoWallApi: "https://sika.idea-infinite.com/api/v1/hair/style",
-        StyleListApi: "https://sika.idea-infinite.com/api/v1/hair/type"
+        PhotoWallApi: `${process.env.VUE_APP_APIPATH}/hair/style`,
+        StyleListApi: `${process.env.VUE_APP_APIPATH}/hair/type`
       },
       desActive: false,
       hairActive: false,
@@ -168,8 +169,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/scss/global.scss";
-
 .section-img {
   background: url("../../public/img/img_Work.jpg") center no-repeat;
   height: 410px;
@@ -289,10 +288,7 @@ export default {
   > div {
     position: relative;
     margin: auto;
-    //電腦版
-    @include pc-width {
-      width: 270px;
-    }
+
     //平板
     @include pad-width {
       width: 270px;
@@ -325,5 +321,11 @@ export default {
   }
   width: 100%;
   margin: 70px auto;
+}
+.page-title {
+  //平板以下
+  @include pad-and-phone-width {
+    font-size: 25px;
+  }
 }
 </style>

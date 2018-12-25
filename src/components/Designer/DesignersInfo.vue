@@ -130,7 +130,7 @@ export default {
     getList() {
       let vm = this;
       axios
-        .get("https://sika.idea-infinite.com/api/v1/designer/content", {
+        .get(`${process.env.VUE_APP_APIPATH}/designer/content`, {
           params: {
             id: vm.page
           }

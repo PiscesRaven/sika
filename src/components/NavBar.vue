@@ -35,37 +35,37 @@
           </span></li>
         <li class="nav-items">
           <router-link to="/news">
-            優惠資訊<span>News</span>
+            優惠資訊<p>News</p>
           </router-link>
         </li>
         <li class="nav-items">
           <router-link to="/hairstyle">
-            髮型專區 <span>Hair</span>
+            髮型專區 <p>Hair</p>
           </router-link>
         </li>
         <li class="nav-items">
           <router-link to="/designer">
-            設計師 <span>Stylist</span>
+            設計師 <p>Stylist</p>
           </router-link>
         </li>
         <li class="nav-items">
           <router-link to="/article">
-            流行趨勢 <span>Blog</span>
+            流行趨勢 <p>Blog</p>
           </router-link>
         </li>
         <li class="nav-items">
           <router-link to="/video">
-            影片專區 <span>Video</span>
+            影片專區 <p>Video</p>
           </router-link>
         </li>
         <li class="nav-items">
           <router-link to="/products">
-            產品資訊 <span>Products</span>
+            產品資訊 <p>Products</p>
           </router-link>
         </li>
         <li class="nav-items">
           <router-link to="/booking">
-            線上預約<span> Booking </span>
+            線上預約<p> Booking </p>
           </router-link>
         </li>
       </ul>
@@ -86,6 +86,11 @@ export default {
   methods: {
     select() {
       this.isActive = !this.isActive;
+      if (this.isActive === true) {
+        document.body.classList.add("modal-open");
+      } else {
+        document.body.classList.remove("modal-open");
+      }
     }
   }
 };
@@ -93,7 +98,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/scss/global.scss";
 .navbar {
   text-align: left;
   display: flex;
@@ -123,7 +127,7 @@ export default {
     }
     //平板
     @include pad-width {
-      padding-right: 0px;
+      display: none;
     }
 
     .router-link-active {
@@ -182,6 +186,8 @@ export default {
     .nav-items {
       &:nth-child(n + 2) {
         margin: 37px 15px;
+        height: 30px;
+        overflow: hidden;
         //平板
         @include pad-width {
           margin: 37px 10px;
@@ -189,25 +195,33 @@ export default {
         //平板以下
         @include pad-and-phone-width {
           margin: 11px 15px;
-        }
-        span {
-          //電腦版
-          @include pc-width {
-            display: none;
-          }
-          //平板
-          @include pad-width {
-            display: none;
-          }
+          width: 30%;
         }
       }
       > a {
-        display: inline-block;
-        line-height: 30px;
         color: $submain-T-Color;
+        display: block;
         text-decoration: none;
+        transition: 0.3s;
+        line-height: 30px;
+
         &:hover {
-          border-bottom: 1px solid #fff;
+          transform: translateY(-50%);
+          //平板以下
+          @include pad-and-phone-width {
+            transform: translateY(0%);
+          }
+          p {
+            box-sizing: border-box;
+            border-bottom: 3px solid #fff;
+            transform: translateY(0%);
+          }
+        }
+      }
+      p {
+        //平板以下
+        @include pad-and-phone-width {
+          display: none;
         }
       }
     }

@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <b-container fluid>
-      <b-row class="section-img">
-        <h1 class="page-title">{{title}}</h1>
-      </b-row>
-    </b-container fluid>
-  </div>
+  <b-container fluid>
+    <b-row class="section-img">
+      <h1 class="page-title">{{title}}</h1>
+    </b-row>
+  </b-container fluid>
 </template>
 
 <script>
@@ -28,13 +26,21 @@ export default {
 <style scoped lang="scss">
 @import "../../assets/scss/global.scss";
 .section-img {
-  background: url("../../../public/img/Image.jpg") right no-repeat;
+  background: url("../../../public/img/Image.jpg") center no-repeat;
   background-size: cover;
   height: 410px;
   margin-bottom: 125px;
   //平板以下
   @include pad-and-phone-width {
-    background: url("../../../public/img/Image_pad.jpg") right no-repeat;
+    background: url("../../../public/img/Image_pad.jpg") top right no-repeat;
+    height: 288px;
+    margin-bottom: 10%;
+  }
+  .page-title {
+    //平板以下
+    @include pad-and-phone-width {
+      font-size: 25px;
+    }
   }
 }
 </style>

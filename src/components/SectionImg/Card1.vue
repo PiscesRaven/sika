@@ -44,4 +44,10 @@ export default {
     height: 288px;
   }
 }
+.page-title {
+  //平板以下
+  @include pad-and-phone-width {
+    font-size: 25px;
+  }
+}
 </style>

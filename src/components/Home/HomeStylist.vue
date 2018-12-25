@@ -1,25 +1,22 @@
 <template>
   <div>
-
     <!-- Swiper -->
     <swiper
       :options="swiperOption"
       ref="mySwiper"
+      v-if="clientWidth(swiperStatus)"
     >
       <!-- slides -->
       <swiper-slide
         v-for="item in stylist"
-        :style="{backgroundImage: 'url(' +item.image_pc+ ')'}"
+        :style="{backgroundImage: 'url(' + item.image_pc+ ')'}"
       >
         <div class="designer-info-hover">
-          <p class="panel-top">
+          <p class="panel-text">
             <router-link :to="{name:'designerinfo', params:{postid:item['id']}}">
               {{item.name}}
             </router-link>
-
           </p>
-          <p class="panel-mid"></p>
-          <!-- <p class="panel-down">2018.11.11</p> -->
         </div>
       </swiper-slide>
       <!-- Optional controls -->
@@ -48,7 +45,22 @@
         >
       </div>
     </swiper>
-
+    <div v-else>
+      <b-row>
+        <b-col
+          v-for="item in stylist"
+          cols="6"
+          class="mo-info-hover"
+        >
+          <img :src="item.image_pc">
+          <p class="panel-text">
+            <router-link :to="{name:'designerinfo', params:{postid:item['id']}}">
+              {{item.name}}
+            </router-link>
+          </p>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -60,12 +72,10 @@ export default {
   name: "carrousel",
   data() {
     return {
-      stylistApi: "https://sika.idea-infinite.com/api/v1/designer",
+      swiperStatus: true,
+      stylistApi: "${process.env.VUE_APP_APIPATH}/designer",
       stylist: [],
       swiperOption: {
-        // some swiper options/callbacks
-        // 所有的参数同 swiper 官方 api 参数
-        // ...
         slidesPerView: 4,
         spaceBetween: 30,
         slidesPerGroup: 3,
@@ -78,20 +88,19 @@ export default {
         breakpoints: {
           // // when window width is >= 320px
           320: {
-            slidesPerView: 1,
-            spaceBetween: 20,
+            slidesPerView: 4,
+            spaceBetween: 5,
             slidesPerGroup: 1
           },
           // when window width is >= 480px
           480: {
-            slidesPerView: 1,
-            spaceBetween: 20,
-
+            slidesPerView: 4,
+            spaceBetween: 5,
             slidesPerGroup: 1
           },
           // when window width is >= 640px
           640: {
-            slidesPerView: 3,
+            slidesPerView: 4,
             spaceBetween: 30
           },
           992: {
@@ -105,12 +114,16 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
+    },
+    clientWidth() {
+      if (document.body.offsetWidth <= 768) {
+        return (this.swiperStatus = !this.swiperStatus);
+      } else {
+        return (this.swiperStatus = this.swiperStatus);
+      }
     }
   },
   mounted() {
-    // current swiper instance
-    // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
-    // console.log('this is current swiper instance object', this.swiper)
     this.swiper.slideTo(0, 1000, false);
   },
   created() {
@@ -118,16 +131,12 @@ export default {
   },
   methods: {
     getStylist() {
-      // axios.get(stylistApi).then(res => {
-      //   this.stylist = res.data.data
-      // })
-
-      axios.get("https://sika.idea-infinite.com/api/v1/designer").then(res => {
-        // console.log(res.data.data)
+      axios.get(`${process.env.VUE_APP_APIPATH}/designer`).then(res => {
         this.stylist = res.data.data;
       });
     }
-  }
+  },
+  watch: {}
 };
 </script>
 
@@ -147,50 +156,33 @@ export default {
     img {
       height: 100%;
     }
-    .designer-info-hover {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  }
+  .designer-info-hover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+    flex-direction: column;
+    color: $submain-T-Color;
+    &:hover {
+      background-color: rgba(171, 171, 170, 0.6);
+
+      .panel-text {
+        transform: translateY(-50%);
+      }
+    }
+    .panel-text {
+      transform: translateY(-1500%);
       transition: transform 0.5s;
-      flex-direction: column;
-      color: $submain-T-Color;
-      &:hover {
-        background-color: rgba(171, 171, 170, 0.6);
-        a {
-          color: #fff;
-          text-decoration: none;
-          cursor: pointer;
-        }
-        .panel-top {
-          transform: translateY(-125%);
-        }
-        .panel-mid {
-          opacity: 1;
-        }
-        .panel-down {
-          transform: translateY(125%);
-        }
-      }
-      .panel-top {
-        transform: translateY(-1500%);
-        transition: transform 0.5s;
-      }
-      .panel-mid {
-        transition: transform 0.5s;
-        width: 80%;
-        height: 1px;
-        opacity: 0;
-        background: #fff;
-      }
-      .panel-down {
-        transition: transform 0.5s;
-        transform: translateY(1500%);
+      a {
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
       }
     }
   }
-
   .swiper-button-prev,
   .swiper-container-rtl .swiper-button-next,
   .swiper-button-next,
