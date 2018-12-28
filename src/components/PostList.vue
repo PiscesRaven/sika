@@ -1,18 +1,12 @@
 <template>
   <div>
-    <Card v-if="$route.name == 'news'" />
-    <Card1 v-if="$route.name == 'article'" />
-    <Card2 v-if="$route.name == 'video'" />
-    <Card3 v-if="$route.name == 'Service'" />
+    <Card v-if="$route.name == 'news'"/>
+    <Card1 v-if="$route.name == 'article'"/>
+    <Card2 v-if="$route.name == 'video'"/>
+    <Card3 v-if="$route.name == 'service'"/>
     <b-container class="container-body">
       <b-row class="news-row">
-        <b-col
-          v-for="list in PostList"
-          lg="4"
-          sm="6"
-          cols="12"
-          v-if="$route.name !== 'video'"
-        >
+        <b-col v-for="list in PostList" lg="4" sm="6" cols="12" v-if="$route.name !== 'video'">
           <router-link :to="{name:path, params:{postid:list['id']}}">
             <b-card
               :title="list.title"
@@ -22,9 +16,7 @@
               tag="article"
             >
               <p class="card-day">{{list.created_date}}</p>
-              <p class="card-text">
-                {{list.description}}
-              </p>
+              <p class="card-text">{{list.description}}</p>
             </b-card>
           </router-link>
         </b-col>
