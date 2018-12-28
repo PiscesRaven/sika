@@ -86,8 +86,8 @@
               </router-link>
             </p>
             <p>
-              <router-link to="/products#/1">
-                產品資訊 Products
+              <router-link to="/service#/1">
+                服務項目 Service
               </router-link>
             </p>
             <p>

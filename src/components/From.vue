@@ -312,7 +312,6 @@ export default {
     height: 57px;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     background-color: #52504d;
-    margin-top: 100px;
     //平板
     @include pad-width {
       width: 100%;

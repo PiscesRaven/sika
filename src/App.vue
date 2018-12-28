@@ -17,25 +17,28 @@
       <Footer />
     </transition>
     <!--Loading -->
-    <div
-      class="el-loading-mask is-fullscreen"
-      style="z-index: 2000;"
-      v-show="timer"
+    <transition
+      name="fade"
+      mode="out-in"
+      appear
     >
-      <div class="el-loading-spinner">
-        <img
-          src="../public/img/navbar_logo.svg"
-          alt=""
-        >
-        <p class="el-loading-text">loading</p>
+      <div
+        class="el-loading-mask is-fullscreen"
+        style="z-index: 2000;"
+        v-show="timer"
+      >
+        <div class="el-loading-spinner">
+          <img
+            src="../public/img/navbar_logo.svg"
+            alt=""
+          >
+        </div>
       </div>
-    </div>
-
+    </transition>
   </div>
 </template>
 
 <script async src="./assets/embed"></script>
-
 <script>
 // @ is an alias to /src
 import NavBar from "@/components/NavBar.vue";
@@ -51,37 +54,36 @@ export default {
   },
   data() {
     return {
-      timer: true
+      timer: false
     };
   },
   created() {
+    this.timer = true;
     setTimeout(() => {
       this.timer = false;
-    }, 2500);
+    }, 2000);
   },
   watch: {
     $route(to, from) {
-      this.timer = true;
-
-      if (to.path !== from.path) {
+      if (to.name == "home") {
+        this.timer = true;
         setTimeout(() => {
           this.timer = false;
-        }, 2500);
+        }, 2000);
       }
     }
   }
 };
 </script>
+
 <style lang="scss">
 @import "@/assets/scss/restscss.scss"; // reset
-@import "@/assets/scss/global.scss";
-
-// RWD 響應式尺寸
-.fz-tw {
-  font-family: "NotoSansCJKtc";
-}
 body.modal-open {
   overflow: hidden;
+}
+body.box-open {
+  overflow: hidden;
+  background: #000;
 }
 
 @font-face {
@@ -103,6 +105,8 @@ a {
 }
 
 img {
+  display: block;
+  margin: auto;
   height: auto;
   max-width: 100%;
 }
@@ -113,7 +117,23 @@ img {
 
 .carousel-item {
   > img {
-    height: 100vh !important;
+    height: 100vh;
+    //電腦版
+    @include pc-width {
+      height: auto;
+    }
+    //平板
+    @include pad-width {
+      height: auto;
+    }
+    //小平板
+    @include small-pad-width {
+      height: auto;
+    }
+    //手機
+    @include phone-width {
+      height: auto;
+    }
   }
 }
 .page-title {
@@ -180,14 +200,6 @@ img {
       height: 57px;
     }
   }
-  .custom-select {
-    // background: gold;
-    option {
-      &:hover {
-        background: red;
-      }
-    }
-  }
 }
 
 .fade-enter-active,
@@ -235,9 +247,11 @@ img {
 .el-loading-parent--relative {
   position: relative !important;
 }
+
 .el-loading-parent--hidden {
   overflow: hidden !important;
 }
+
 .el-loading-mask {
   position: absolute;
   z-index: 2000;
@@ -247,79 +261,48 @@ img {
   right: 0;
   bottom: 0;
   left: 0;
-  -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
+  &.is-fullscreen {
+    position: fixed;
+    .el-loading-spinner {
+      margin-top: -25px;
+      .circular {
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
 }
-.el-loading-mask.is-fullscreen {
-  position: fixed;
-}
-.el-loading-mask.is-fullscreen .el-loading-spinner {
-  margin-top: -25px;
-}
-.el-loading-mask.is-fullscreen .el-loading-spinner .circular {
-  height: 50px;
-  width: 50px;
-}
+
 .el-loading-spinner {
   top: 25%;
   margin-top: -21px;
   width: 100%;
   text-align: center;
   position: absolute;
+  .el-loading-text {
+    color: #ffffff;
+    margin: 3px 0;
+    font-size: 14px;
+  }
+  .circular {
+    height: 42px;
+    width: 42px;
+    animation: loading-rotate 2s linear infinite;
+  }
 }
-.el-loading-spinner .el-loading-text {
-  color: #ffffff;
-  margin: 3px 0;
-  font-size: 14px;
-}
-.el-loading-spinner .circular {
-  height: 42px;
-  width: 42px;
-  -webkit-animation: loading-rotate 2s linear infinite;
-  animation: loading-rotate 2s linear infinite;
-}
-.el-loading-spinner .path {
-  -webkit-animation: loading-dash 1.5s ease-in-out infinite;
-  animation: loading-dash 1.5s ease-in-out infinite;
-  stroke-dasharray: 90, 150;
-  stroke-dashoffset: 0;
-  stroke-width: 2;
-  stroke: #409eff;
-  stroke-linecap: round;
-}
-.el-loading-spinner i {
-  color: #409eff;
-}
+
 .el-loading-fade-enter,
 .el-loading-fade-leave-active {
   opacity: 0;
 }
-@-webkit-keyframes loading-rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
+
 @keyframes loading-rotate {
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
-@-webkit-keyframes loading-dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -40px;
-  }
-  100% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -120px;
-  }
-}
+
 @keyframes loading-dash {
   0% {
     stroke-dasharray: 1, 200;

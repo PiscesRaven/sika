@@ -33,9 +33,9 @@
           cols="12"
         >
           <h2 class="home-sec-title">
-            優惠資訊
+            關於希卡
             <span class="en-title">
-              News
+              Sika
             </span>
           </h2>
         </b-col>
@@ -45,8 +45,8 @@
         class="home-news-row"
       >
         <b-col
-          lg="6"
-          md="6"
+          lg="8"
+          md="8"
           sm="12"
           cols="12"
           class="blog-sec"
@@ -54,10 +54,17 @@
           <h3>{{list.title}}</h3>
           <p>{{list.created_date}}</p>
           <p>{{list.description}}</p>
-          <router-link :to="{name:'newspost', params:{postid:list['id']}}">more ></router-link>
+          <router-link :to="{name:'aboutsika'}">more ></router-link>
         </b-col>
         <b-col>
-          <img :src="list.cover_image">
+          <!--  <div
+            class="news-img"
+            :style="{backgroundImage:'url('+list.cover_image +')'}"
+          >
+      <img :src="list.cover_image" >
+          </div> -->
+          <div class="news-img">
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -115,10 +122,12 @@
           v-for="list in blog"
         >
           <div class="home-article">
-            <img :src="list.cover_image">
-            <h3>{{list.title}}</h3>
-            <h4>{{list.description}}</h4>
-            <router-link :to="{name:'articlepost', params:{postid:list['id']}}">more ></router-link>
+            <router-link :to="{name:'articlepost', params:{postid:list['id']}}">
+              <img :src="list.cover_image">
+              <h3>{{list.title}}</h3>
+              <h4>{{list.description}}</h4>
+              more >
+            </router-link>
           </div>
         </b-col>
       </b-row>
@@ -169,7 +178,7 @@
           v-for="list in productRow"
           class="pd-0"
         >
-          <router-link :to="{name:'productspost', params:{postid:list['id']}}">
+          <router-link :to="{name:'servicepost', params:{postid:list['id']}}">
             <article class="settimg-img slide-TextUp">
               <img :src="list.slider_image">
               <div class="scrolltop-txt">
@@ -247,7 +256,6 @@
 
         </b-col>
       </b-row>
-
     </b-container>
     <b-container
       fluid
@@ -262,7 +270,7 @@
           <img
             src="../../public/img/img_booking_home.jpg"
             alt=""
-            srcset=""
+            class="booking-img"
           >
         </b-col>
         <b-col
@@ -275,7 +283,6 @@
         </b-col>
       </b-row>
     </b-container fluid>
-
   </div>
 </template>
 
@@ -405,7 +412,7 @@ export default {
         right: 0;
         background: url("../assets/icon/icon_field.png") no-repeat right;
         transition: 0.3s all ease-in;
-        height: 37%;
+        height: 180px;
         width: 100%;
         @include pad-width {
           display: none;
@@ -530,9 +537,20 @@ export default {
   @include pad-and-phone-width {
     margin-bottom: 50px;
   }
-  img {
+  .news-img {
+    width: 100%;
+    height: 100%;
+    background-image: url("https://scontent.ftpe7-2.fna.fbcdn.net/v/t1.0-9/41682291_222913548582908_2714771694483931136_n.jpg?_nc_cat=104&_nc_ht=scontent.ftpe7-2.fna&oh=d01369dd4eb065293a98c209bb21334e&oe=5CD01263");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
     margin-top: -70px;
     box-shadow: 50px -50px 0px 0px#e5e5e5;
+
+    // margin-top: -70px;
+    // box-shadow: 50px -50px 0px 0px#e5e5e5;
+    // border-radius: 50%;
     //平板
     @include pad-width {
       margin-top: -30px;
@@ -540,15 +558,16 @@ export default {
     }
     //小平板
     @include small-pad-width {
+      height: 510px;
       margin-top: 0px;
       margin-bottom: 50px;
-
       box-shadow: none;
     }
     //手機
     @include phone-width {
+      height: 100vw;
       margin-top: 0px;
-      margin-top: 50px;
+      margin-bottom: 50px;
       box-shadow: none;
     }
   }
@@ -580,10 +599,10 @@ export default {
   background: url("../../public/img/bg_stylist.jpg") no-repeat bottom;
   background-size: cover;
   background-attachment: fixed;
-  margin-bottom: 240px;
+  margin-bottom: 130px;
   // 電腦
   @include pc-width {
-    min-height: 700px;
+    min-height: 800px;
     margin-bottom: 10%;
   } // 平板
   @include pad-width {
@@ -595,7 +614,7 @@ export default {
     min-height: 600px;
     margin-bottom: 5%;
   }
-  img {
+  .booking-img {
     //平板以下
     @include pad-and-phone-width {
       display: none;
@@ -672,30 +691,38 @@ export default {
 
     // 平板
     @include pad-width {
-      margin-bottom: 10%;
+      margin-bottom: 80px;
     }
     //平板以下
     @include pad-and-phone-width {
-      margin-bottom: 5%;
+      margin-bottom: 60px;
     }
-    img {
-      margin-bottom: 30px;
-    }
-    h3 {
-      letter-spacing: 2.5px;
-      margin-bottom: 6px;
-      font-size: 25px;
-    }
-    h4 {
-      overflow: hidden;
-      -webkit-line-clamp: 1;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      letter-spacing: 0.8px;
-      margin-bottom: 7px;
-      width: 80%;
-      line-height: 30px;
+    a {
+      color: $main-T-Color;
+      &:hover {
+        text-decoration: none;
+      }
+      img {
+        margin-bottom: 30px;
+      }
+      h3 {
+        letter-spacing: 2.5px;
+        margin-bottom: 6px;
+        font-size: 25px;
+        color: $main-T-Color;
+      }
+      h4 {
+        overflow: hidden;
+        -webkit-line-clamp: 1;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        letter-spacing: 0.8px;
+        margin-bottom: 7px;
+        width: 80%;
+        line-height: 30px;
+        color: $main-T-Color;
+      }
     }
     .video-section {
       margin: 20px auto;

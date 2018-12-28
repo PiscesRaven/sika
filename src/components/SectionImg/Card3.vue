@@ -13,11 +13,11 @@ export default {
   name: "product title",
   data() {
     return {
-      title: "產品資訊 Products"
+      title: "服務項目 Service"
     };
   },
   created() {
-    if (this.$route.name == "productspost") {
+    if (this.$route.name == "servicepost") {
       this.title = "";
     }
   }
@@ -26,8 +26,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../../assets/scss/global.scss";
-
 .section-img {
   background: url("../../../public/img/img_Products.jpg") center no-repeat;
   height: 410px;

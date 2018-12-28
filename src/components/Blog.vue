@@ -3,6 +3,7 @@
     <!-- 文章區title圖片 -->
     <Card v-if="this.$route.name == 'newspost'" />
     <Card1 v-if="this.$route.name == 'articlepost'" />
+    <Card3 v-if="this.$route.name == 'servicepost'" />
     <b-container>
       <b-row
         v-for="article in post"
@@ -58,7 +59,7 @@ import Card2 from "@/components/SectionImg/Card2.vue";
 import Card3 from "@/components/SectionImg/Card3.vue";
 
 export default {
-  name: "article",
+  name: "ArticleContact",
   components: {
     Card,
     Card1,
@@ -78,8 +79,8 @@ export default {
           api: `${process.env.VUE_APP_APIPATH}/article/content`
         },
         {
-          name: "productspost",
-          api: `${process.env.VUE_APP_APIPATH}/service/content`
+          name: "servicepost",
+          api: `${process.env.VUE_APP_APIPATH}/products/content`
         }
       ]
     };
@@ -128,7 +129,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
 .section-img {
   background: url("../../public/img/Image.jpg") center no-repeat;
   height: 410px;

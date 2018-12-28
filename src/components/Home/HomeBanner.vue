@@ -1,5 +1,4 @@
 <template>
-  <div>
     <b-carousel
       id="carousel1"
       style="text-shadow: 1px 1px 2px #333;"
@@ -19,7 +18,6 @@
         :img-src="mediaWidth(item)"
       ></b-carousel-slide>
     </b-carousel>
-  </div>
 </template>
 
 <script>
@@ -31,10 +29,15 @@ export default {
     return {
       slide: 0,
       sliding: null,
-      slide2: 0,
-      sliding2: null,
-      banner: this.image
+      banner: this.image,
+      window_w: 0
     };
+  },
+  mounted() {
+    this.window_w = window.innerWidth;
+    window.addEventListener("resize", () => {
+      this.window_w = window.innerWidth;
+    });
   },
   methods: {
     onSlideStart(slide) {
@@ -44,7 +47,7 @@ export default {
       this.sliding = false;
     },
     mediaWidth(item) {
-      if (document.body.offsetWidth < 768) {
+      if (this.window_w < 768) {
         return item.image_mobile;
       } else {
         return item.image_pc;
@@ -55,5 +58,4 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../../assets/scss/global.scss";
 </style>

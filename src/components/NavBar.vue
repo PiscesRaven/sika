@@ -59,8 +59,8 @@
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/products">
-            產品資訊 <p>Products</p>
+          <router-link to="/service">
+            服務項目 <p>Service</p>
           </router-link>
         </li>
         <li class="nav-items">
@@ -80,15 +80,23 @@ export default {
   name: "NavBar",
   data() {
     return {
-      isActive: false
+      isActive: false,
+      window_w: 0
     };
+  },
+  mounted() {
+    this.window_w = window.innerWidth;
+    window.addEventListener("resize", () => {
+      this.window_w = window.innerWidth;
+    });
   },
   methods: {
     select() {
       this.isActive = !this.isActive;
-      if (this.isActive === true) {
+      if (this.window_w <= 768 && this.isActive == true) {
         document.body.classList.add("modal-open");
-      } else {
+      }
+      if (this.window_w <= 768 && this.isActive == false) {
         document.body.classList.remove("modal-open");
       }
     }
@@ -121,15 +129,15 @@ export default {
   );
   .navbar-brand {
     padding-right: 130px;
+    margin-right: 0px;
     //電腦版
     @include pc-width {
       padding-right: 20px;
     }
     //平板
     @include pad-width {
-      display: none;
+      padding-right: 60px;
     }
-
     .router-link-active {
       border: none;
       img {
@@ -150,10 +158,19 @@ export default {
     }
   }
   .router-link-active {
-    border-bottom: 1px solid #fff;
+    border-bottom: 3px solid #fff;
+    line-height: 30px;
+    transform: translateY(-50%);
+    //平板以下
+    @include pad-and-phone-width {
+      transform: translateY(0%);
+    }
   }
   .rwd-home {
     display: none;
+    &.router-link-active {
+      transform: none;
+    }
     //平板
     @include pad-width {
       img {

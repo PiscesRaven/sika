@@ -3,7 +3,7 @@
     <Card v-if="$route.name == 'news'" />
     <Card1 v-if="$route.name == 'article'" />
     <Card2 v-if="$route.name == 'video'" />
-    <Card3 v-if="$route.name == 'products'" />
+    <Card3 v-if="$route.name == 'Service'" />
     <b-container class="container-body">
       <b-row class="news-row">
         <b-col
@@ -32,7 +32,7 @@
         <b-col
           v-if="$route.name == 'video'"
           v-for="item in PostList"
-          lg="6"
+          lg="4"
           md="12"
           sm="12"
           cols="12"
@@ -49,28 +49,6 @@
             <h1>{{item.title}}</h1>
           </div>
         </b-col>
-
-        <b-col
-          v-for="list in PostList"
-          lg="4"
-          sm="6"
-          cols="12"
-          v-if=" $route.name == 'products'"
-        >
-          <b-card
-            :title="list.title"
-            :img-src="list.cover_image"
-            img-alt="Image"
-            img-top
-            tag="article"
-          >
-            <p class="card-day">{{list.created_date}}</p>
-            <p class="card-text">
-              {{list.description}}
-            </p>
-          </b-card>
-        </b-col>
-
         <div class="pagination-nav">
           <b-pagination-nav
             base-url="/"
@@ -118,15 +96,15 @@ export default {
           api: `${process.env.VUE_APP_APIPATH}/article/list`
         },
         {
-          path: "/products",
-          name: "products",
-          topath: "productspost",
+          path: "/service",
+          name: "service",
+          topath: "servicepost",
           api: `${process.env.VUE_APP_APIPATH}/service/list`
         },
         {
           path: "/video",
           name: "video",
-          api: `8${process.env.VUE_APP_APIPATH}/video`
+          api: `${process.env.VUE_APP_APIPATH}/video`
         }
       ]
     };
@@ -208,6 +186,12 @@ export default {
       .card-title {
         font-size: 20px;
         font-weight: 700;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        line-height: 20px;
       }
       .card-day {
         color: #707070;
@@ -225,6 +209,14 @@ export default {
   .video-section {
     margin: 70px auto;
     box-shadow: 5px 5px 19px 0px #ebebeb;
+    //平板
+    @include pad-width {
+      margin: auto;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      margin: auto;
+    }
     h1 {
       height: 100px;
       padding: 15px 10px;

@@ -15,7 +15,60 @@
           </a>
         </div>
       </b-row>
-      <div
+      <b-row>
+        <b-col cols="12">
+          <div
+            class="designer-card"
+            v-for="item in designer"
+          >
+            <div class="designer-img">
+              <!--  :style="{backgroundImage:'url('+item.image_pc+')'}" -->
+              <img
+                :src="item.image_pc"
+                alt=""
+              >
+            </div>
+            <div class="designer-info">
+              <div class="info-block">
+                <h1>Name {{item.name}}</h1>
+                <h4>資料簡介:{{item.description}}</h4>
+              </div>
+
+              <div class="info-block">
+                <div class="contact-icons">
+                  <a :href="item.instagram_link">
+                    <font-awesome-icon
+                      :icon="['fab','instagram']"
+                      size="2x"
+                    />
+                  </a>
+                  <a :href="item.facebook_link">
+                    <font-awesome-icon
+                      :icon="['fab','facebook-f']"
+                      size="2x"
+                    />
+                  </a>
+                  <a :href="item.line_link">
+                    <font-awesome-icon
+                      :icon="['fab','line']"
+                      size="2x"
+                    />
+                  </a>
+                </div>
+                <div class="designer-contact">
+                  <h5>T: {{item.phone}}</h5>
+                  <h5>E: {{item.email}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-col>
+
+      </b-row>
+      <h3>
+        精選作品 Feature
+      </h3>
+      <!-- <div
         class="designer-card"
         v-for="item in designer"
       >
@@ -25,7 +78,9 @@
             md="12"
             sm="12"
             cols="12"
-          ><img :src="item.image_pc"></b-col>
+          >
+            <img :src="item.image_pc">
+          </b-col>
           <b-col
             lg="6"
             md="12"
@@ -70,7 +125,7 @@
         <h3>
           精選作品 Feature
         </h3>
-      </div>
+      </div> -->
     </b-container>
     <b-container fluid>
       <b-row>
@@ -96,7 +151,6 @@
           </router-link>
         </b-col>
         <b-col v-for="item in designer">
-          <h2>簡介</h2>
           <p v-html="item.content"></p>
         </b-col>
       </b-row>
@@ -152,7 +206,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../../assets/scss/global.scss";
 .section-img {
   background: url("../../../public/img/img_Stylist.jpg") center center no-repeat;
   background-size: cover;
@@ -179,13 +232,8 @@ h3 {
   margin-top: 172px;
   margin-bottom: 60px;
 }
-
-h2 {
-  font-size: 32px;
-  text-align: left;
-}
 p {
-  text-align: left;
+  text-align: center;
   font-size: 20px;
   line-height: 30px;
   margin-top: 24px;
@@ -222,27 +270,57 @@ p {
 }
 
 .designer-card {
+  display: flex;
+  flex-wrap: wrap;
+  .designer-img {
+    flex: 1 0 50%;
+    width: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    //平板
+    @include pad-width {
+      flex: 1 0 100%;
+    }
+    //平板以下
+    @include pad-and-phone-width {
+      flex: 1 0 100%;
+      margin: 0 -15px;
+    }
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
   .designer-info {
+    flex: 1 0 50%;
     background: $main-Bg-Color;
     color: $submain-T-Color;
-    height: 100%;
     padding: 100px;
     text-align: left;
+    //電腦版
+    @include pc-width {
+      padding: 85px;
+    }
     //平板
     @include pad-width {
       padding: 20px;
+      flex: 1 0 100%;
     }
     //小平板
     @include small-pad-width {
       padding: 15px;
       margin: -15px;
+      flex: 1 0 100%;
     }
     //手機
     @include phone-width {
       padding: 10px;
       margin: -15px;
+      flex: 1 0 100%;
     }
     .info-block {
+      text-align: center;
       border-bottom: 1px solid $submain-Bg-Color;
       padding: 0 25px 16px 25px;
       h1 {

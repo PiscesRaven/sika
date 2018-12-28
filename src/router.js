@@ -12,13 +12,20 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/aboutsika',
+      name: 'aboutsika',
+      component: () => import( /* webpackChunkName: "news" */ './views/AboutUs.vue'),
+      meta: {
+        title: '希卡 Sika hair salon-關於Sika'
+      }
+    },
+    {
       path: '/news',
       name: 'news',
       component: () => import( /* webpackChunkName: "news" */ './components/PostList.vue'),
       meta: {
         title: '希卡 Sika hair salon-優惠資訊'
-      },
-
+      }
     },
     {
       path: '/news/:postid',
@@ -76,17 +83,17 @@ export default new Router({
       }
     },
     {
-      path: '/products',
+      path: '/service',
       name: 'products',
       component: () => import( /* webpackChunkName: "products" */ './components/PostList.vue'),
       meta: {
-        title: '希卡 Sika hair salon-產品資訊'
+        title: '希卡 Sika hair salon-服務資訊'
       }
     },
     {
-      path: '/products/:postid',
-      name: 'productspost',
-      component: () => import( /* webpackChunkName: "productspost" */ './components/Blog.vue'),
+      path: '/service/:postid',
+      name: 'servicepost',
+      component: () => import( /* webpackChunkName: "servicepost" */ './components/Blog.vue'),
     },
     {
       path: '/booking',

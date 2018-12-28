@@ -34,16 +34,12 @@
           <ul>
             <li
               :class="status.selectDesigner === 'All' ? 'active' : ''"
-              @click.prevent="status={
-selectDesigner:'All',
-selectStyle:'All'}"
+              @click.prevent="status={selectDesigner:'All',selectStyle:'All'}"
             ><a href="#">All</a></li>
             <li
               v-for="item in DesignerList"
               :class="status.selectDesigner === item.designer_name ? 'active' : ''"
-              @click.prevent="status={
-selectDesigner:item.designer_name,
-selectStyle:'All'}"
+              @click.prevent="status={selectDesigner:item.designer_name,selectStyle:'All'}"
             >
               <a href="#">{{item.designer_name}}</a></li>
           </ul>
@@ -58,15 +54,20 @@ selectStyle:'All'}"
               sm="6"
               cols="12"
             >
-              <div class="hair-style-sec">
-                <div class="fz-tw">
-                  <img
-                    :src="item.image"
-                    alt=""
-                  >
-                  <span>{{item.designer_name}}</span>
+              <a
+                href="#"
+                @click.prevent="lightBox(item)"
+              >
+                <div class="hair-style-sec">
+                  <div class="fz-tw">
+                    <img
+                      :src="item.image"
+                      alt=""
+                    >
+                    <span>{{item.designer_name}}</span>
+                  </div>
                 </div>
-              </div>
+              </a>
             </b-col>
           </b-row>
           <!-- <div class="pagination-nav">
@@ -77,6 +78,31 @@ selectStyle:'All'}"
             />
           </div> -->
         </b-col>
+        <transition
+          name="box"
+          mode="out-in"
+          appear
+        >
+        </transition>
+
+        <div
+          v-show="lightBoxData.length !=0"
+          class="loght-box"
+        >
+          <div class="box-contact">
+            <div
+              class="close-btn"
+              @click.prevrnt="closeLightBox()"
+            ></div>
+            <div class="box-img fz-tw">
+              <!-- <img
+                  :src="lightBoxData.image"
+                  alt=""
+                > -->
+            </div>
+            <span>{{lightBoxData.designer_name}}</span>
+          </div>
+        </div>
 
       </b-row>
     </b-container fluid>
@@ -104,7 +130,8 @@ export default {
       hairActive: false,
       stylelist: [],
       designer: [],
-      HairData: []
+      HairData: [],
+      lightBoxData: []
     };
   },
   computed: {
@@ -143,6 +170,7 @@ export default {
       );
     }
   },
+
   created() {
     this.getAllList();
   },
@@ -162,6 +190,17 @@ export default {
             vm.designer = PhotoWall.data.data;
           })
         );
+    },
+    lightBox(item) {
+      this.lightBoxData = item;
+      document.querySelector(".box-img").style.backgroundImage = `url('${
+        item.image
+      }')`;
+      document.body.classList.add("modal-open");
+    },
+    closeLightBox(item) {
+      this.lightBoxData = [];
+      document.body.classList.remove("modal-open");
     }
   }
 };
@@ -327,5 +366,127 @@ export default {
   @include pad-and-phone-width {
     font-size: 25px;
   }
+}
+.loght-box {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  background: rgba(106, 106, 106, 0.51);
+  padding: 100px 0px;
+  z-index: 9999;
+}
+.box-contact {
+  position: relative;
+  margin: auto;
+  background: #fff;
+  height: 80vh;
+  max-width: 1170px;
+  padding: 100px;
+  //電腦版
+  @include pc-width {
+    padding: 100px;
+  }
+  //平板
+  @include pad-width {
+    padding: 10vw;
+  }
+  //手機
+  @include phone-width {
+    padding: 15vw 10vw;
+  }
+  span {
+    position: absolute;
+    right: 25%;
+    bottom: 5%;
+    font-size: 45px;
+    text-transform: capitalize;
+    color: #000;
+    //電腦版
+    @include pc-width {
+      bottom: 5%;
+      right: 15%;
+    }
+    //平板
+    @include pad-width {
+      bottom: 5%;
+      right: 20%;
+    }
+    //小平板
+    @include small-pad-width {
+      bottom: 5%;
+      right: 20%;
+    }
+    //手機
+    @include phone-width {
+      bottom: 5%;
+      right: 20%;
+    }
+  }
+}
+.close-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #000;
+  z-index: 9999;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  //平板以下
+  @include pad-and-phone-width {
+    width: 45px;
+    height: 45px;
+  }
+  cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 4px;
+    border-radius: 20px;
+    background: #fff;
+    transform: rotate(45deg) translateX(3px) translateY(37px);
+    //平板以下
+    @include pad-and-phone-width {
+      transform: rotate(45deg) translateX(2px) translateY(28px);
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 4px;
+    position: absolute;
+    border-radius: 20px;
+    background: #fff;
+    transform: rotate(-45deg) translateX(-37px) translateY(3px);
+    //平板以下
+    @include pad-and-phone-width {
+      transform: rotate(-45deg) translateX(-28px) translateY(2px);
+    }
+  }
+}
+.box-img {
+  height: calc(80vh - 200px);
+  margin: auto;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: relative;
+  //手機
+  @include phone-width {
+    height: calc(80vh - 15vh);
+  }
+}
+.box-enter-active,
+.box-leave-active {
+  transition: opacity 1s;
+}
+
+.box-enter,
+.box-leave-active {
+  opacity: 0;
 }
 </style>

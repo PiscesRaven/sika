@@ -26,8 +26,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../../assets/scss/global.scss";
-
 .section-img {
   background: url("../../../public/img/img_Blog.jpg") right no-repeat;
   height: 410px;
