@@ -30,16 +30,16 @@
 
             </router-link>
             <div class="card-social">
-              <a :href="list.facebook_link">
+              <a :href="list.instagram_link">
                 <img
-                  src="../../assets/icon/btn_fb_w.svg"
+                  src="../../assets/icon/btn_Instagram_w.svg"
                   alt=""
                   srcset=""
                 >
               </a>
-              <a :href="list.instagram_link">
+              <a :href="list.facebook_link">
                 <img
-                  src="../../assets/icon/btn_Instagram_w.svg"
+                  src="../../assets/icon/btn_fb_w.svg"
                   alt=""
                   srcset=""
                 >
@@ -112,7 +112,7 @@ export default {
 .section-img {
   background: url("../../../public/img/img_Stylist.jpg") center no-repeat;
   height: 410px;
-  margin-bottom: 64px;
+  margin-bottom: 125px;
   background-size: cover;
 
   //平板
@@ -184,6 +184,11 @@ export default {
 
   .designer-card {
     text-align: left;
+    margin-bottom: 125px;
+    //平板以下
+    @include pad-and-phone-width {
+      margin-bottom: 30px;
+    }
     img {
       width: 100%;
     }
@@ -194,7 +199,7 @@ export default {
       min-height: 135px;
       display: block;
     }
-    margin-bottom: 30px;
+
     //手機
     @include phone-width {
       padding-bottom: 4%;
@@ -215,14 +220,14 @@ export default {
       line-height: 20px;
     }
     .designer-body {
-      padding: 1.25rem;
+      padding: 1.125rem;
     }
   }
   .card-social {
     display: flex;
     justify-content: center;
     background: #707070;
-    height: 50px;
+    height: 40px;
     > a {
       display: block;
       margin: 5px 15px;

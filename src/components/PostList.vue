@@ -1,14 +1,35 @@
 <template>
   <div>
-    <Card v-if="$route.name == 'news'"/>
-    <Card1 v-if="$route.name == 'article'"/>
-    <Card2 v-if="$route.name == 'video'"/>
-    <Card3 v-if="$route.name == 'service'"/>
+    <Card v-if="$route.name == 'news'" />
+    <Card1 v-if="$route.name == 'article'" />
+    <Card2 v-if="$route.name == 'video'" />
+    <Card3 v-if="$route.name == 'service'" />
     <b-container class="container-body">
       <b-row class="news-row">
-        <b-col v-for="list in PostList" lg="4" sm="6" cols="12" v-if="$route.name !== 'video'">
+        <b-col
+          v-for="list in postList"
+          lg="4"
+          sm="6"
+          cols="12"
+          v-if="$route.name !== 'video'"
+        >
           <router-link :to="{name:path, params:{postid:list['id']}}">
+            <article
+              class="card"
+              v-if=" $route.name == 'service'"
+            >
+              <div
+                class="post-img"
+                :style="{backgroundImage: 'url(' + list.cover_image+')'}"
+              ></div>
+              <div class="card-body">
+                <h4 class="card-title">{{list.title}}</h4>
+                <p class="card-day">{{list.created_date}}</p>
+                <p class="card-text">{{list.description}}</p>
+              </div>
+            </article>
             <b-card
+              v-if="$route.name == 'news' || $route.name == 'article'"
               :title="list.title"
               :img-src="list.cover_image"
               img-alt="Image"
@@ -19,11 +40,12 @@
               <p class="card-text">{{list.description}}</p>
             </b-card>
           </router-link>
+
         </b-col>
 
         <b-col
           v-if="$route.name == 'video'"
-          v-for="item in PostList"
+          v-for="item in postList"
           lg="4"
           md="12"
           sm="12"
@@ -45,7 +67,7 @@
           <b-pagination-nav
             base-url="/"
             :link-gen="linkGen"
-            :number-of-pages="totalPage"
+            :number-of-pages="total"
             v-model="currentPage"
           />
         </div>
@@ -73,7 +95,7 @@ export default {
       currentPage: 1,
       PostList: [],
       numPages: 0,
-      total: "",
+      total: 0,
       data: [
         {
           path: "/news", //現在路徑
@@ -119,20 +141,16 @@ export default {
           }
         })
         .then(res => {
-          this.PostList = res.data.data;
-          this.numPages = res.data.total;
-          this.total = Math.ceil(this.numPages / 6);
+          vm.PostList = res.data.data;
+          vm.numPages = res.data.total;
+          vm.total = Math.ceil(vm.numPages / 6);
         });
     },
     linkGen(pageNum) {
       return "#/" + pageNum;
     }
   },
-  computed: {
-    totalPage() {
-      return this.total;
-    }
-  },
+  computed: {},
   watch: {
     currentPage: function(pageNum) {
       this.getList(pageNum);
@@ -144,22 +162,38 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     this.getList();
+  },
+  computed: {
+    postList() {
+      let vm = this;
+      for (let i = 0; i < vm.PostList.length; i++) {
+        vm.PostList[i].description =
+          vm.PostList[i].description.substring(0, 30) + "...";
+      }
+      return vm.PostList;
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.post-img {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+}
 .news-row {
-  max-width: 900px;
-  margin: auto;
+  a {
+    max-height: 425px;
+  }
   .card {
-    width: 270px;
+    max-width: 350px;
     text-align: left;
     margin-bottom: 30px;
-    padding-bottom: 30px;
     border: none;
     border-radius: 0px;
     //平板
@@ -168,7 +202,7 @@ export default {
     }
     //平板以下
     @include pad-and-phone-width {
-      width: auto;
+      margin: 0 auto 10% auto;
     }
 
     .card-body {
@@ -179,39 +213,44 @@ export default {
         font-size: 20px;
         font-weight: 700;
         overflow: hidden;
-        -webkit-line-clamp: 2;
+        white-space: nowrap;
         text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
+        // -webkit-line-clamp: 2;
+        // display: -webkit-box;
+        // -webkit-box-orient: vertical;
         line-height: 20px;
+        height: 20px;
       }
       .card-day {
         color: #707070;
       }
       .card-text {
         overflow: hidden;
-        -webkit-line-clamp: 2;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
+        //  white-space: nowrap;
+        // -webkit-line-clamp: 2;
+        // text-overflow: ellipsis;
+        // display: -webkit-box;
+        // -webkit-box-orient: vertical;
         line-height: 20px;
+        height: 40px;
       }
     }
   }
   .video-section {
-    margin: 70px auto;
+    margin-bottom: 30px;
     box-shadow: 5px 5px 19px 0px #ebebeb;
     //平板
     @include pad-width {
-      margin: auto;
+      margin-bottom: 30px;
     }
     //平板以下
     @include pad-and-phone-width {
-      margin: auto;
+      margin: 0 auto 10% auto;
     }
     h1 {
       height: 100px;
       padding: 15px 10px;
+      text-align: left;
     }
   }
 }
@@ -222,7 +261,12 @@ export default {
       display: inline-block;
     }
   }
+  margin-top: 70px;
   width: 100%;
   margin-bottom: 140px;
+  //平板以下
+  @include pad-and-phone-width {
+    margin-bottom: 70px;
+  }
 }
 </style>

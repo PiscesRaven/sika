@@ -116,6 +116,7 @@ img {
 }
 
 .carousel-item {
+  outline: none;
   > img {
     height: 100vh;
     //電腦版

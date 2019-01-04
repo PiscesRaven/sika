@@ -40,20 +40,27 @@
           </h2>
         </b-col>
       </b-row>
-      <b-row
-        v-for="list in homenews"
-        class="home-news-row"
-      >
+      <b-row class="home-news-row">
         <b-col
-          lg="8"
-          md="8"
+          lg="7"
+          md="7"
           sm="12"
           cols="12"
           class="blog-sec"
         >
-          <h3>{{list.title}}</h3>
-          <p>{{list.created_date}}</p>
-          <p>{{list.description}}</p>
+          <p>希卡為您設計客製化造型，<br>
+
+            依照您髮質髮性臉型頭型整理習慣及穿著風格...等，<br>
+
+            給予適當意見溝通後才操作。<br>
+
+            項目包含 洗髮 基本造型吹整設計<br>
+
+            我們的設計師皆經過嚴格的挑選及訓練<br>
+
+            讓您髮型風格走出最符合當代的時尚感。<br>
+
+            潮流造型×質感美髮</p>
           <router-link :to="{name:'aboutsika'}">more ></router-link>
         </b-col>
         <b-col>
@@ -119,7 +126,7 @@
           md="4"
           sm="12"
           cols="12"
-          v-for="list in blog"
+          v-for="list in blogLength"
         >
           <div class="home-article">
             <router-link :to="{name:'articlepost', params:{postid:list['id']}}">
@@ -150,7 +157,7 @@
         <b-col
           md="4"
           sm="12"
-          v-for="item in video.slice(0,3)"
+          v-for="item in videoLength.slice(0,3)"
         >
           <article class="home-article">
             <div class="video-section">
@@ -218,7 +225,7 @@
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5458.063410319871!2d120.5419531651003!3d24.07263338772579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469388f1b64e687%3A0xecb0929a6bd94e5!2z5biM5Y2hIFNpa2EgaGFpciBzYWxvbg!5e0!3m2!1szh-TW!2stw!4v1542599832447"
             width="100%"
-            height="300"
+            height="360"
             frameborder="0"
             style="border:0"
             allowfullscreen
@@ -303,14 +310,12 @@ export default {
   data() {
     return {
       Api: {
-        NewsApi: `${process.env.VUE_APP_APIPATH}/news`,
         StylistApi: `${process.env.VUE_APP_APIPATH}/designer`,
         BlogApi: `${process.env.VUE_APP_APIPATH}/article/list`,
         ProductApi: `${process.env.VUE_APP_APIPATH}/service/list`,
         DisplayApi: `${process.env.VUE_APP_APIPATH}/display`,
         VideoApi: `${process.env.VUE_APP_APIPATH}/video`
       },
-      homenews: [],
       imgshow: [],
       blog: [],
       video: [],
@@ -329,13 +334,6 @@ export default {
       let vm = this;
       axios
         .all([
-          axios.get(vm.Api.NewsApi, {
-            params: {
-              limit: 1,
-              offset: 0
-            }
-          }),
-
           axios.get(vm.Api.BlogApi, {
             params: {
               limit: 3,
@@ -352,14 +350,7 @@ export default {
           axios.get(vm.Api.VideoApi)
         ])
         .then(
-          axios.spread(function(
-            newsApi,
-            BlogApi,
-            ProductApi,
-            DisplayApi,
-            VideoApi
-          ) {
-            vm.homenews = newsApi.data.data;
+          axios.spread(function(BlogApi, ProductApi, DisplayApi, VideoApi) {
             vm.blog = BlogApi.data.data;
             vm.productRow = ProductApi.data.data;
             vm.imgshow = DisplayApi.data.data;
@@ -370,6 +361,22 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0);
+  },
+  computed: {
+    blogLength() {
+      let vm = this;
+      for (let i = 0; i < vm.blog.length; i++) {
+        vm.blog[i].title = vm.blog[i].title.substring(0, 20) + "...";
+      }
+      return vm.blog;
+    },
+    videoLength() {
+      let vm = this;
+      for (let i = 0; i < vm.video.length; i++) {
+        vm.video[i].title = vm.video[i].title.substring(0, 25) + "...";
+      }
+      return vm.video;
+    }
   }
 };
 </script>
@@ -447,7 +454,6 @@ export default {
   border-bottom: 1px solid #000;
   position: relative;
   padding-bottom: 3px;
-  margin: 70px auto;
   padding-left: 24px;
   text-align: left;
   //平板
@@ -475,6 +481,7 @@ export default {
   }
   .en-title {
     font-size: 45px;
+    padding-left: 48px;
     // 平板
     @include pad-width {
       font-size: 22px;
@@ -512,19 +519,10 @@ export default {
     margin-bottom: 50px;
     order: 2;
   }
-  h3 {
-    font-size: 34px;
-    letter-spacing: 3.4px;
-    margin-bottom: 15px;
-  }
   p {
+    font-size: 15px;
     margin-bottom: 10px;
-    line-height: 30px;
-    overflow: hidden;
-    -webkit-line-clamp: 3;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    line-height: 25px;
   }
 }
 .home-news-row {
@@ -544,37 +542,30 @@ export default {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 50%;
-    margin-top: -70px;
-    box-shadow: 50px -50px 0px 0px#e5e5e5;
 
     // margin-top: -70px;
     // box-shadow: 50px -50px 0px 0px#e5e5e5;
     // border-radius: 50%;
-    //平板
-    @include pad-width {
-      margin-top: -30px;
-      box-shadow: none;
-    }
+
     //小平板
     @include small-pad-width {
-      height: 510px;
-      margin-top: 0px;
-      margin-bottom: 50px;
-      box-shadow: none;
+      max-width: 100%;
+      height: calc(100vw - 30px);
+      margin: 0px auto 50px auto;
     }
     //手機
     @include phone-width {
-      height: 100vw;
-      margin-top: 0px;
-      margin-bottom: 50px;
-      box-shadow: none;
+      max-width: 100%;
+      height: calc(100vw - 30px);
+      margin: 0px auto 50px auto;
     }
   }
 }
 
 #carousel1 {
+  outline: none;
   .carousel-indicators /deep/ li {
+    outline: none;
     width: 10px;
     height: 10px;
     margin: 0 9px;
@@ -687,8 +678,9 @@ export default {
   }
   .home-article {
     text-align: left;
+    margin: auto;
     margin-bottom: 175px;
-
+    max-width: 370px;
     // 平板
     @include pad-width {
       margin-bottom: 80px;
@@ -710,6 +702,8 @@ export default {
         margin-bottom: 6px;
         font-size: 25px;
         color: $main-T-Color;
+        height: 50px;
+        overflow: hidden;
       }
       h4 {
         overflow: hidden;
@@ -728,6 +722,7 @@ export default {
       margin: 20px auto;
       box-shadow: 5px 5px 19px 0px #ebebeb;
       h1 {
+        overflow: hidden;
         height: 100px;
         padding: 15px 10px;
       }
@@ -758,7 +753,7 @@ address {
   position: relative;
   overflow: hidden;
   img {
-    height: 670px;
+    height: 660px;
     display: block;
     //電腦版
     @include pc-width {

@@ -44,7 +44,8 @@
           <p
             class="article-content"
             v-html="article.content"
-          ></p>
+          >
+          </p>
         </b-col>
       </b-row>
     </b-container>
@@ -84,6 +85,12 @@ export default {
         }
       ]
     };
+  },
+  mounted() {
+    let scriptIg = document.createElement("script");
+    scriptIg.src = "https://www.instagram.com/embed.js";
+    console.log(scriptIg);
+    document.getElementsByTagName("head")[0].appendChild(scriptIg);
   },
   methods: {
     getUrl() {

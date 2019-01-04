@@ -14,9 +14,9 @@
           <ul class="hair-style-ul">
             <li
               v-for="item in stylelist"
-              :class="status.selectStyle === item.name ? 'active' : ''"
+              :class="status.type_id === item.id ? 'active' : ''"
               class="hair-style-list"
-              @click.prevent="status.selectStyle =item.name"
+              @click.prevent="status.type_id =item.id , desWorks()"
             >
               <a href="#">
                 {{item.name}}
@@ -33,77 +33,86 @@
           <h3>設計師</h3>
           <ul>
             <li
-              :class="status.selectDesigner === 'All' ? 'active' : ''"
-              @click.prevent="status={selectDesigner:'All',selectStyle:'All'}"
+              :class="status.designer_id === 'All' ? 'active' : ''"
+              @click.prevent="status={designer_id:'All',type_name:'All',type_id:'0',limit:status.limit,offset:'0'
+              },getAllList()"
             ><a href="#">All</a></li>
             <li
-              v-for="item in DesignerList"
-              :class="status.selectDesigner === item.designer_name ? 'active' : ''"
-              @click.prevent="status={selectDesigner:item.designer_name,selectStyle:'All'}"
+              v-for="item in designer"
+              :class="status.designer_id === item.id ? 'active' : ''"
+              @click.prevent="status={designer_id:item.id,type_name:'All',type_id:'0', limit:status.limit,offset:'0',designer_name:item.name
+              },desWorks(status)"
             >
-              <a href="#">{{item.designer_name}}</a></li>
+              <a href="#">{{item.name}}</a></li>
           </ul>
         </b-col>
+
         <b-col lg="10">
           <b-row>
             <b-col
-              v-for="item in filterList"
+              v-for="item in HairData"
               xl="3"
               lg="4"
               md="6"
               sm="6"
-              cols="12"
+              cols="6"
             >
               <a
                 href="#"
                 @click.prevent="lightBox(item)"
               >
-                <div class="hair-style-sec">
-                  <div class="fz-tw">
-                    <img
-                      :src="item.image"
-                      alt=""
-                    >
-                    <span>{{item.designer_name}}</span>
+                <transition
+                  name="fade"
+                  mode="out-in"
+                  appear
+                >
+                  <div class="hair-style-sec">
+                    <div class="fz-tw">
+                      <img
+                        :src="item.image"
+                        alt=""
+                      >
+                      <span>{{item.designer_name}}</span>
+                    </div>
                   </div>
-                </div>
+                </transition>
               </a>
             </b-col>
           </b-row>
-          <!-- <div class="pagination-nav">
+          <div class="pagination-nav">
             <b-pagination-nav
               base-url="#"
-              :number-of-pages="15"
+              :number-of-pages="totalPage"
               v-model="currentPage"
+              v-if="total !=0 "
             />
-          </div> -->
+          </div>
         </b-col>
         <transition
-          name="box"
+          name="fade"
           mode="out-in"
           appear
         >
-        </transition>
 
-        <div
-          v-show="lightBoxData.length !=0"
-          class="loght-box"
-        >
-          <div class="box-contact">
-            <div
-              class="close-btn"
-              @click.prevrnt="closeLightBox()"
-            ></div>
-            <div class="box-img fz-tw">
-              <!-- <img
+          <div
+            v-show="lightBoxData.length !=0"
+            class="loght-box"
+          >
+            <div class="box-contact">
+              <div
+                class="close-btn"
+                @click.prevrnt="closeLightBox()"
+              ></div>
+              <div class="box-img fz-tw">
+                <!-- <img
                   :src="lightBoxData.image"
                   alt=""
                 > -->
+              </div>
+              <span>{{lightBoxData.designer_name}}</span>
             </div>
-            <span>{{lightBoxData.designer_name}}</span>
           </div>
-        </div>
-
+        </transition>
       </b-row>
     </b-container fluid>
   </div>
@@ -117,14 +126,21 @@ export default {
   props: {},
   data() {
     return {
-      currentPage: 0,
+      currentPage: 1, //現在頁數
+      total: 0, //總頁數
+      window_w: 0, //裝置寬
       status: {
-        selectDesigner: "All",
-        selectStyle: "All"
+        designer_name: "", //設計師名字
+        designer_id: "All", //設計師ID
+        type_name: "All", //髮型名稱
+        type_id: "0", //髮型ID
+        offset: 0,
+        limit: 12 //文章上限
       },
       Api: {
         PhotoWallApi: `${process.env.VUE_APP_APIPATH}/hair/style`,
-        StyleListApi: `${process.env.VUE_APP_APIPATH}/hair/type`
+        StyleListApi: `${process.env.VUE_APP_APIPATH}/hair/type`,
+        DesignerApi: `${process.env.VUE_APP_APIPATH}/designer`
       },
       desActive: false,
       hairActive: false,
@@ -135,59 +151,72 @@ export default {
     };
   },
   computed: {
-    filterList: function() {
-      let vm = this;
-      let designer = vm.status.selectDesigner; //data的設計師
-      let style = vm.status.selectStyle; //data的髮型
-      // console.log("現在是 " + designer + " 和 " + style + " 風格");
-      if (designer === "All" && style === "All") {
-        // console.log('全部設計師與風格')
-        return vm.HairData;
-      }
-      if (designer !== "All" && style !== "All") {
-        return vm.HairData.filter(function(list) {
-          return list.designer_name == designer && list.type_name == style;
-        });
-      }
-      if (style !== "All") {
-        // console.log('只篩選風格')
-        return vm.HairData.filter(function(list) {
-          return list.type_name == style;
-        });
-      }
-      if (designer !== "All") {
-        // console.log('現在設計師' + designer + ',風格是' + style)
-        return vm.HairData.filter(function(list) {
-          return list.designer_name == designer;
-        });
-      }
-    },
-    DesignerList: function() {
-      //過濾設計師清單
-      const set = new Set();
-      return this.designer.filter(item =>
-        !set.has(item.designer_name) ? set.add(item.designer_name) : false
-      );
+    // filterList: function() {
+    //   let vm = this;
+    //   let designer = vm.status.designer_id; //data的設計師
+    //   let style = vm.status.type_name; //data的髮型
+    //   if (designer === "All" && style === "All") {
+    //     // console.log('全部設計師與風格')
+    //     return vm.HairData;
+    //   }
+    //   if (designer !== "All" && style !== "All") {
+    //     return vm.HairData.filter(function(list) {
+    //       return list.designer_id == designer && list.type_name == style;
+    //     });
+    //   }
+    //   if (designer === "All" && style !== "All") {
+    //     vm.desWorks();
+    //     console.log("只篩選風格");
+    //     // return vm.HairData.filter(function(list) {
+    //     //   return list.type_name == style;
+    //     // });
+    //   }
+    //   if (designer !== "All") {
+    //     // console.log("現在設計師" + designer + ",風格是" + style);
+    //     return vm.HairData.filter(function(list) {
+    //       return list.designer_id == designer;
+    //     });
+    //   }
+    // },
+    totalPage() {
+      return this.total;
     }
   },
-
   created() {
     this.getAllList();
+  },
+  mounted() {
+    this.window_w = window.innerWidth;
+    window.addEventListener("resize", () => {
+      this.window_w = window.innerWidth;
+    });
+    if (this.window_w < 768) {
+      console.log(this.currentPage);
+      this.status.limit = "24";
+    }
   },
   methods: {
     getAllList() {
       let vm = this;
       axios
-        .all([axios.get(vm.Api.StyleListApi), axios.get(vm.Api.PhotoWallApi)])
+        .all([
+          axios.get(vm.Api.StyleListApi),
+          axios.get(vm.Api.PhotoWallApi, {
+            params: vm.status
+          }),
+          axios.get(vm.Api.DesignerApi)
+        ])
         .then(
-          axios.spread(function(stylelist, PhotoWall) {
+          axios.spread(function(stylelist, PhotoWall, Designer) {
             vm.stylelist = stylelist.data.data;
             vm.stylelist.splice(0, 0, {
               id: "0",
               name: "All"
             });
+            let numPages = PhotoWall.data.total;
             vm.HairData = PhotoWall.data.data;
-            vm.designer = PhotoWall.data.data;
+            vm.designer = Designer.data.data;
+            vm.total = Math.ceil(numPages / vm.status.limit);
           })
         );
     },
@@ -201,6 +230,30 @@ export default {
     closeLightBox(item) {
       this.lightBoxData = [];
       document.body.classList.remove("modal-open");
+    },
+    desWorks(status) {
+      let vm = this;
+      axios
+        .get(vm.Api.PhotoWallApi, {
+          params: vm.status
+        })
+        .then(res => {
+          let numPages = res.data.total;
+          vm.HairData = res.data.data;
+          // console.log(vm.HairData[0]);
+          vm.total = Math.ceil(numPages / this.status.limit);
+        });
+    },
+    linkGen(pageNum) {
+      return "#/" + pageNum;
+    }
+  },
+  watch: {
+    currentPage: function(pageNum) {
+      let vm = this;
+      vm.currentPage = pageNum;
+      vm.status.offset = (pageNum - 1) * vm.status.limit;
+      vm.desWorks();
     }
   }
 };
@@ -208,6 +261,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
 .section-img {
   background: url("../../public/img/img_Work.jpg") center no-repeat;
   height: 410px;
@@ -328,19 +390,6 @@ export default {
     position: relative;
     margin: auto;
 
-    //平板
-    @include pad-width {
-      width: 270px;
-    }
-    //小平板
-    @include small-pad-width {
-      width: 270px;
-    }
-    //手機
-    @include phone-width {
-      width: 270px;
-    }
-
     span {
       position: absolute;
       right: 13px;
@@ -382,7 +431,7 @@ export default {
   margin: auto;
   background: #fff;
   height: 80vh;
-  max-width: 1170px;
+  max-width: 810px;
   padding: 100px;
   //電腦版
   @include pc-width {
@@ -390,11 +439,12 @@ export default {
   }
   //平板
   @include pad-width {
-    padding: 10vw;
+    padding: 100px;
   }
   //手機
   @include phone-width {
     padding: 15vw 10vw;
+    height: 100%;
   }
   span {
     position: absolute;
@@ -426,8 +476,8 @@ export default {
   }
 }
 .close-btn {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: #000;
   z-index: 9999;
@@ -436,49 +486,45 @@ export default {
   right: 30px;
   //平板以下
   @include pad-and-phone-width {
-    width: 45px;
-    height: 45px;
+    width: 24px;
+    height: 24px;
   }
   cursor: pointer;
   &::before {
     content: "";
     position: absolute;
-    width: 80%;
+    width: 65%;
     height: 4px;
     border-radius: 20px;
     background: #fff;
-    transform: rotate(45deg) translateX(3px) translateY(37px);
+    transform: rotate(45deg) translateX(5px) translateY(29px);
     //平板以下
     @include pad-and-phone-width {
-      transform: rotate(45deg) translateX(2px) translateY(28px);
+      transform: rotate(45deg) translateX(1px) translateY(13px);
     }
   }
   &::after {
     content: "";
     position: absolute;
-    width: 80%;
+    width: 65%;
     height: 4px;
     position: absolute;
     border-radius: 20px;
     background: #fff;
-    transform: rotate(-45deg) translateX(-37px) translateY(3px);
+    transform: rotate(-45deg) translateX(-29px) translateY(5px);
     //平板以下
     @include pad-and-phone-width {
-      transform: rotate(-45deg) translateX(-28px) translateY(2px);
+      transform: rotate(-45deg) translateX(-13px) translateY(1px);
     }
   }
 }
 .box-img {
-  height: calc(80vh - 200px);
+  height: 100%;
   margin: auto;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   position: relative;
-  //手機
-  @include phone-width {
-    height: calc(80vh - 15vh);
-  }
 }
 .box-enter-active,
 .box-leave-active {
