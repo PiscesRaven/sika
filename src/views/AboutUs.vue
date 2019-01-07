@@ -12,7 +12,7 @@
           md="6"
         >
           <img
-            src="https://scontent.ftpe7-2.fna.fbcdn.net/v/t1.0-9/41682291_222913548582908_2714771694483931136_n.jpg?_nc_cat=104&_nc_ht=scontent.ftpe7-2.fna&oh=d01369dd4eb065293a98c209bb21334e&oe=5CD01263"
+            src="../../public/img/sila-about.jpg"
             alt=""
             class="aboutus_img"
           ></b-col>
@@ -71,7 +71,6 @@ $pg-T: #4a90e2;
   }
   .aboutus_img {
     margin: auto;
-    border-radius: 50%;
     //平板以下
     @include pad-and-phone-width {
       margin-bottom: 1.4rem;

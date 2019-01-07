@@ -42,12 +42,13 @@
       </b-row>
       <b-row class="home-news-row">
         <b-col
-          lg="7"
-          md="7"
+          lg="6"
+          md="6"
           sm="12"
           cols="12"
           class="blog-sec"
         >
+        <h1>希卡為您設計客製化造型</h1>
           <p>希卡為您設計客製化造型，<br>
 
             依照您髮質髮性臉型頭型整理習慣及穿著風格...等，<br>
@@ -205,7 +206,7 @@
           sm="7"
           cols="12"
         >
-          <h2 class="home-sec-title">
+          <h2 class="home-sec-title mt-title">
             希卡位置
             <span class="en-title">
               Map
@@ -382,8 +383,8 @@ export default {
 </script>
 <style lang="scss">
 .imgshow-container {
-  margin-bottom: 110px;
-  @include pad-width {
+  margin-bottom: 178px;
+ @include pad-width {
     margin: 0;
   }
   //手機
@@ -456,6 +457,7 @@ export default {
   padding-bottom: 3px;
   padding-left: 24px;
   text-align: left;
+  margin-bottom: 40px;
   //平板
   @include pad-width {
     margin: 10% auto;
@@ -506,8 +508,7 @@ export default {
 
 .blog-sec {
   text-align: left;
-  margin-top: 80px;
-
+  margin-top: 15px;
   //平板
   @include pad-width {
     margin-top: 0;
@@ -518,6 +519,12 @@ export default {
     margin-top: 0;
     margin-bottom: 50px;
     order: 2;
+  }
+  h1{
+    font-size: 34px;
+    letter-spacing: 3.4px;
+    margin-bottom: 14px;
+    font-weight: 700;
   }
   p {
     font-size: 15px;
@@ -536,9 +543,10 @@ export default {
     margin-bottom: 50px;
   }
   .news-img {
+  margin-top: -80px;
     width: 100%;
-    height: 100%;
-    background-image: url("https://scontent.ftpe7-2.fna.fbcdn.net/v/t1.0-9/41682291_222913548582908_2714771694483931136_n.jpg?_nc_cat=104&_nc_ht=scontent.ftpe7-2.fna&oh=d01369dd4eb065293a98c209bb21334e&oe=5CD01263");
+    height: 375px;
+    background-image: url("../../public/img/sila-about.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -550,7 +558,7 @@ export default {
     //小平板
     @include small-pad-width {
       max-width: 100%;
-      height: calc(100vw - 30px);
+      height: calc(100vw -200px);
       margin: 0px auto 50px auto;
     }
     //手機
@@ -666,7 +674,7 @@ export default {
 }
 .blog-video-sec {
   .home-sec-title {
-    margin: 0px auto 80px auto;
+    margin: 0px auto 42px auto;
     // 平板
     @include pad-width {
       margin: 10% auto;
@@ -823,5 +831,8 @@ address {
   @include phone-width {
     display: none;
   }
+}
+.mt-title{
+  margin-top: 78px;
 }
 </style>

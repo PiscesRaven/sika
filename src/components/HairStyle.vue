@@ -84,7 +84,7 @@
               base-url="#"
               :number-of-pages="totalPage"
               v-model="currentPage"
-              v-if="total !=0 "
+              v-if="total >=2 "
             />
           </div>
         </b-col>
@@ -135,7 +135,7 @@ export default {
         type_name: "All", //髮型名稱
         type_id: "0", //髮型ID
         offset: 0,
-        limit: 12 //文章上限
+        limit: 48 //文章上限
       },
       Api: {
         PhotoWallApi: `${process.env.VUE_APP_APIPATH}/hair/style`,
@@ -183,6 +183,7 @@ export default {
     }
   },
   created() {
+    this.getUrl()
     this.getAllList();
   },
   mounted() {
@@ -191,11 +192,20 @@ export default {
       this.window_w = window.innerWidth;
     });
     if (this.window_w < 768) {
-      console.log(this.currentPage);
       this.status.limit = "24";
     }
   },
-  methods: {
+  methods: {   getUrl() {
+      let vm = this;
+      let url = document.URL;
+      let sliceposition = url.lastIndexOf("#");
+      if(sliceposition == -1) return
+      let slicedata = url.slice(sliceposition + 1);
+      console.log(slicedata)
+      vm.status.offset = (parseInt(slicedata)-1)* this.status.limit;
+       vm.currentPage=parseInt(slicedata)
+     
+    },
     getAllList() {
       let vm = this;
       axios

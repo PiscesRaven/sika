@@ -1,27 +1,15 @@
 <template>
   <div>
-    <Card v-if="$route.name == 'news'" />
-    <Card1 v-if="$route.name == 'article'" />
-    <Card2 v-if="$route.name == 'video'" />
-    <Card3 v-if="$route.name == 'service'" />
+    <Card v-if="$route.name == 'news'"/>
+    <Card1 v-if="$route.name == 'article'"/>
+    <Card2 v-if="$route.name == 'video'"/>
+    <Card3 v-if="$route.name == 'service'"/>
     <b-container class="container-body">
       <b-row class="news-row">
-        <b-col
-          v-for="list in postList"
-          lg="4"
-          sm="6"
-          cols="12"
-          v-if="$route.name !== 'video'"
-        >
+        <b-col v-for="list in postList" lg="4" sm="6" cols="12" v-if="$route.name !== 'video'">
           <router-link :to="{name:path, params:{postid:list['id']}}">
-            <article
-              class="card"
-              v-if=" $route.name == 'service'"
-            >
-              <div
-                class="post-img"
-                :style="{backgroundImage: 'url(' + list.cover_image+')'}"
-              ></div>
+            <article class="card" v-if=" $route.name == 'service'">
+              <div class="post-img" :style="{backgroundImage: 'url(' + list.cover_image+')'}"></div>
               <div class="card-body">
                 <h4 class="card-title">{{list.title}}</h4>
                 <p class="card-day">{{list.created_date}}</p>
@@ -40,7 +28,6 @@
               <p class="card-text">{{list.description}}</p>
             </b-card>
           </router-link>
-
         </b-col>
 
         <b-col
@@ -124,7 +111,17 @@ export default {
     };
   },
   methods: {
-    getList(pageNum = 1) {
+    getUrl() {
+      let vm = this;
+      let url = document.URL;
+      let sliceposition = url.lastIndexOf("/");
+      let slicedata = url.slice(sliceposition + 1);
+      if (isNaN(slicedata)) {
+        slicedata = 1;
+      }
+      vm.getList(slicedata);
+    },
+    getList(pageNum) {
       let vm = this;
       var api = "";
       for (let i = 0; i < vm.data.length; i++) {
@@ -141,6 +138,7 @@ export default {
           }
         })
         .then(res => {
+          vm.currentPage = parseInt(pageNum);
           vm.PostList = res.data.data;
           vm.numPages = res.data.total;
           vm.total = Math.ceil(vm.numPages / 6);
@@ -153,17 +151,19 @@ export default {
   computed: {},
   watch: {
     currentPage: function(pageNum) {
-      this.getList(pageNum);
+      this.currentPage = pageNum;
+      this.getUrl();
     },
     $route(to, from) {
       let vm = this;
       if (to.path !== from.path) {
-        vm.getList(1);
+        vm.getUrl();
       }
     }
   },
   mounted() {
-    this.getList();
+    this.getUrl();
+    // this.getList();
   },
   computed: {
     postList() {

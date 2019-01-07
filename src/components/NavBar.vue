@@ -1,78 +1,60 @@
 <template>
   <div>
-    <button
-      id="toggle"
-      @click="select()"
-    >
-      <div
-        class="span"
-        id="top"
-      ></div>
-      <div
-        class="span"
-        id="middle"
-      ></div>
-      <div
-        class="span"
-        id="bottom"
-      ></div>
+    <button id="toggle" @click="select()">
+      <div class="span" id="top"></div>
+      <div class="span" id="middle"></div>
+      <div class="span" id="bottom"></div>
     </button>
-    <div
-      id="navbar"
-      class="navbar"
-      :class="{active: isActive}"
-    >
-      <router-link
-        to="/"
-        class="rwd-home"
-      ><img src="../../public/img/navbar_logo.svg"></router-link>
-      <ul
-        class="nav-bar"
-        @click="select()"
-      >
-        <li class="nav-items"><span class="navbar-brand">
-            <router-link to="/"><img src="../../public/img/navbar_logo.svg"></router-link>
-          </span></li>
+    <div id="navbar" class="navbar" :class="{active: isActive}">
+      <router-link to="/" class="rwd-home">
+        <img src="../../public/img/navbar_logo.svg">
+      </router-link>
+      <ul class="nav-bar" @click="select()">
         <li class="nav-items">
-          <router-link to="/news">
-            優惠資訊<p>News</p>
+          <span class="navbar-brand">
+            <router-link to="/">
+              <img src="../../public/img/navbar_logo.svg">
+            </router-link>
+          </span>
+        </li>
+        <li class="nav-items">
+          <router-link to="/news">優惠資訊
+            <p>News</p>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/hairstyle">
-            髮型專區 <p>Hair</p>
+          <router-link to="/hairstyle">髮型專區
+            <p>Hair</p>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/designer">
-            設計師 <p>Stylist</p>
+          <router-link to="/designer">設計師
+            <p>Stylist</p>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/article">
-            流行趨勢 <p>Blog</p>
+          <router-link to="/article">流行趨勢
+            <p>Blog</p>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/video">
-            影片專區 <p>Video</p>
+          <router-link to="/video">影片專區
+            <p>Video</p>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/service">
-            服務項目 <p>Service</p>
+          <router-link to="/service">服務項目
+            <p>Service</p>
           </router-link>
         </li>
         <li class="nav-items">
-          <router-link to="/booking">
-            線上預約<p> Booking </p>
+          <router-link to="/booking">線上預約
+            <p>Booking</p>
           </router-link>
         </li>
       </ul>
     </div>
-
   </div>
-
 </template>
 
 <script>
