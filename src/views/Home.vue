@@ -48,20 +48,8 @@
           cols="12"
           class="blog-sec"
         >
-        <h1>希卡為您設計客製化造型</h1>
-          <p>希卡為您設計客製化造型，<br>
-
-            依照您髮質髮性臉型頭型整理習慣及穿著風格...等，<br>
-
-            給予適當意見溝通後才操作。<br>
-
-            項目包含 洗髮 基本造型吹整設計<br>
-
-            我們的設計師皆經過嚴格的挑選及訓練<br>
-
-            讓您髮型風格走出最符合當代的時尚感。<br>
-
-            潮流造型×質感美髮</p>
+          <h1>{{aboutus[0].title}}</h1>
+          <p v-html="aboutusReplace"></p>
           <router-link :to="{name:'aboutsika'}">more ></router-link>
         </b-col>
         <b-col>
@@ -311,12 +299,14 @@ export default {
   data() {
     return {
       Api: {
+        AboutUs: `${process.env.VUE_APP_APIPATH}/about_us`,
         StylistApi: `${process.env.VUE_APP_APIPATH}/designer`,
         BlogApi: `${process.env.VUE_APP_APIPATH}/article/list`,
         ProductApi: `${process.env.VUE_APP_APIPATH}/service/list`,
         DisplayApi: `${process.env.VUE_APP_APIPATH}/display`,
         VideoApi: `${process.env.VUE_APP_APIPATH}/video`
       },
+      aboutus: [],
       imgshow: [],
       blog: [],
       video: [],
@@ -348,14 +338,22 @@ export default {
             }
           }),
           axios.get(vm.Api.DisplayApi),
-          axios.get(vm.Api.VideoApi)
+          axios.get(vm.Api.VideoApi),
+          axios.get(vm.Api.AboutUs)
         ])
         .then(
-          axios.spread(function(BlogApi, ProductApi, DisplayApi, VideoApi) {
+          axios.spread(function(
+            BlogApi,
+            ProductApi,
+            DisplayApi,
+            VideoApi,
+            AboutUs
+          ) {
             vm.blog = BlogApi.data.data;
             vm.productRow = ProductApi.data.data;
             vm.imgshow = DisplayApi.data.data;
             vm.video = VideoApi.data.data;
+            vm.aboutus.push(AboutUs.data.data);
           })
         );
     }
@@ -377,6 +375,10 @@ export default {
         vm.video[i].title = vm.video[i].title.substring(0, 25) + "...";
       }
       return vm.video;
+    },
+    aboutusReplace() {
+      let vm = this;
+      return vm.aboutus[0].description.replace(/\n/g, "<br>");
     }
   }
 };
@@ -384,7 +386,7 @@ export default {
 <style lang="scss">
 .imgshow-container {
   margin-bottom: 178px;
- @include pad-width {
+  @include pad-width {
     margin: 0;
   }
   //手機
@@ -520,7 +522,7 @@ export default {
     margin-bottom: 50px;
     order: 2;
   }
-  h1{
+  h1 {
     font-size: 34px;
     letter-spacing: 3.4px;
     margin-bottom: 14px;
@@ -543,7 +545,7 @@ export default {
     margin-bottom: 50px;
   }
   .news-img {
-  margin-top: -80px;
+    margin-top: -80px;
     width: 100%;
     height: 375px;
     background-image: url("../../public/img/sila-about.jpg");
@@ -761,7 +763,7 @@ address {
   position: relative;
   overflow: hidden;
   img {
-    height: 660px;
+    width: 100%;
     display: block;
     //電腦版
     @include pc-width {
@@ -832,7 +834,7 @@ address {
     display: none;
   }
 }
-.mt-title{
+.mt-title {
   margin-top: 78px;
 }
 </style>

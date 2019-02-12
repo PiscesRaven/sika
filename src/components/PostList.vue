@@ -1,15 +1,27 @@
 <template>
   <div>
-    <Card v-if="$route.name == 'news'"/>
-    <Card1 v-if="$route.name == 'article'"/>
-    <Card2 v-if="$route.name == 'video'"/>
-    <Card3 v-if="$route.name == 'service'"/>
+    <Card v-if="$route.name == 'news'" />
+    <Card1 v-if="$route.name == 'article'" />
+    <Card2 v-if="$route.name == 'video'" />
+    <Card3 v-if="$route.name == 'service'" />
     <b-container class="container-body">
       <b-row class="news-row">
-        <b-col v-for="list in postList" lg="4" sm="6" cols="12" v-if="$route.name !== 'video'">
+        <b-col
+          v-for="list in postList"
+          lg="4"
+          sm="6"
+          cols="12"
+          v-if="$route.name !== 'video'"
+        >
           <router-link :to="{name:path, params:{postid:list['id']}}">
-            <article class="card" v-if=" $route.name == 'service'">
-              <div class="post-img" :style="{backgroundImage: 'url(' + list.cover_image+')'}"></div>
+            <article
+              class="card"
+              v-if=" $route.name == 'service'"
+            >
+              <div
+                class="post-img"
+                :style="{backgroundImage: 'url(' + list.cover_image+')'}"
+              ></div>
               <div class="card-body">
                 <h4 class="card-title">{{list.title}}</h4>
                 <p class="card-day">{{list.created_date}}</p>
@@ -150,7 +162,7 @@ export default {
   },
   computed: {},
   watch: {
-    currentPage: function(pageNum) {
+    currentPage: function (pageNum) {
       this.currentPage = pageNum;
       this.getUrl();
     },

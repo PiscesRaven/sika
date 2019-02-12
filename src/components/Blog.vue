@@ -89,7 +89,6 @@ export default {
   mounted() {
     let scriptIg = document.createElement("script");
     scriptIg.src = "https://www.instagram.com/embed.js";
-    console.log(scriptIg);
     document.getElementsByTagName("head")[0].appendChild(scriptIg);
   },
   methods: {
@@ -128,7 +127,7 @@ export default {
       this.$router.back();
     }
   },
-  created: function() {
+  created: function () {
     this.getUrl();
   }
 };

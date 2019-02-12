@@ -151,39 +151,12 @@ export default {
     };
   },
   computed: {
-    // filterList: function() {
-    //   let vm = this;
-    //   let designer = vm.status.designer_id; //data的設計師
-    //   let style = vm.status.type_name; //data的髮型
-    //   if (designer === "All" && style === "All") {
-    //     // console.log('全部設計師與風格')
-    //     return vm.HairData;
-    //   }
-    //   if (designer !== "All" && style !== "All") {
-    //     return vm.HairData.filter(function(list) {
-    //       return list.designer_id == designer && list.type_name == style;
-    //     });
-    //   }
-    //   if (designer === "All" && style !== "All") {
-    //     vm.desWorks();
-    //     console.log("只篩選風格");
-    //     // return vm.HairData.filter(function(list) {
-    //     //   return list.type_name == style;
-    //     // });
-    //   }
-    //   if (designer !== "All") {
-    //     // console.log("現在設計師" + designer + ",風格是" + style);
-    //     return vm.HairData.filter(function(list) {
-    //       return list.designer_id == designer;
-    //     });
-    //   }
-    // },
     totalPage() {
       return this.total;
     }
   },
   created() {
-    this.getUrl()
+    this.getUrl();
     this.getAllList();
   },
   mounted() {
@@ -195,16 +168,16 @@ export default {
       this.status.limit = "24";
     }
   },
-  methods: {   getUrl() {
+  methods: {
+    getUrl() {
       let vm = this;
       let url = document.URL;
       let sliceposition = url.lastIndexOf("#");
-      if(sliceposition == -1) return
+      if (sliceposition == -1) return;
       let slicedata = url.slice(sliceposition + 1);
-      console.log(slicedata)
-      vm.status.offset = (parseInt(slicedata)-1)* this.status.limit;
-       vm.currentPage=parseInt(slicedata)
-     
+      console.log(slicedata);
+      vm.status.offset = (parseInt(slicedata) - 1) * this.status.limit;
+      vm.currentPage = parseInt(slicedata);
     },
     getAllList() {
       let vm = this;
